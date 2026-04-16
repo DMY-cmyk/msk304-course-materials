@@ -1,0 +1,3 @@
+# Week-specific overrides. Currently structural-only; reserved for future customization.
+week_num = 1
+authoring_notes = "Week 1 is the framework week: it sets the scaffolding for how every subsequent week will be studied."
