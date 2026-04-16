@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page_title }} — MST304 Manajemen Strategik Kontemporer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Inter+Tight:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/screen.css">
+<link rel="stylesheet" href="./assets/print.css" media="print">
+</head>
+<body>
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="brand">MST304
+    <small>Manajemen Strategik Kontemporer<br>{{ week.topic_id }}<br>Minggu {{ "%02d" | format(week.num) }}</small>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Minggu Ini</div>
+    {% for anchor in anchors %}<a href="#{{ anchor.id }}">{{ anchor.title }}</a>{% endfor %}
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Keluaran Minggu Ini</div>
+    <a href="../../Study Guide - Aid/Week {{ "%02d" | format(week.num) }}/index.html">① Study Guide</a>
+    <a href="../../Main Summary - Ebook/Week {{ "%02d" | format(week.num) }}/index.html">② Main Summary</a>
+    <a href="../../Indonesian Company Examples/Week {{ "%02d" | format(week.num) }}/index.html">④ Indonesian Examples</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Navigasi</div>
+    <a href="../../Visual Companion/index.html">Visual Companion</a>
+  </div>
+</aside>
+
+<main>
+  <section class="hero">
+    <div class="page-eyebrow">{{ output_eyebrow }} · Minggu {{ "%02d" | format(week.num) }}</div>
+    <h1>{{ page_title }}</h1>
+    <p class="lede">{{ lede }}</p>
+    <div class="meta-row">
+      {% if week.tpgs_chapters %}<span>TPGS Ch. {{ week.tpgs_chapters | join(", ") }}</span>{% endif %}
+      {% if week.henry_chapters %}<span>Henry Ch. {{ week.henry_chapters | join(", ") }}</span>{% endif %}
+      {% for a in week.articles %}<span>Art.{{ a.number }}</span>{% endfor %}
+      <span>Flagship: {{ week.indo_flagship.name }}</span>
+    </div>
+  </section>
+
+  {{ content | safe }}
+
+  <footer class="page-footer">
+    <hr>
+    <p>Dzaki — Magister Akuntansi STIE YKPN · Semester II TA 2025/2026 · MST304.</p>
+    <p class="small">Dihasilkan oleh pipeline Dev Assistant (Rust). Sumber dan catatan verifikasi tercantum per halaman.</p>
+  </footer>
+</main>
+
+</div>
+</body>
+</html>
