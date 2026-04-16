@@ -26,6 +26,7 @@ enum Command {
 const SECTIONS: &[(&str, &str, &str)] = &[
     ("study_guide", "Study Guide - Aid",            "Study Guide / Aid"),
     ("summary",     "Main Summary - Ebook",         "Main Summary / Ebook"),
+    ("article",     "Articles",                     "Analisis Artikel Jurnal"),
     ("indonesian",  "Indonesian Company Examples",  "Contoh Perusahaan Indonesia"),
 ];
 

@@ -66,6 +66,7 @@ pub fn render_section(
     let template_name = match section_key {
         "study_guide" => "week-study-guide.html.j2",
         "summary"     => "week-summary.html.j2",
+        "article"     => "week-article.html.j2",
         "indonesian"  => "week-indonesian.html.j2",
         _ => return Err(crate::error::BuildError::Config(format!("unknown section: {section_key}"))),
     };
@@ -97,6 +98,10 @@ fn section_titles(week: &Week, section_key: &str) -> (String, String) {
         "summary" => (
             format!("Main Summary — {}", week.topic_id),
             format!("Sintesis akademik lengkap dari referensi wajib minggu ini. Kerangka dirender sebagai diagram SVG; istilah kunci ditampilkan dua-bahasa untuk mendukung pembacaan teks asli."),
+        ),
+        "article" => (
+            format!("Analisis Artikel — {}", week.topic_id),
+            format!("Kajian mendalam atas artikel empiris minggu ini: pertanyaan riset, metode, temuan, kontribusi teoretis, kritik, dan hubungannya dengan bab TPGS/Henry."),
         ),
         "indonesian" => (
             format!("Contoh Perusahaan Indonesia — {}", week.topic_id),
