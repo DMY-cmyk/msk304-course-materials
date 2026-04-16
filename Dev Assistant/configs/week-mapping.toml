@@ -1,0 +1,240 @@
+# MST304 — syllabus-to-textbook-to-Indonesian-flagship authoritative mapping.
+# Source of truth for the Rust pipeline. Edits here cascade into every output.
+
+[[weeks]]
+num = 1
+topic_slug = "what-is-strategy"
+topic_id = "Apa Itu Strategi dan Mengapa Penting?"
+topic_en = "What Is Strategy and Why Is It Important?"
+tpgs_chapters = [1]
+henry_chapters = [1]
+articles = []
+indo_flagship = { slug = "astra-international", name = "Astra International", idx_ticker = "ASII", concept_anchor = "strategic coherence across a diversified portfolio" }
+indo_sidebars = [
+  { slug = "unilever-indonesia", name = "Unilever Indonesia", idx_ticker = "UNVR", concept_anchor = "focused differentiation in FMCG" },
+  { slug = "indofood", name = "Indofood Sukses Makmur", idx_ticker = "INDF", concept_anchor = "vertical integration across the food value chain" },
+]
+
+[[weeks]]
+num = 2
+topic_slug = "crafting-executing-strategy"
+topic_id = "Proses Manajerial Penyusunan dan Eksekusi Strategi"
+topic_en = "The Managerial Process of Crafting and Executing Strategy"
+tpgs_chapters = [2]
+henry_chapters = [1, 2]
+articles = [
+  { number = 1, citation = "Altıok, P. (2011). Applicable vision, mission and the effects of strategic management on crisis resolve. Procedia Social & Behavioral Sciences, 24, 61–71.", pdf_available = true, week_role = "vision-mission as crisis anchor" },
+  { number = 2, citation = "Mohamed, F., Nusari, M., Ameen, A., Raju, V., & Bhaumik, A. (2019). Towards a better understanding of the relationship between strategy formulation (vision, mission, and goals) and organizational performance. Test Engineering and Management, 81, 1987–1994.", pdf_available = true, week_role = "empirical vision-mission → performance" },
+]
+indo_flagship = { slug = "bca", name = "Bank Central Asia", idx_ticker = "BBCA", concept_anchor = "vision-mission discipline and governance rigor" }
+indo_sidebars = [
+  { slug = "pertamina", name = "Pertamina", concept_anchor = "mission evolution post-Holding Migas" },
+]
+
+[[weeks]]
+num = 3
+topic_slug = "external-environment"
+topic_id = "Evaluasi Lingkungan Eksternal Perusahaan"
+topic_en = "Evaluating a Company's External Environment"
+tpgs_chapters = [3]
+henry_chapters = [3]
+articles = [
+  { number = 3, citation = "Newman, C., Rand, J., Tarp, F., & Trifkovic, N. (2020). Corporate social responsibility in a competitive business environment. The Journal of Development Studies, 56(8), 1455–1472.", pdf_available = true, week_role = "CSR interaction with industry competitiveness" },
+  { number = 4, citation = "Mason, R. B. (2007). The external environment's effect on management and strategy: A complexity theory approach. Management Decision, 45(1), 10–28.", pdf_available = true, week_role = "environment as complex adaptive system" },
+]
+indo_flagship = { slug = "goto", name = "GoTo Gojek Tokopedia", idx_ticker = "GOTO", concept_anchor = "macro and technological environment shock" }
+indo_sidebars = [
+  { slug = "adaro-energy", name = "Adaro Energy", idx_ticker = "ADRO", concept_anchor = "regulatory environment in energy transition" },
+  { slug = "telkom-indonesia", name = "Telkom Indonesia", idx_ticker = "TLKM", concept_anchor = "technological environment in 5G/IndiHome" },
+]
+
+[[weeks]]
+num = 4
+topic_slug = "resources-competitive-position"
+topic_id = "Evaluasi Sumber Daya dan Posisi Kompetitif"
+topic_en = "Evaluating a Company's Resources and Competitive Position"
+tpgs_chapters = [4]
+henry_chapters = [4]
+articles = [
+  { number = 5, citation = "Barney, J. (1991). Firm resources and sustained competitive advantage. Journal of Management, 17(1), 99–120.", pdf_available = false, week_role = "VRIN foundation" },
+  { number = 6, citation = "Ma, H. (2000). Competitive advantage and firm performance. Competitiveness Review, 10(2), 15–32.", pdf_available = false, week_role = "linking advantage to performance" },
+]
+indo_flagship = { slug = "bca", name = "Bank Central Asia", idx_ticker = "BBCA", concept_anchor = "VRIN-aligned intangibles (network + brand + CASA)" }
+indo_sidebars = [
+  { slug = "telkomsel", name = "Telkomsel", concept_anchor = "spectrum and infrastructure as rare resources" },
+  { slug = "gudang-garam", name = "Gudang Garam", idx_ticker = "GGRM", concept_anchor = "brand and distribution as VRIN assets" },
+]
+
+[[weeks]]
+num = 5
+topic_slug = "generic-strategies"
+topic_id = "Lima Strategi Kompetitif Generik"
+topic_en = "The Five Generic Competitive Strategies"
+tpgs_chapters = [5]
+henry_chapters = [5]
+articles = [
+  { number = 7, citation = "Salavou, H. (2015). Competitive strategies and their shift to the future. European Business Review, 27(1), 80–99.", pdf_available = false, week_role = "evolution of generic strategies" },
+  { number = 8, citation = "Adom, A. Y., Nyarko, I. K., & Som, G. N. K. (2016). Competitor analysis in strategic management. Journal of Resources Development and Management, 24, 116.", pdf_available = false, week_role = "competitor analysis practice" },
+]
+indo_flagship = { slug = "indofood", name = "Indofood Sukses Makmur", idx_ticker = "INDF", concept_anchor = "cost leadership in CPG at scale" }
+indo_sidebars = [
+  { slug = "unilever-indonesia", name = "Unilever Indonesia", idx_ticker = "UNVR", concept_anchor = "broad differentiation" },
+  { slug = "sido-muncul", name = "Sido Muncul", idx_ticker = "SIDO", concept_anchor = "focused differentiation in premium jamu" },
+]
+
+[[weeks]]
+num = 6
+topic_slug = "supplementing-strategy"
+topic_id = "Melengkapi Strategi Kompetitif yang Dipilih"
+topic_en = "Supplementing the Chosen Competitive Strategy"
+tpgs_chapters = [6]
+henry_chapters = [5, 6]
+articles = [
+  { number = 9, citation = "Teeratansirikool, L., Siengthai, S., Badir, Y., & Charoenngam, C. (2013). Competitive strategies and firm performance: the mediating role of performance measurement. IJPPM, 63(1/2), 168–184.", pdf_available = false, week_role = "performance measurement as mediator" },
+  { number = 10, citation = "Onditi, E. O. (2018). Competitive strategies and firm performance: A review of literature. Strategic Journals, 5(4), 1869–1879.", pdf_available = false, week_role = "literature synthesis" },
+]
+indo_flagship = { slug = "goto", name = "GoTo Gojek Tokopedia", idx_ticker = "GOTO", concept_anchor = "blue-ocean super-app strategy" }
+indo_sidebars = [
+  { slug = "garuda-indonesia", name = "Garuda Indonesia", idx_ticker = "GIAA", concept_anchor = "defensive and restructuring moves" },
+  { slug = "bri", name = "Bank Rakyat Indonesia", idx_ticker = "BBRI", concept_anchor = "horizontal expansion via Holding UMi" },
+]
+
+[[weeks]]
+num = 7
+topic_slug = "tailoring-to-industry"
+topic_id = "Menyesuaikan Strategi dengan Situasi Industri dan Perusahaan"
+topic_en = "Tailoring Strategy to Fit Specific Industry and Company Situations"
+tpgs_chapters = [6]
+henry_chapters = [6]
+articles = [
+  { number = 11, citation = "Hsieh, Y. H., & Chen, H. M. (2011). Strategic fit among business competitive strategy, human resource strategy, and reward system. Academy of Strategic Management Journal, 10(2), 11–32.", pdf_available = false, week_role = "strategic fit framework" },
+  { number = 12, citation = "Moses, O. S., & Ekwutosi, O. C. (2018). Implication of strategic fit and sustainability on organizational effectiveness. IARC Vienna.", pdf_available = false, week_role = "fit-sustainability nexus" },
+]
+indo_flagship = { slug = "kalbe-farma", name = "Kalbe Farma", idx_ticker = "KLBF", concept_anchor = "tailoring to mature fragmented pharma" }
+indo_sidebars = [
+  { slug = "icbp", name = "Indofood CBP", idx_ticker = "ICBP", concept_anchor = "dominant-leader tailoring" },
+  { slug = "bukalapak", name = "Bukalapak", idx_ticker = "BUKA", concept_anchor = "growing-industry pivot" },
+]
+
+[[weeks]]
+num = 8
+topic_slug = "international-markets"
+topic_id = "Strategi Bersaing di Pasar Internasional"
+topic_en = "Strategies for Competing in International Markets"
+tpgs_chapters = [7]
+henry_chapters = [8]
+articles = [
+  { number = 15, citation = "Thomas, H., Pollock, T., & Gorman, P. (1999). Global strategic analysis: Frameworks and approaches.", pdf_available = false, week_role = "frameworks for global analysis" },
+  { number = 16, citation = "Grein, A. F. The impact of market similarity on international marketing strategies: The automobile industry in Western Europe.", pdf_available = false, week_role = "market-similarity effects" },
+  { number = 17, citation = "Robles, F. International market entry strategies and performance of United States catalog firms.", pdf_available = false, week_role = "entry-mode choice and performance" },
+]
+indo_flagship = { slug = "indofood", name = "Indofood Sukses Makmur", idx_ticker = "INDF", concept_anchor = "global product strategy via Indomie in 90+ countries" }
+indo_sidebars = [
+  { slug = "astra-otoparts", name = "Astra Otoparts", idx_ticker = "AUTO", concept_anchor = "export manufacturing" },
+  { slug = "kopi-kenangan", name = "Kopi Kenangan", concept_anchor = "regional Southeast Asia expansion" },
+]
+
+[[weeks]]
+num = 9
+topic_slug = "diversification"
+topic_id = "Strategi Korporat: Diversifikasi dan Perusahaan Multibisnis"
+topic_en = "Corporate Strategy: Diversification and the Multibusiness Company"
+tpgs_chapters = [8]
+henry_chapters = [9]
+articles = [
+  { number = 18, citation = "Kochhar, R., & Hitt, M. A. Linking corporate strategy to capital structure: Diversification strategy, type and source of financing.", pdf_available = false, week_role = "capital-structure × diversification" },
+  { number = 19, citation = "Goold, M., & Luchs, K. (1993). Why diversify? Four decades of management thinking.", pdf_available = false, week_role = "historical thinking on diversification" },
+]
+indo_flagship = { slug = "astra-international", name = "Astra International", idx_ticker = "ASII", concept_anchor = "unrelated diversification with soft-control integration" }
+indo_sidebars = [
+  { slug = "salim-group", name = "Salim / Indofood Group", concept_anchor = "related + unrelated diversification" },
+  { slug = "djarum-group", name = "Djarum Group", concept_anchor = "tobacco + banking (BCA) + digital (GDP Venture)" },
+]
+
+[[weeks]]
+num = 10
+topic_slug = "ethics-csr-sustainability"
+topic_id = "Etika, CSR, Keberlanjutan Lingkungan, dan Strategi"
+topic_en = "Ethics, Corporate Social Responsibility, Environmental Sustainability, and Strategy"
+tpgs_chapters = [9]
+henry_chapters = [10]
+articles = [
+  { number = 20, citation = "Triebswetter, U., & Hitchens, D. The impact of environmental regulation on competitiveness in the German manufacturing industry.", pdf_available = false, week_role = "environmental regulation × competitiveness" },
+  { number = 21, citation = "De Sousa Filho, J. M., Wanderley, L. S. O., Gómez, C. P., & Farache, F. (2010). Strategic corporate social responsibility management for competitive advantage.", pdf_available = false, week_role = "CSR as strategic advantage" },
+]
+indo_flagship = { slug = "unilever-indonesia", name = "Unilever Indonesia", idx_ticker = "UNVR", concept_anchor = "Unilever Sustainable Living Plan localised" }
+indo_sidebars = [
+  { slug = "indika-energy", name = "Indika Energy", idx_ticker = "INDY", concept_anchor = "coal-to-renewables transition" },
+  { slug = "bri", name = "Bank Rakyat Indonesia", idx_ticker = "BBRI", concept_anchor = "sustainable finance portfolio" },
+]
+
+[[weeks]]
+num = 11
+topic_slug = "strategy-execution"
+topic_id = "Eksekusi Strategi yang Unggul"
+topic_en = "Superior Strategy Execution"
+tpgs_chapters = [10]
+henry_chapters = [11]
+articles = [
+  { number = 22, citation = "Kaplan, R. S., & Norton, D. P. (2006). How to implement a new strategy without disrupting your organization.", pdf_available = false, week_role = "strategy-execution without disruption" },
+  { number = 23, citation = "Richardson, J. The business model: An integrative framework for strategy execution.", pdf_available = false, week_role = "business model as execution engine" },
+]
+indo_flagship = { slug = "bank-mandiri", name = "Bank Mandiri", idx_ticker = "BMRI", concept_anchor = "post-merger integration execution" }
+indo_sidebars = [
+  { slug = "pertamina", name = "Pertamina", concept_anchor = "holding-subholding execution" },
+  { slug = "bri", name = "Bank Rakyat Indonesia", idx_ticker = "BBRI", concept_anchor = "BRILink and BRImo execution layer" },
+]
+
+[[weeks]]
+num = 12
+topic_slug = "business-model-barriers"
+topic_id = "Inovasi Model Bisnis dan Hambatan Masuk (Artikel)"
+topic_en = "Business Model Innovation and Barriers to Entry (article-led)"
+tpgs_chapters = []
+henry_chapters = [7]
+is_article_led = true
+articles = [
+  { number = 24, citation = "Beckmann, M., Royer, S., & Schiavone, F. (2016). Old but sexy: Value creation of old technology-based businesses models.", pdf_available = false, week_role = "value creation via legacy tech" },
+  { number = 25, citation = "Karakaya, F., & Parayitam, S. (2013). Barrier to entry and firm performance: A proposed model and curvilinear relationships.", pdf_available = false, week_role = "barrier × performance curvilinear" },
+]
+indo_flagship = { slug = "goto", name = "GoTo Gojek Tokopedia", idx_ticker = "GOTO", concept_anchor = "super-app business model architecture" }
+indo_sidebars = [
+  { slug = "ruangguru", name = "Ruangguru", concept_anchor = "EdTech subscription model" },
+  { slug = "indomaret", name = "Indomaret", concept_anchor = "retail density as barrier to entry" },
+]
+
+[[weeks]]
+num = 13
+topic_slug = "stakeholder-engagement"
+topic_id = "Kapabilitas Stakeholder dan Engagement (Artikel)"
+topic_en = "Stakeholder Capability and Engagement (article-led)"
+tpgs_chapters = []
+henry_chapters = [2, 10]
+is_article_led = true
+articles = [
+  { number = 26, citation = "Westermann-Behaylo, M. K., Van Buren III, H. J., & Berman, S. L. (2016). Stakeholder capability enhancement as a path to promote human dignity and cooperative advantage.", pdf_available = false, week_role = "stakeholder capability enhancement" },
+  { number = 27, citation = "Kumar, V., & Pansari, A. (2016). Competitive advantage through engagement.", pdf_available = false, week_role = "engagement as competitive advantage" },
+]
+indo_flagship = { slug = "gojek-drivers", name = "Gojek driver ecosystem", concept_anchor = "stakeholder capability enhancement (landmark case)" }
+indo_sidebars = [
+  { slug = "tokopedia", name = "Tokopedia seller program", concept_anchor = "seller engagement" },
+  { slug = "bca", name = "BCA customer loyalty", idx_ticker = "BBCA", concept_anchor = "customer engagement at scale" },
+]
+
+[[weeks]]
+num = 14
+topic_slug = "hypercompetition-leadership"
+topic_id = "Hiperkompetisi dan Kepemimpinan Strategis (Artikel)"
+topic_en = "Hypercompetition and Strategic Leadership (article-led)"
+tpgs_chapters = []
+henry_chapters = [3, 11]
+is_article_led = true
+articles = [
+  { number = 28, citation = "Chen, M. J., Lin, H. C., & Michel, J. G. (2010). Navigating in a hypercompetitive environment: The roles of action aggressiveness and TMT integration.", pdf_available = false, week_role = "hypercompetition × TMT integration" },
+  { number = 29, citation = "Jansen, J. J. P., Vera, D., & Crossan, M. (2009). Strategic leadership for exploration and exploitation: The moderating role of environmental dynamism.", pdf_available = false, week_role = "ambidextrous strategic leadership" },
+]
+indo_flagship = { slug = "goto-grab-shopeefood", name = "GoTo – Grab – ShopeeFood triopoly", concept_anchor = "hypercompetitive food-delivery rivalry" }
+indo_sidebars = [
+  { slug = "bca-leadership", name = "Jahja Setiaatmadja at BCA", concept_anchor = "long-tenure strategic leadership" },
+  { slug = "telkom-tmt", name = "Telkom TMT", idx_ticker = "TLKM", concept_anchor = "ambidextrous leadership in incumbent telco" },
+]

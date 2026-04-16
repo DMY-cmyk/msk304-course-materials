@@ -1,0 +1,8 @@
+# Output root — relative to project root (i.e. the parent of "Dev Assistant").
+output_root = "../course-materials/outputs"
+
+[sections]
+study_guide   = { folder = "Study Guide - Aid",            template = "week-study-guide.html.j2" }
+summary       = { folder = "Main Summary - Ebook",         template = "week-summary.html.j2" }
+indonesian    = { folder = "Indonesian Company Examples",  template = "week-indonesian.html.j2" }
+# Article template added in Phase II when Week 2 ships.
