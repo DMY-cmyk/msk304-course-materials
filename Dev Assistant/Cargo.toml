@@ -1,0 +1,30 @@
+[package]
+name = "dev-assistant"
+version = "0.1.0"
+edition = "2021"
+description = "MST304 course support system — content pipeline"
+authors = ["Dzaki <dzakimy.spelanta@gmail.com>"]
+publish = false
+
+[[bin]]
+name = "dev-assistant"
+path = "src/main.rs"
+
+[lib]
+name = "dev_assistant"
+path = "src/lib.rs"
+
+[dependencies]
+anyhow = "1.0"
+thiserror = "1.0"
+clap = { version = "4.5", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_yaml = "0.9"
+toml = "0.8"
+walkdir = "2.5"
+pulldown-cmark = { version = "0.11", default-features = false, features = ["html"] }
+minijinja = { version = "2.3", features = ["loader"] }
+
+[dev-dependencies]
+tempfile = "3.12"
+pretty_assertions = "1.4"

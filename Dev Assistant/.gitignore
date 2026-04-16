@@ -1,0 +1,5 @@
+/target
+/temp
+/logs
+**/*.bk
+Cargo.lock
