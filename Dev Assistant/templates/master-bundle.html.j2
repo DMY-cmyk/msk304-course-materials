@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MST304 Manajemen Strategik Kontemporer — Master Course Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Inter+Tight:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/screen.css">
+<link rel="stylesheet" href="./assets/print.css" media="print">
+<style>
+  /* ============================================
+     Master Bundle — overrides for single-file continuous document
+     ============================================ */
+
+  .layout { display: block; }
+  aside.sidebar { display: none !important; }
+  main {
+    padding: 0;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  /* Cover page */
+  .cover {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(180deg, var(--panel) 0%, var(--paper) 100%);
+    border-bottom: 2px solid var(--gold);
+    page-break-after: always;
+  }
+  .cover-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+  .cover-title {
+    font-family: var(--display);
+    font-weight: 500;
+    font-variation-settings: "SOFT" 50, "opsz" 144;
+    font-size: 4rem;
+    line-height: 1.05;
+    letter-spacing: -0.028em;
+    color: var(--navy);
+    margin: 0;
+  }
+  .cover-subtitle {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 1.8rem;
+    color: var(--ink);
+    margin: 1.2rem 0 3rem;
+    font-weight: 400;
+  }
+  .cover-divider {
+    width: 120px;
+    height: 3px;
+    background: var(--gold);
+    margin: 0 auto 2.5rem;
+    border-radius: 2px;
+  }
+  .cover-meta {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--ink);
+    line-height: 2;
+  }
+  .cover-meta p { margin: 0.2rem 0; }
+  .cover-references {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 3rem;
+    line-height: 1.8;
+    max-width: 600px;
+  }
+  .cover-references p { margin: 0.3rem 0; }
+
+  /* Table of Contents */
+  .toc {
+    padding: 4rem 2.5rem;
+    page-break-after: always;
+    min-height: 90vh;
+  }
+  .toc h1 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-variation-settings: "SOFT" 50, "opsz" 144;
+    font-size: 3rem;
+    letter-spacing: -0.022em;
+    color: var(--navy);
+    margin: 0 0 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--gold);
+    display: inline-block;
+  }
+  .toc-week {
+    margin: 1.2rem 0;
+    padding: 0.8rem 0;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .toc-week-title {
+    font-family: var(--sans);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.3rem;
+  }
+  .toc-sections {
+    margin: 0;
+    padding: 0 0 0 1.5rem;
+    list-style: none;
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  .toc-sections li {
+    padding: 0.15rem 0;
+    position: relative;
+  }
+  .toc-sections li::before {
+    content: "•";
+    color: var(--gold);
+    margin-right: 0.6rem;
+  }
+
+  /* Week divider pages */
+  .week-divider {
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, var(--panel) 0%, var(--paper) 60%);
+    border-top: 3px solid var(--gold);
+    border-bottom: 1px solid var(--rule);
+    page-break-before: always;
+  }
+  .week-divider-inner { max-width: 600px; }
+  .week-divider-num {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .week-divider-title {
+    font-family: var(--display);
+    font-weight: 500;
+    font-variation-settings: "SOFT" 50, "opsz" 120;
+    font-size: 2.8rem;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--navy);
+    margin: 0 0 0.8rem;
+  }
+  .week-divider-english {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--muted);
+    margin: 0 0 1.5rem;
+  }
+  .week-divider-meta {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 1.5rem;
+  }
+  .week-divider-meta span {
+    display: inline-block;
+    padding: 0.2rem 0.8rem;
+    margin: 0.2rem;
+    background: rgba(255,255,255,0.7);
+    border-radius: 999px;
+    border: 1px solid var(--rule);
+    font-weight: 500;
+  }
+
+  /* Section markers within a week */
+  .week-content {
+    padding: 2rem 2.5rem 3rem;
+  }
+  .section-marker {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin: 3rem 0 1.2rem;
+    padding: 0.6rem 1rem;
+    background: var(--panel-2);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 4px 4px 0;
+    page-break-before: always;
+    page-break-after: avoid;
+  }
+  .section-marker:first-child {
+    margin-top: 1.5rem;
+  }
+
+  /* Back-matter */
+  .back-matter {
+    padding: 4rem 2.5rem;
+    page-break-before: always;
+    border-top: 3px solid var(--gold);
+    background: var(--panel);
+  }
+  .back-matter h1 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-variation-settings: "SOFT" 50, "opsz" 144;
+    font-size: 2.5rem;
+    color: var(--navy);
+    margin: 0 0 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--gold);
+    display: inline-block;
+  }
+
+  /* Companies index styling */
+  .companies-index {
+    margin: 2rem 0;
+  }
+  .company-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px dashed var(--rule);
+    font-size: 0.92rem;
+  }
+  .company-name {
+    font-family: var(--sans);
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .company-appearances {
+    font-family: var(--serif);
+    color: var(--muted);
+  }
+  .company-appearances strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ============================================
+     Print-specific refinements
+     ============================================ */
+  @media print {
+    body {
+      font-size: 10.5pt;
+      line-height: 1.5;
+    }
+    .cover, .week-divider {
+      min-height: auto;
+      padding: 2cm 1.5cm;
+    }
+    .cover-title { font-size: 32pt; }
+    .cover-subtitle { font-size: 16pt; }
+    .week-divider-title { font-size: 24pt; }
+    .toc h1, .back-matter h1 { font-size: 22pt; }
+
+    main { padding: 0; max-width: none; }
+    .week-content { padding: 0; }
+    .section-marker {
+      padding: 0.4rem 0.8rem;
+      margin: 2rem 0 1rem;
+      font-size: 11pt;
+    }
+
+    /* Suppress hero sections (they come from each week section's own HTML) */
+    .hero .meta-row { display: none; }
+    .hero {
+      margin: 0 !important;
+      padding: 0 !important;
+      background: none !important;
+      border: 0 !important;
+    }
+    .hero::after { display: none !important; }
+    .hero .page-eyebrow { display: none; }
+    .hero h1 { font-size: 18pt; margin-top: 0.5rem; }
+    .hero .lede { font-size: 11pt; }
+
+    /* Suppress individual-page footers (replaced by bundle back-matter) */
+    .page-footer { display: none; }
+
+    /* Running headers via @page */
+    @page {
+      size: A4 portrait;
+      margin: 2cm 1.8cm 2cm 1.8cm;
+      @top-left { content: "MST304 · Manajemen Strategik Kontemporer"; font-family: "Inter Tight"; font-size: 8pt; color: #595959; }
+      @top-right { content: "Master Course Companion"; font-family: "Inter Tight"; font-size: 8pt; color: #595959; }
+      @bottom-center { content: counter(page); font-family: "Inter Tight"; font-size: 9pt; color: #595959; }
+    }
+    @page :first {
+      @top-left { content: ""; }
+      @top-right { content: ""; }
+      @bottom-center { content: ""; }
+    }
+  }
+</style>
+</head>
+<body class="bundle">
+<div class="layout">
+<main>
+
+<!-- ========== COVER ========== -->
+<article class="cover">
+  <div class="cover-eyebrow">MST304 · 3 SKS · Semester II TA 2025/2026</div>
+  <h1 class="cover-title">Manajemen Strategik Kontemporer</h1>
+  <p class="cover-subtitle">Master Course Companion</p>
+  <div class="cover-divider"></div>
+  <div class="cover-meta">
+    <p><strong>Magister Akuntansi</strong></p>
+    <p>STIE YKPN Yogyakarta</p>
+    <p style="margin-top:1.5rem">Prepared for <strong>Dzaki</strong></p>
+    <p style="font-size:.9rem;color:var(--muted)">14 Teaching Weeks · 55+ Pages · 16+ Framework Diagrams</p>
+  </div>
+  <div class="cover-references">
+    <p>Based on: Gamble, Peteraf &amp; Thompson (2021) <em>Essentials of Strategic Management</em> 7e</p>
+    <p>Anthony Henry (2021) <em>Understanding Strategic Management</em> 4e · plus 29 academic articles</p>
+    <p style="margin-top:1rem">Anchored in verifiable Indonesian company evidence</p>
+  </div>
+</article>
+
+<!-- ========== TABLE OF CONTENTS ========== -->
+<article class="toc">
+  <h1>Daftar Isi</h1>
+  <p style="color:var(--muted);max-width:60ch;margin-bottom:2rem">
+    Dokumen ini berisi seluruh 14 minggu pembelajaran, masing-masing mencakup empat komponen
+    (Study Guide, Main Summary, Article Analysis, Indonesian Company Examples), disertai cover,
+    daftar isi ini, dan catatan akhir.
+  </p>
+  {% for w in weeks %}
+  <div class="toc-week">
+    <div class="toc-week-title">Minggu {{ "%02d" | format(w.week.num) }} — {{ w.week.topic_id }}</div>
+    <ol class="toc-sections">
+      {% if w.has_sg %}<li>① Study Guide / Aid</li>{% endif %}
+      {% if w.has_sum %}<li>② Main Summary / Ebook</li>{% endif %}
+      {% if w.has_art %}<li>③ Article Analysis</li>{% endif %}
+      {% if w.has_ind %}<li>④ Indonesian Company Examples</li>{% endif %}
+    </ol>
+  </div>
+  {% endfor %}
+  <div class="toc-week" style="margin-top:2rem">
+    <div class="toc-week-title" style="color:var(--gold)">Back-matter</div>
+    <ol class="toc-sections">
+      <li>Catatan Metodologis</li>
+      <li>Indeks Perusahaan Indonesia</li>
+      <li>Rujukan Kerangka Strategis</li>
+    </ol>
+  </div>
+</article>
+
+<!-- ========== WEEKS ========== -->
+{% for w in weeks %}
+<article class="week-divider">
+  <div class="week-divider-inner">
+    <div class="week-divider-num">Minggu {{ "%02d" | format(w.week.num) }}</div>
+    <h1 class="week-divider-title">{{ w.week.topic_id }}</h1>
+    <p class="week-divider-english">{{ w.week.topic_en }}</p>
+    <div class="week-divider-meta">
+      {% if w.week.tpgs_chapters %}<span>TPGS Ch. {{ w.week.tpgs_chapters | join(", ") }}</span>{% endif %}
+      {% if w.week.henry_chapters %}<span>Henry Ch. {{ w.week.henry_chapters | join(", ") }}</span>{% endif %}
+      {% for a in w.week.articles %}<span>Art. {{ a.number }}</span>{% endfor %}
+      <span>Flagship: {{ w.week.indo_flagship.name }}</span>
+    </div>
+  </div>
+</article>
+
+<article class="week-content">
+  {% if w.has_sg %}
+  <div class="section-marker">① Study Guide / Aid · Minggu {{ "%02d" | format(w.week.num) }}</div>
+  {{ w.study_guide_html | safe }}
+  {% endif %}
+
+  {% if w.has_sum %}
+  <div class="section-marker">② Main Summary / Ebook · Minggu {{ "%02d" | format(w.week.num) }}</div>
+  {{ w.summary_html | safe }}
+  {% endif %}
+
+  {% if w.has_art %}
+  <div class="section-marker">③ Article Analysis · Minggu {{ "%02d" | format(w.week.num) }}</div>
+  {{ w.article_html | safe }}
+  {% endif %}
+
+  {% if w.has_ind %}
+  <div class="section-marker">④ Indonesian Company Examples · Minggu {{ "%02d" | format(w.week.num) }}</div>
+  {{ w.indonesian_html | safe }}
+  {% endif %}
+</article>
+{% endfor %}
+
+<!-- ========== BACK-MATTER ========== -->
+<article class="back-matter">
+  <h1>Catatan Akhir</h1>
+
+  <h2 style="color:var(--navy);margin-top:2rem">Catatan Metodologis</h2>
+  <p>Master Course Companion ini dirakit dari 14 minggu materi pembelajaran MST304, setara dengan 55+ halaman HTML individu yang juga tersedia sebagai unit mandiri di folder <code>course-materials/outputs/</code>. Dokumen ini dirancang untuk <em>studi intensif terstruktur</em>—membaca secara berurutan dari Minggu 1 sampai Minggu 14, atau sebagai referensi komprehensif untuk persiapan UAS.</p>
+
+  <p>Setiap minggu mengikuti arsitektur empat-bagian yang konsisten:</p>
+  <ul>
+    <li><strong>① Study Guide / Aid</strong> — panduan belajar: urutan membaca, konsep inti, koneksi antar-minggu, fokus diskusi + self-check questions.</li>
+    <li><strong>② Main Summary / Ebook</strong> — sintesis akademik lengkap dengan framework diagrams (SVG inline), bold key terms, concept-check callouts, referensi.</li>
+    <li><strong>③ Article Analysis</strong> — kajian mendalam artikel empiris (Art.1–4 dengan PDF; Art.5–29 berbasis abstrak publik + literatur kanonik dengan disclosure banner).</li>
+    <li><strong>④ Indonesian Company Examples</strong> — flagship yang dianalisis mendalam + 1–2 sidebar komparatif, dengan tabel sumber dan catatan verifikasi.</li>
+  </ul>
+
+  <h2 style="color:var(--navy);margin-top:2rem">Disiplin Sumber</h2>
+  <p>Seluruh data Indonesian company example didasarkan pada <em>materi publik yang diungkapkan perusahaan</em>: annual report, sustainability report, disclosure IDX/OJK, investor relations materials, publikasi regulator (OJK, Kementerian BUMN, Kemenkominfo, dll.). Setiap data point menyertakan document type + tahun. Di mana angka tidak dapat secara jelas dirujuk, digunakan bahasa deskriptif (<em>"among top-3 by revenue"</em>) alih-alih angka buatan. Mahasiswa dianjurkan memverifikasi angka terkini dari pengajuan aktual sebelum menggunakan dalam tugas akhir atau tesis.</p>
+
+  <h2 style="color:var(--navy);margin-top:2rem">Indeks Perusahaan Indonesia</h2>
+  <p style="color:var(--muted);font-size:.9rem">Perusahaan flagship/sidebar yang muncul lintas-minggu:</p>
+  <div class="companies-index">
+    <div class="company-row">
+      <span class="company-name">Astra International</span>
+      <span class="company-appearances"><strong>Flagship:</strong> W1, W9 · <strong>Sidebar:</strong> —</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">BCA (Bank Central Asia)</span>
+      <span class="company-appearances"><strong>Flagship:</strong> W2, W4 · <strong>Sidebar:</strong> W13 (loyalty) · <strong>Sidebar W14:</strong> Jahja Setiaatmadja leadership</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">GoTo Gojek Tokopedia</span>
+      <span class="company-appearances"><strong>Flagship:</strong> W3, W6, W12 · <strong>Triopoly flagship:</strong> W14 · <strong>Drivers flagship:</strong> W13</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Indofood / ICBP</span>
+      <span class="company-appearances"><strong>Flagship:</strong> W5, W8 · <strong>Sidebar:</strong> W1, W5 (ICBP), W7 (ICBP)</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Unilever Indonesia</span>
+      <span class="company-appearances"><strong>Flagship:</strong> W10 (USLP) · <strong>Sidebar:</strong> W1, W5</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Bank Mandiri</span>
+      <span class="company-appearances"><strong>Flagship:</strong> W11 (post-merger integration)</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Kalbe Farma</span>
+      <span class="company-appearances"><strong>Flagship:</strong> W7 (tailoring to mature industry)</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Telkom / Telkomsel</span>
+      <span class="company-appearances"><strong>Sidebar:</strong> W3, W4, W14 (TMT)</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Pertamina</span>
+      <span class="company-appearances"><strong>Sidebar:</strong> W2, W11 (holding-subholding)</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">BRI (Bank Rakyat Indonesia)</span>
+      <span class="company-appearances"><strong>Sidebar:</strong> W6, W10 (sustainable finance), W11 (BRILink/BRImo)</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Adaro Energy</span>
+      <span class="company-appearances"><strong>Sidebar:</strong> W3 (regulatory)</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Indika Energy</span>
+      <span class="company-appearances"><strong>Sidebar:</strong> W10 (coal-to-renewables)</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Salim Group / Djarum Group</span>
+      <span class="company-appearances"><strong>Sidebar:</strong> W9 (diversification)</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Gudang Garam</span>
+      <span class="company-appearances"><strong>Sidebar:</strong> W4 (brand as VRIN)</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Sido Muncul</span>
+      <span class="company-appearances"><strong>Sidebar:</strong> W5 (focused differentiation)</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Garuda Indonesia</span>
+      <span class="company-appearances"><strong>Sidebar:</strong> W6 (defensive moves)</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Astra Otoparts</span>
+      <span class="company-appearances"><strong>Sidebar:</strong> W8 (export manufacturing)</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Kopi Kenangan</span>
+      <span class="company-appearances"><strong>Sidebar:</strong> W8 (regional expansion)</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Bukalapak</span>
+      <span class="company-appearances"><strong>Sidebar:</strong> W7 (pivot)</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Ruangguru</span>
+      <span class="company-appearances"><strong>Sidebar:</strong> W12 (edtech business model)</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Indomaret (Salim)</span>
+      <span class="company-appearances"><strong>Sidebar:</strong> W12 (retail density as barrier)</span>
+    </div>
+    <div class="company-row">
+      <span class="company-name">Tokopedia (GoTo)</span>
+      <span class="company-appearances"><strong>Sidebar:</strong> W13 (seller engagement)</span>
+    </div>
+  </div>
+
+  <h2 style="color:var(--navy);margin-top:2rem">Rujukan Kerangka Strategis</h2>
+  <p style="color:var(--muted);font-size:.9rem">16+ framework diagrams utama yang ditampilkan sebagai inline SVG:</p>
+  <ul style="font-size:.93rem;line-height:1.7">
+    <li><strong>W2</strong> — Five-Stage Managerial Process · Three Levels of Strategy</li>
+    <li><strong>W3</strong> — PESTEL Framework · Porter's Five Forces</li>
+    <li><strong>W4</strong> — VRIN/VRIO Framework · SWOT Matrix</li>
+    <li><strong>W5</strong> — Porter's Five Generic Strategies Matrix</li>
+    <li><strong>W6</strong> — Blue Ocean Four Actions Framework</li>
+    <li><strong>W7</strong> — Industry Lifecycle with Strategic Implications</li>
+    <li><strong>W8</strong> — Market Entry Modes Spectrum · Integration-Responsiveness Matrix</li>
+    <li><strong>W9</strong> — Porter's Three Tests Diversification · Related vs. Unrelated Spectrum · BCG Matrix</li>
+    <li><strong>W10</strong> — Three Views of CSR (Shareholder / Stakeholder / Shared Value)</li>
+    <li><strong>W11</strong> — Eight Elements of Strategy Execution · Balanced Scorecard</li>
+    <li><strong>W12</strong> — Business Model Canvas (9 Blocks) · Curvilinear Barriers to Entry</li>
+    <li><strong>W13</strong> — Stakeholder Salience Model · Four Pillars of Engagement</li>
+    <li><strong>W14</strong> — Ambidextrous Leadership Framework</li>
+  </ul>
+
+  <h2 style="color:var(--navy);margin-top:2rem">Penutup</h2>
+  <p>Dokumen ini dirancang bukan sebagai <em>passive reading</em> tetapi <em>active study</em> guide. Setiap halaman Study Guide berisi Pemeriksa Konsep (self-check questions) yang sebaiknya dikerjakan sebelum melangkah ke minggu berikutnya. Setiap Indonesian Company page mendorong verifikasi independen ke sumber publik. Setiap Article Analysis mendorong kritik metodologis dan aplikasi ke konteks lokal.</p>
+  <p style="margin-top:1rem">Semoga 14 minggu materi ini menjadi fondasi yang kokoh bagi pemahaman strategi manajerial kontemporer—tidak hanya untuk kebutuhan UTS dan UAS, tetapi untuk pemikiran strategis jangka panjang dalam karier akuntansi dan manajemen.</p>
+
+  <hr style="margin-top:3rem;border:0;border-top:1px solid var(--rule)">
+  <p style="text-align:center;font-size:.82rem;color:var(--muted);font-family:var(--sans);margin-top:1.5rem">
+    Dirakit oleh pipeline <em>Dev Assistant</em> (Rust · pulldown-cmark · minijinja).<br>
+    Dzaki — Magister Akuntansi STIE YKPN · Semester II TA 2025/2026 · MST304.
+  </p>
+</article>
+
+</main>
+</div>
+</body>
+</html>

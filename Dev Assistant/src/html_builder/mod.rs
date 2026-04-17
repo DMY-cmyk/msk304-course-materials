@@ -135,3 +135,53 @@ pub fn build_week_section(
 
     Ok(out_file)
 }
+
+/// Build master print bundle — single HTML combining all 14 weeks end-to-end.
+/// Includes cover, TOC, per-week divider, all section content, and back-matter.
+pub fn build_master_bundle(
+    weeks: &[Week],
+    content_root: &Path,
+    output_root: &Path,
+) -> Result<PathBuf> {
+    let env = engine::build_env(Path::new("templates"))?;
+    let tmpl = env.get_template("master-bundle.html.j2")?;
+
+    let mut week_contexts = Vec::new();
+    for w in weeks {
+        let sg = compile_section_body(w.num, "study_guide", content_root)?;
+        let sum = compile_section_body(w.num, "summary", content_root)?;
+        let art = compile_section_body(w.num, "article", content_root)?;
+        let ind = compile_section_body(w.num, "indonesian", content_root)?;
+
+        let has_sg = !sg.trim().is_empty();
+        let has_sum = !sum.trim().is_empty();
+        let has_art = !art.trim().is_empty();
+        let has_ind = !ind.trim().is_empty();
+
+        week_contexts.push(context! {
+            week => w,
+            study_guide_html => sg,
+            summary_html => sum,
+            article_html => art,
+            indonesian_html => ind,
+            has_sg => has_sg,
+            has_sum => has_sum,
+            has_art => has_art,
+            has_ind => has_ind,
+        });
+    }
+
+    let ctx = context! { weeks => week_contexts };
+    let html = tmpl.render(ctx)?;
+
+    let out_dir = output_root.join("Master Print Bundle");
+    fs::create_dir_all(&out_dir)?;
+    let out_file = out_dir.join("course-companion.html");
+    fs::write(&out_file, html)?;
+
+    let assets_src = Path::new("assets/css");
+    let assets_dst = out_dir.join("assets");
+    assets::copy_css(assets_src, &assets_dst)?;
+
+    Ok(out_file)
+}

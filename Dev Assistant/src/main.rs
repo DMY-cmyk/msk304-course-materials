@@ -21,6 +21,8 @@ enum Command {
     Clean,
     /// Verify every week's output HTML exists and is non-empty
     Verify,
+    /// Build Master Print Bundle — single-file all-14-weeks course-companion.html (PDF-ready)
+    Bundle,
 }
 
 const SECTIONS: &[(&str, &str, &str)] = &[
@@ -76,6 +78,12 @@ fn main() -> anyhow::Result<()> {
                     println!("cleaned {}", p.display());
                 }
             }
+        }
+        Command::Bundle => {
+            let weeks = load_weeks(&PathBuf::from("configs/week-mapping.toml"))?;
+            let out = html_builder::build_master_bundle(&weeks, &content_root, &output_root)?;
+            println!("wrote {}", out.display());
+            println!("bundle complete.");
         }
         Command::Verify => {
             let weeks = load_weeks(&PathBuf::from("configs/week-mapping.toml"))?;
