@@ -1,0 +1,30 @@
+@page {
+  size: A4 portrait;
+  margin: 2.5cm 2.2cm;
+  @top-left   { content: "MST304 · Manajemen Strategik Kontemporer"; font-family: "Inter Tight", sans-serif; font-size: 9pt; color: #595959; }
+  @top-right  { content: string(section-title); font-family: "Inter Tight", sans-serif; font-size: 9pt; color: #595959; }
+  @bottom-right { content: "Halaman " counter(page) " dari " counter(pages); font-family: "Inter Tight", sans-serif; font-size: 9pt; color: #595959; }
+  @bottom-left  { content: "Dzaki — Magister Akuntansi STIE YKPN"; font-family: "Inter Tight", sans-serif; font-size: 9pt; color: #595959; }
+}
+
+aside.sidebar { display: none !important; }
+.layout { display: block !important; }
+main { padding: 0 !important; max-width: none !important; }
+.hero { margin: 0 !important; background: none !important; border: 0 !important; padding: 0 0 1rem !important; }
+.hero::after { display: none; }
+
+body { font-size: 11pt; line-height: 1.55; color: #1a1a1a; background: #fff; }
+h1 { font-size: 22pt; page-break-after: avoid; }
+h2 { font-size: 15pt; page-break-before: always; page-break-after: avoid; string-set: section-title content(); }
+h2:first-of-type { page-break-before: avoid; }
+h3 { font-size: 12pt; page-break-after: avoid; }
+
+p, ul, ol, blockquote { orphans: 3; widows: 3; }
+
+.callout, .case-box, .framework, .citations, .pull-quote, .concept-card, .src-table, table { page-break-inside: avoid; }
+svg.framework-svg { page-break-inside: avoid; max-width: 100%; height: auto; }
+
+a { color: #1a1a1a; text-decoration: none; }
+a::after { content: ""; }
+
+.page-footer { margin-top: 2rem; }

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Visual Companion — MSK Pertemuan 3</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{--bg:#0f172a;--panel:#111c34;--ink:#e5edf7;--muted:#9aa8c1;--accent:#7dd3fc;--accent2:#fbbf24;--line:#1f2a44;--ok:#34d399}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:linear-gradient(180deg,#0b1224,#0f172a);color:var(--ink);line-height:1.55}
+  header{padding:36px 40px 18px;border-bottom:1px solid var(--line)}
+  header .eyebrow{color:var(--accent);letter-spacing:.18em;font-size:11px;text-transform:uppercase}
+  header h1{margin:.2em 0 .1em;font-size:28px;font-weight:700}
+  header .sub{color:var(--muted);font-size:14px}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 40px 60px}
+  .grid{display:grid;gap:18px}
+  .g2{grid-template-columns:1fr 1fr}
+  @media(max-width:880px){.g2{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+  .card h2{margin:0 0 10px;font-size:16px;color:var(--accent)}
+  .card h3{margin:14px 0 6px;font-size:14px;color:var(--accent2)}
+  .pill{display:inline-block;padding:3px 10px;border-radius:999px;background:rgba(125,211,252,.12);color:var(--accent);font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-right:6px}
+  .ok{background:rgba(52,211,153,.14);color:var(--ok)}
+  ul,ol{margin:6px 0 0;padding-left:20px}
+  li{margin:3px 0;color:#cbd6ea;font-size:14px}
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13.5px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+  code{background:#0a1226;color:#a5e3ff;padding:2px 6px;border-radius:5px;font-size:12.5px}
+  .file{display:flex;justify-content:space-between;gap:10px;padding:10px 12px;background:#0a1226;border:1px solid var(--line);border-radius:8px;margin:6px 0;font-size:13.5px}
+  .file .nm{color:#cbd6ea}
+  .file .sz{color:var(--muted);font-variant-numeric:tabular-nums}
+  footer{color:var(--muted);font-size:12px;text-align:center;padding:20px;border-top:1px solid var(--line);margin-top:40px}
+  .kbd{font-family:ui-monospace,Menlo,monospace;background:#0a1226;border:1px solid var(--line);padding:1px 7px;border-radius:5px;font-size:12.5px;color:#a5e3ff}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">Visual Companion · Manajemen Strategik Kontemporer</div>
+  <h1>Pertemuan 3 — Evaluating a Company's External Environment</h1>
+  <div class="sub">Dzaki Muhammad Yusfian · NIM 1125 01079 · Magister Akuntansi STIE YKPN</div>
+</header>
+
+<div class="wrap">
+
+<div class="card" style="margin-bottom:18px">
+  <span class="pill ok">Selesai dibangkitkan</span>
+  <span class="pill">Pandoc + reference.docx</span>
+  <h2 style="margin-top:12px">Tugas (dari <code>Tugas Pert. 3.png</code>)</h2>
+  <p style="margin:6px 0 0;color:#cbd6ea">"Buat Ringkasan Materi Kuliah Dan Riviu Kritis Artikel Pertemuan Ke 3 Sesuai Silabus." Batas pengumpulan: <strong>Sabtu, 18 April 2026 · 18.30 WIB</strong>.</p>
+</div>
+
+<div class="grid g2">
+
+  <div class="card">
+    <h2>Pemetaan Materi (Silabus)</h2>
+    <table>
+      <tr><th>Sumber</th><th>Cakupan</th></tr>
+      <tr><td>TPGS Bab 3</td><td>PESTEL, Five Forces, Strategic Group Mapping, Driving Forces, KSF, Industry Attractiveness</td></tr>
+      <tr><td>Henry Bab 3</td><td>Macro-environment, scenario planning, environmental scanning, stakeholder analysis</td></tr>
+      <tr><td>Artikel 3</td><td>Newman, Rand, Tarp &amp; Trifkovic (2020) — <em>CSR in a Competitive Business Environment</em>, JDS</td></tr>
+      <tr><td>Artikel 4</td><td>Mason (2007) — <em>External environment's effect on management and strategy: a complexity theory approach</em>, MD 45(1)</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Output yang Dihasilkan</h2>
+    <div class="file"><span class="nm">RMK/01079_Dzaki Muhammad Yusfian_RMK Pert. 3.docx</span><span class="sz">31 KB</span></div>
+    <div class="file"><span class="nm">Critical Thinking of the Article/01079_…_Artikel 3.docx</span><span class="sz">29 KB</span></div>
+    <div class="file"><span class="nm">Critical Thinking of the Article/01079_…_Artikel 4.docx</span><span class="sz">29 KB</span></div>
+    <h3>Pipeline</h3>
+    <ul>
+      <li>Markdown sumber: <code>Dev Assistant/temp/*.md</code></li>
+      <li>Konversi: <span class="kbd">pandoc --reference-doc=reference.docx</span></li>
+      <li>Skrip: <code>Dev Assistant/scripts/generate_pert3.py</code></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Struktur RMK Pertemuan 3</h2>
+    <ol>
+      <li>Pendahuluan dan kerangka analisis</li>
+      <li>Lingkungan makro vs lingkungan industri</li>
+      <li>Kerangka <em>PESTEL</em></li>
+      <li><em>Porter's Five Forces</em></li>
+      <li><em>Strategic Group Mapping</em></li>
+      <li><em>Driving Forces</em> industri</li>
+      <li><em>Key Success Factors</em> (KSF)</li>
+      <li>Penilaian daya tarik industri</li>
+      <li>Sintesis dengan Artikel 3 &amp; 4</li>
+      <li>Implikasi MSK dan akuntansi manajerial</li>
+      <li>Kesimpulan</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Struktur Critical Review (Artikel 3 &amp; 4)</h2>
+    <ol>
+      <li>Identitas artikel</li>
+      <li>Tujuan penelitian</li>
+      <li>Argumen utama dan temuan</li>
+      <li>Koneksi dengan silabus Pertemuan 3</li>
+      <li>Kekuatan</li>
+      <li>Keterbatasan</li>
+      <li>Evaluasi kritis</li>
+      <li>Implikasi terhadap pemahaman MSK</li>
+      <li>Isu untuk diperdebatkan lebih lanjut</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Arah Analitis — Artikel 3 (Newman dkk., 2020)</h2>
+    <p style="margin:4px 0 8px;color:#cbd6ea;font-size:13.5px">Panel data Vietnam 2011–2014 (5.185 perusahaan, 20.740 obs.). 12 indikator CSR (4 manajemen + 8 komunitas), HHI sebagai proksi kompetisi.</p>
+    <h3>Garis kritik utama</h3>
+    <ul>
+      <li>CSR komunitas memang produktif, tetapi efek belum sepenuhnya bebas dari <em>self-selection</em> dan <em>reverse causality</em>.</li>
+      <li>Konteks Vietnam (institusi lemah, jejaring informal) membatasi generalisasi ke pasar matang.</li>
+      <li>Distribusi <em>rent</em>: pekerja menerima <em>wage share</em> lebih rendah, menantang narasi <em>win-win</em>.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Arah Analitis — Artikel 4 (Mason, 2007)</h2>
+    <p style="margin:4px 0 8px;color:#cbd6ea;font-size:13.5px">Empat studi kasus Afrika Selatan (2 IT turbulen, 2 <em>packaging</em> stabil); 4 proposisi (P1–P2 didukung, P3–P4 tidak).</p>
+    <h3>Garis kritik utama</h3>
+    <ul>
+      <li>Daya jelas teori kompleksitas tinggi, tetapi operasionalisasi <em>strange attractor</em> dan <em>emergence</em> masih lemah.</li>
+      <li>Sampel kecil (n = 4) membatasi <em>external validity</em>; klaim normatif lebih kuat dari bukti.</li>
+      <li>Implikasi MSK: pendekatan deterministik (PESTEL/Five Forces statis) perlu dikomplemenkan kapabilitas adaptif dan <em>sensemaking</em>.</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="card" style="margin-top:18px">
+  <h2>Verifikasi Cepat</h2>
+  <ul>
+    <li>✅ Tiga berkas <em>.docx</em> ada di <code>course-materials/outputs/…</code> dengan ukuran 28–31 KB.</li>
+    <li>✅ Halaman pertama tiap dokumen memuat <strong>Nama: Dzaki Muhammad Yusfian</strong> dan <strong>NIM: 1125 01079</strong>.</li>
+    <li>✅ Penamaan berkas sesuai pola <code>01079_Dzaki Muhammad Yusfian_…</code>.</li>
+    <li>✅ Bahasa Indonesia, istilah asing dimiringkan, tanpa <em>em-dash</em> sebagai konektor antar-fragmen.</li>
+  </ul>
+</div>
+
+<footer>Visual Companion · Pertemuan 3 · dibangkitkan otomatis oleh <code>generate_pert3.py</code></footer>
+</div>
+</body>
+</html>
