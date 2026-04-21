@@ -1,0 +1,1318 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visual Companion — MST304 Manajemen Strategik Kontemporer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Inter+Tight:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* ===== Editorial Scholar palette =====
+       Warm paper · deep indigo-ink · refined gold · academic cyan
+       Designed for: serious scholarship that still feels alive. */
+    --paper:     #fdfcfa;   /* main background — warm off-white, like real paper */
+    --panel:     #faf8f4;   /* subtle panel — warm sidebar, callout base */
+    --panel-2:   #f3f1eb;   /* deeper warm panel */
+    --rule:      #e7e5e0;   /* warm hairline */
+    --rule-2:    #d6d3ca;   /* stronger border */
+    --ink:       #1a1a1a;   /* warm black — body text */
+    --muted:     #595959;   /* readable grey, not too light */
+    --muted-2:   #8c8c8c;   /* captions */
+
+    /* Primary: deep indigo-night — richer and warmer than standard navy */
+    --navy:      #1a1f3a;
+    --navy-soft: #2d3561;
+    --navy-50:   #eef0f7;   /* tint backgrounds */
+
+    /* Accent 1: refined scholarly gold — eye-catching, historical, confident */
+    --gold:      #b08700;
+    --gold-soft: #d4a500;
+    --gold-50:   #fbf5dd;
+
+    /* Accent 2: academic cyan — secondary callouts, check boxes */
+    --teal:      #0e7490;
+    --teal-soft: #22b4d1;
+    --teal-50:   #e0f3f8;
+
+    /* Semantic */
+    --warn:      #b45309;   /* disclosure banners */
+    --warn-50:   #fef3c7;
+    --ok:        #166534;   /* done states */
+    --ok-50:     #dcfce7;
+    --rev:       #7e22ce;   /* revision-flag purple */
+    --rev-50:    #faf5ff;
+    --danger:    #991b1b;   /* exam markers */
+
+    /* Aliases */
+    --bg: var(--paper);
+
+    /* Typography */
+    --display: "Fraunces", "Playfair Display", "Iowan Old Style", Georgia, serif;
+    --serif:   "Source Serif 4", "Source Serif Pro", Charter, Georgia, "Times New Roman", serif;
+    --sans:    "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono:    "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--serif);
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.72;
+    font-size: 17px;
+    font-feature-settings: "liga", "kern", "onum";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h2, h3, h4, h5, h6, .sans {
+    font-family: var(--sans);
+    font-weight: 700;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+  }
+  h1 {
+    font-family: var(--display);
+    font-weight: 500;           /* Fraunces looks best at mid-weight */
+    font-variation-settings: "SOFT" 50, "opsz" 120;
+    letter-spacing: -0.022em;
+    font-size: 2.65rem;
+    line-height: 1.1;
+    color: var(--navy);
+    margin: 0 0 .9rem;
+  }
+  h2 {
+    font-size: 1.6rem;
+    line-height: 1.25;
+    margin: 3rem 0 1rem;
+    color: var(--navy);
+    position: relative;
+    padding-bottom: .45rem;
+  }
+  h2::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 42px; height: 3px;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+  h3 { font-size: 1.18rem; line-height: 1.3; margin: 1.75rem 0 .55rem; color: var(--ink); }
+  h4 {
+    font-size: .78rem;
+    line-height: 1.3;
+    margin: 1.2rem 0 .4rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  p { margin: 0 0 1rem; }
+  a { color: var(--navy); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; transition: color .15s; }
+  a:hover { color: var(--gold); }
+  code { font-family: var(--mono); font-size: .88em; background: var(--panel-2); padding: .14em .44em; border-radius: 4px; color: var(--navy); font-weight: 500; }
+  kbd { font-family: var(--mono); font-size: .82em; background: var(--panel); border: 1px solid var(--rule-2); border-bottom-width: 2px; padding: .12em .5em; border-radius: 4px; color: var(--ink); }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+  ::selection { background: var(--gold-50); color: var(--ink); }
+
+  .layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+
+  /* ===== SIDEBAR ===== */
+  aside.sidebar {
+    position: sticky; top: 0; align-self: start;
+    height: 100vh; overflow-y: auto;
+    background: var(--panel);
+    border-right: 1px solid var(--rule);
+    padding: 1.75rem 1.25rem;
+    font-family: var(--sans);
+    font-size: .875rem;
+  }
+  .brand {
+    font-family: var(--display);
+    font-weight: 600;
+    font-variation-settings: "SOFT" 30, "opsz" 36;
+    color: var(--navy);
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .brand small { display: block; color: var(--muted); font-weight: 500; font-size: .72rem; margin-top: .35rem; letter-spacing: .02em; font-family: var(--sans); line-height: 1.4; }
+  .brand::before { content: ""; display: block; width: 28px; height: 3px; background: var(--gold); border-radius: 2px; margin-bottom: .7rem; }
+  .nav-group { margin-top: 1.5rem; }
+  .nav-group-title { text-transform: uppercase; font-size: .68rem; letter-spacing: .08em; color: var(--muted); font-weight: 600; margin-bottom: .45rem; padding-left: .1rem; }
+  .sidebar a { display: block; padding: .42rem .6rem; border-radius: 6px; color: var(--ink); text-decoration: none; margin-bottom: 1px; }
+  .sidebar a:hover { background: var(--panel-2); color: var(--navy); }
+  .sidebar a.active { background: var(--navy); color: #fff; font-weight: 600; }
+  .week-nav a { display: flex; justify-content: space-between; gap: .5rem; }
+  .week-nav a .wk { color: var(--muted); font-variant-numeric: tabular-nums; font-size: .78rem; font-weight: 600; min-width: 28px; }
+  .week-nav a.active .wk { color: #fff; }
+  .week-nav a:hover .wk { color: var(--navy); }
+
+  /* ===== MAIN ===== */
+  main { padding: 3rem 4rem 6rem; max-width: 1080px; }
+  .page-eyebrow {
+    font-family: var(--sans);
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: .7rem;
+    display: inline-flex;
+    align-items: center;
+    gap: .65rem;
+  }
+  .page-eyebrow::before {
+    content: "";
+    width: 18px; height: 2px;
+    background: var(--gold);
+    display: inline-block;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: 1.18rem;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 62ch;
+    font-weight: 400;
+  }
+  .lede b { color: var(--ink); font-weight: 600; }
+
+  /* ===== STATS GRID ===== */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 2rem 0 2.5rem; }
+  .stat {
+    padding: 1.2rem 1.3rem 1.1rem;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    background: var(--paper);
+    position: relative;
+    overflow: hidden;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .stat::before {
+    content: "";
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--gold);
+    opacity: .85;
+  }
+  .stat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px -8px rgba(26,31,58,.15);
+  }
+  .stat .n {
+    font-family: var(--display);
+    font-variation-settings: "SOFT" 40, "opsz" 72;
+    font-size: 2.6rem;
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1;
+    letter-spacing: -0.028em;
+    display: block;
+  }
+  .stat .l {
+    font-family: var(--sans);
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    color: var(--muted);
+    margin-top: .55rem;
+    font-weight: 600;
+  }
+
+  /* ===== MAPPING TABLE ===== */
+  .map-table { width: 100%; border-collapse: collapse; font-size: .9rem; margin: 1.25rem 0 2rem; }
+  .map-table th, .map-table td { padding: .65rem .7rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--rule); }
+  .map-table th { background: var(--panel); font-family: var(--sans); font-weight: 600; font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); border-top: 1px solid var(--rule); }
+  .map-table tbody tr:hover { background: var(--panel); }
+  .map-table .wk-cell { font-family: var(--sans); font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: .72rem;
+    font-weight: 600;
+    padding: .18rem .55rem;
+    border-radius: 4px;
+    margin: 1px 3px 1px 0;
+    background: var(--panel-2);
+    color: var(--ink);
+    border: 1px solid var(--rule);
+    white-space: nowrap;
+    letter-spacing: .01em;
+  }
+  .tag.tpgs  { background: var(--navy-50); color: var(--navy); border-color: #d4d9ea; }
+  .tag.henry { background: var(--teal-50); color: var(--teal); border-color: #bfe4ed; }
+  .tag.art   { background: var(--gold-50); color: #8a6d00;     border-color: #ecd886; }
+  .tag.indo  { background: #fdf4ff;        color: #86198f;     border-color: #f5d0fe; }
+  .tag.exam  { background: #fde7e7;        color: var(--danger); border-color: #f5c6c6; }
+  .tag.ph    { background: var(--paper);   color: var(--muted); border-style: dashed; font-style: italic; }
+
+  /* ===== COMPONENT PREVIEWS ===== */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 1.25rem 0; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.25rem 0; }
+
+  .concept-card {
+    padding: 1.15rem 1.3rem;
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--navy);
+    border-radius: 0 8px 8px 0;
+    background: var(--paper);
+    transition: border-left-color .15s, transform .15s;
+  }
+  .concept-card:hover { border-left-color: var(--gold); transform: translateX(2px); }
+  .concept-card h4 {
+    margin: 0 0 .45rem;
+    text-transform: none;
+    letter-spacing: -0.008em;
+    color: var(--ink);
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: var(--sans);
+  }
+  .concept-card p { margin: 0; font-size: .95rem; color: var(--muted); line-height: 1.6; }
+
+  .pull-quote {
+    font-family: var(--display);
+    font-variation-settings: "SOFT" 60, "opsz" 60;
+    font-style: italic;
+    font-size: 1.45rem;
+    font-weight: 400;
+    line-height: 1.38;
+    color: var(--ink);
+    padding: 1.3rem 0 1.2rem 1.6rem;
+    border-left: 3px solid var(--gold);
+    margin: 1.8rem 0;
+    position: relative;
+  }
+  .pull-quote::before {
+    content: "\201C";
+    position: absolute;
+    left: 1rem; top: -.5rem;
+    font-family: var(--display);
+    font-size: 3.5rem;
+    color: var(--gold-soft);
+    opacity: .35;
+    line-height: 1;
+  }
+  .pull-quote cite {
+    display: block;
+    font-style: normal;
+    font-family: var(--sans);
+    font-size: .78rem;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: .8rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+
+  .callout {
+    padding: 1rem 1.2rem;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    margin: 1.25rem 0;
+    font-size: .93rem;
+  }
+  .callout.check { border-left: 3px solid var(--teal); background: var(--teal-50); border-color: #c2e1e9; }
+  .callout.check .tt { font-family: var(--sans); font-weight: 700; font-size: .74rem; text-transform: uppercase; letter-spacing: .09em; color: var(--teal); margin-bottom: .4rem; }
+  .callout.disclosure { border-left: 3px solid var(--warn); background: var(--warn-50); border-color: #f1d99a; font-size: .9rem; }
+  .callout.disclosure .tt { font-family: var(--sans); font-weight: 700; font-size: .72rem; text-transform: uppercase; letter-spacing: .09em; color: var(--warn); margin-bottom: .35rem; }
+
+  .case-box {
+    padding: 1.1rem 1.25rem;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    background: var(--bg);
+    margin: 1.25rem 0;
+  }
+  .case-box .case-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: .5rem; border-bottom: 1px solid var(--rule); padding-bottom: .45rem; }
+  .case-box .case-head h3 { margin: 0; font-size: 1.05rem; }
+  .case-box .case-head .ticker { font-family: var(--mono); font-size: .78rem; color: var(--muted); }
+  .case-box .data-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin: .7rem 0; }
+  .case-box .data-pt { font-family: var(--sans); }
+  .case-box .data-pt .n {
+    display: block;
+    font-family: var(--display);
+    font-variation-settings: "SOFT" 40, "opsz" 48;
+    font-size: 1.55rem;
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .case-box .data-pt .l { display: block; font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; margin-top: .2rem; }
+  .case-box .data-pt .src { display: block; font-family: var(--serif); font-size: .72rem; font-style: italic; color: var(--muted); margin-top: .25rem; }
+
+  /* ===== COLOR SWATCHES ===== */
+  .swatch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin: 1rem 0; }
+  .swatch { border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; font-family: var(--sans); font-size: .82rem; }
+  .swatch .sw-color { height: 72px; }
+  .swatch .sw-meta { padding: .5rem .7rem .6rem; background: var(--bg); }
+  .swatch .sw-meta .role { font-weight: 600; color: var(--ink); }
+  .swatch .sw-meta .hex { color: var(--muted); font-family: var(--mono); font-size: .78rem; }
+
+  /* ===== FRAMEWORK CARD ===== */
+  .framework {
+    padding: 1.25rem;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    margin: 1.25rem 0;
+  }
+  .framework-title { font-family: var(--sans); font-weight: 700; font-size: .88rem; text-transform: uppercase; letter-spacing: .06em; color: var(--navy); margin-bottom: .7rem; }
+
+  /* ===== PRINT PREVIEW PAGE ===== */
+  .print-preview {
+    background: #f1f5f9;
+    padding: 2.5rem 1rem;
+    border-radius: 12px;
+    margin: 1.5rem 0 2rem;
+    text-align: center;
+  }
+  .print-page {
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 1 / 1.414;
+    background: #fff;
+    margin: 0 auto;
+    padding: 2.5rem 2.75rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.06);
+    border-radius: 2px;
+    text-align: left;
+    font-size: 10px;
+    line-height: 1.45;
+    overflow: hidden;
+    position: relative;
+  }
+  .print-page .p-header { display: flex; justify-content: space-between; font-family: var(--sans); font-size: 8px; color: var(--muted); padding-bottom: .4rem; margin-bottom: .8rem; border-bottom: 1px solid var(--rule); }
+  .print-page h2 { font-size: 14px; margin: 0 0 .3rem; color: var(--navy); }
+  .print-page h3 { font-size: 11px; margin: .5rem 0 .2rem; }
+  .print-page p { font-size: 9.5px; margin: 0 0 .4rem; }
+  .print-page .p-footer { position: absolute; left: 2.75rem; right: 2.75rem; bottom: 1.2rem; font-family: var(--sans); font-size: 8px; color: var(--muted); display: flex; justify-content: space-between; padding-top: .3rem; border-top: 1px solid var(--rule); }
+  .print-page .p-box { border: 1px solid var(--rule); padding: .4rem .55rem; margin: .4rem 0; border-radius: 3px; background: #f8fafc; font-size: 9px; }
+  .print-page .p-box strong { color: var(--teal); }
+
+  /* ===== PHASE TIMELINE ===== */
+  .phases { margin: 1.5rem 0 2rem; border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+  .phase { display: grid; grid-template-columns: 80px 1fr auto; align-items: start; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--rule); }
+  .phase:last-child { border-bottom: 0; }
+  .phase .p-label { font-family: var(--sans); font-weight: 700; color: var(--navy); font-size: .9rem; }
+  .phase .p-body { font-size: .92rem; color: var(--ink); }
+  .phase .p-body h4 { margin: 0 0 .2rem; font-size: .95rem; text-transform: none; letter-spacing: normal; color: var(--ink); }
+  .phase .p-body p { margin: 0; color: var(--muted); font-size: .88rem; }
+  .phase .p-status { font-family: var(--sans); font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; padding: .2rem .55rem; border-radius: 999px; white-space: nowrap; }
+  .phase.current { background: #fffbeb; }
+  .phase.current .p-status { background: var(--warn); color: #fff; }
+  .phase.done .p-status { background: var(--ok); color: #fff; }
+  .phase.pending .p-status { background: var(--panel-2); color: var(--muted); border: 1px solid var(--rule); }
+
+  /* ===== REVISION PANEL ===== */
+  .revision {
+    padding: 1rem 1.25rem;
+    border: 1px dashed #c084fc;
+    background: #faf5ff;
+    border-radius: 8px;
+    margin: 1rem 0;
+  }
+  .revision .r-head { font-family: var(--sans); font-weight: 700; color: #7e22ce; font-size: .82rem; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .3rem; }
+  .revision p { margin: 0; font-size: .92rem; color: var(--ink); }
+
+  /* ===== TYPOGRAPHY SAMPLE ===== */
+  .type-sample { padding: 1.75rem 1.9rem; border: 1px solid var(--rule); border-radius: 10px; background: var(--paper); }
+  .type-sample .display-1 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-variation-settings: "SOFT" 50, "opsz" 144;
+    font-size: 3rem;
+    letter-spacing: -0.028em;
+    line-height: 1.02;
+    color: var(--navy);
+    margin: 0;
+  }
+  .type-sample .sans-2 {
+    font-family: var(--sans);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+    margin: 1.5rem 0 .3rem;
+  }
+  .type-sample .serif-body {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    color: var(--ink);
+    line-height: 1.72;
+    max-width: 62ch;
+  }
+  .type-sample .caption {
+    font-family: var(--sans);
+    font-size: .72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    margin-top: .8rem;
+    font-weight: 600;
+  }
+
+  /* ===== CITATION BLOCK ===== */
+  .citations { font-size: .82rem; font-family: var(--sans); color: var(--muted); line-height: 1.5; padding: .8rem 1rem; background: var(--panel); border-radius: 6px; margin: 1rem 0; border-left: 2px solid var(--rule); }
+  .citations b { color: var(--ink); }
+  .citations ol { margin: 0; padding-left: 1.2rem; }
+
+  /* ===== SOURCES TABLE ===== */
+  .src-table { width: 100%; border-collapse: collapse; font-size: .84rem; margin: 1rem 0; }
+  .src-table th, .src-table td { padding: .5rem .6rem; text-align: left; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .src-table th { background: var(--panel); font-family: var(--sans); font-weight: 600; font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+  .src-table td:first-child { font-family: var(--sans); font-weight: 600; color: var(--navy); white-space: nowrap; }
+
+  /* ===== SECTION SEP ===== */
+  .section-sep { margin: 4rem 0; border-top: 1px solid var(--rule); }
+
+  /* ===== HEADER BAR ===== */
+  .hero {
+    background:
+      radial-gradient(1200px 380px at 85% -10%, rgba(176,135,0,.10), transparent 60%),
+      radial-gradient(900px 500px at 0% 0%, rgba(26,31,58,.05), transparent 55%),
+      linear-gradient(180deg, var(--panel) 0%, var(--paper) 100%);
+    margin: -3rem -4rem 2.5rem;
+    padding: 3.2rem 4rem 2.7rem;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    left: 4rem; right: 4rem; bottom: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold) 0, var(--gold) 80px, transparent 80px);
+  }
+  .hero .meta-row { display: flex; flex-wrap: wrap; gap: .55rem; font-family: var(--sans); font-size: .78rem; color: var(--muted); margin-top: 1.4rem; }
+  .hero .meta-row span { background: rgba(255,255,255,.8); padding: .3rem .8rem; border-radius: 999px; border: 1px solid var(--rule); font-weight: 500; }
+  .hero .meta-row span code { background: transparent; padding: 0; color: var(--muted); font-size: .85em; }
+
+  /* ===== INLINE SVG ===== */
+  svg.framework-svg { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: 1fr; }
+    aside.sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--rule); }
+    main { padding: 2rem 1.5rem 4rem; }
+    .hero { margin: -2rem -1.5rem 1.5rem; padding: 2rem 1.5rem; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .swatch-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    aside.sidebar { display: none; }
+    .layout { display: block; }
+    main { padding: 0; max-width: none; }
+    .hero { margin: 0; background: none; border: 0; padding: 0; }
+    body { font-size: 11pt; }
+    .print-preview { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="brand">MST304
+    <small>Manajemen Strategik Kontemporer<br>Visual Companion · 2025/2026</small>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Overview</div>
+    <a href="#intro" class="active">Introduction</a>
+    <a href="#course-at-glance">Course at a Glance</a>
+    <a href="#design-decisions">Design Decisions</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Master Mapping</div>
+    <a href="#master-map">Week × Topic × Sources</a>
+    <a href="#indo-map">Indonesian Company Map</a>
+    <a href="#articles-map">Article Coverage</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Design System</div>
+    <a href="#typography">Typography</a>
+    <a href="#colors">Color Palette</a>
+    <a href="#components">Component Library</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Output Preview</div>
+    <a href="#anatomy">Weekly Output Anatomy</a>
+    <a href="#sample-summary">Sample · Main Summary (Week 3)</a>
+    <a href="#sample-indo">Sample · Indonesian Example</a>
+    <a href="#sample-article">Sample · Article Analysis</a>
+    <a href="#print-preview">Print-to-PDF Preview</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Workflow</div>
+    <a href="#phases">Build Phases</a>
+    <a href="#revision">Revision Panel</a>
+    <a href="#next">Next Actions</a>
+  </div>
+
+  <div class="nav-group week-nav">
+    <div class="nav-group-title">Weekly Outputs (planned)</div>
+    <a href="#"><span class="wk">01</span><span>What Is Strategy</span></a>
+    <a href="#"><span class="wk">02</span><span>Crafting/Executing</span></a>
+    <a href="#"><span class="wk">03</span><span>External Env</span></a>
+    <a href="#"><span class="wk">04</span><span>Resources/VRIN</span></a>
+    <a href="#"><span class="wk">05</span><span>Generic Strategies</span></a>
+    <a href="#"><span class="wk">06</span><span>Supplementing</span></a>
+    <a href="#"><span class="wk">07</span><span>Tailoring</span></a>
+    <a href="#"><span class="wk">UTS</span><span>Mid-Exam</span></a>
+    <a href="#"><span class="wk">08</span><span>International</span></a>
+    <a href="#"><span class="wk">09</span><span>Diversification</span></a>
+    <a href="#"><span class="wk">10</span><span>Ethics/CSR</span></a>
+    <a href="#"><span class="wk">11</span><span>Execution</span></a>
+    <a href="#"><span class="wk">12</span><span>Business Model</span></a>
+    <a href="#"><span class="wk">13</span><span>Stakeholder/Engage</span></a>
+    <a href="#"><span class="wk">14</span><span>Hypercomp/Leadership</span></a>
+    <a href="#"><span class="wk">UAS</span><span>Final-Exam</span></a>
+  </div>
+</aside>
+
+<main>
+
+<!-- ================== HERO ================== -->
+<section id="intro" class="hero">
+  <div class="page-eyebrow">Visual Companion · Review before implementation</div>
+  <h1>MST304 Manajemen Strategik Kontemporer</h1>
+  <p class="lede">Graduate-level course support system built from the syllabus, core textbooks (Gamble/Peteraf/Thompson 7e; Anthony Henry 4e), assigned articles, and an Indonesian corporate-evidence layer — designed for deep study, presentation prep, and UTS/UAS readiness. This companion shows you every structural, visual, and editorial decision so you can approve or redirect before full generation.</p>
+  <div class="meta-row">
+    <span>Program · Magister Akuntansi · STIE YKPN</span>
+    <span>14 tatap-muka + UTS + UAS</span>
+    <span>Bahasa Indonesia akademik · EN term tracking</span>
+    <span>Style: Clean Editorial</span>
+    <span>Print-to-PDF ready</span>
+    <span>Spec: <code>docs/superpowers/specs/2026-04-16-msk304-design.md</code></span>
+  </div>
+</section>
+
+<!-- ================== COURSE AT A GLANCE ================== -->
+<section id="course-at-glance">
+  <div class="page-eyebrow">01 · Scope</div>
+  <h2>Course at a Glance</h2>
+  <p>This system produces four distinct output types per week, each with a specific pedagogical role. The Visual Companion you are reading now is the master review layer.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="n">14</div><div class="l">Teaching Weeks</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">Output Types per Week</div></div>
+    <div class="stat"><div class="n">56+</div><div class="l">HTML Files Generated</div></div>
+    <div class="stat"><div class="n">42</div><div class="l">Indonesian Company Slots</div></div>
+    <div class="stat"><div class="n">29</div><div class="l">Research Articles Covered</div></div>
+    <div class="stat"><div class="n">10</div><div class="l">TPGS 7e Chapters (core)</div></div>
+    <div class="stat"><div class="n">11</div><div class="l">Henry 4e Chapters (supp.)</div></div>
+    <div class="stat"><div class="n">3 SKS</div><div class="l">Academic Credits</div></div>
+  </div>
+</section>
+
+<!-- ================== DESIGN DECISIONS ================== -->
+<section id="design-decisions">
+  <div class="page-eyebrow">02 · Locked decisions</div>
+  <h2>Design Decisions (all approved)</h2>
+  <div class="grid-3">
+    <div class="concept-card">
+      <h4>Gap handling · Option A</h4>
+      <p>Weeks 12–14 (no TPGS Ch.11–12 in 7e) are driven by the assigned articles + Anthony Henry crosswalk. Missing article PDFs get structured analysis from public abstracts + canonical literature with visible disclosure banners.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Indonesian depth · Option C</h4>
+      <p>One deep flagship per week (1–1.5 pages, 2–3 hard data points with AR/IDX citation) + 1–2 sidebar comparatives (~1–2 paragraphs) showing the same concept in another Indonesian firm.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Visual style · Option A</h4>
+      <p>Clean Editorial: navy + teal accents, sans headings + serif body, 220px fixed sidebar, pull-quotes, SVG framework diagrams. Sidebar hides on print so content prints like a textbook page.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="section-sep">
+
+<!-- ================== MASTER MAPPING ================== -->
+<section id="master-map">
+  <div class="page-eyebrow">03 · Master mapping</div>
+  <h2>Week × Topic × Textbook × Article × Indonesian Flagship</h2>
+  <p>Authoritative crosswalk used by the Rust pipeline. Syllabus-to-TPGS-7e resolutions are explicit where the syllabus references don't match the 7th edition structure.</p>
+
+  <table class="map-table">
+    <thead>
+      <tr>
+        <th style="width:52px">Week</th>
+        <th>Topic (syllabus)</th>
+        <th>TPGS 7e</th>
+        <th>Henry 4e</th>
+        <th>Articles</th>
+        <th>Indonesian Flagship</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="wk-cell">W1</td>
+        <td>What Is Strategy and Why Is It Important?</td>
+        <td><span class="tag tpgs">Ch.1</span></td>
+        <td><span class="tag henry">Ch.1</span></td>
+        <td><em>(no article)</em></td>
+        <td><span class="tag indo">Astra International</span></td>
+      </tr>
+      <tr>
+        <td class="wk-cell">W2</td>
+        <td>Managerial Process of Crafting &amp; Executing Strategy</td>
+        <td><span class="tag tpgs">Ch.2</span></td>
+        <td><span class="tag henry">Ch.1–2</span></td>
+        <td><span class="tag art">Art.1 Altıok 2011</span> <span class="tag art">Art.2 Mohamed 2019</span></td>
+        <td><span class="tag indo">BCA</span></td>
+      </tr>
+      <tr>
+        <td class="wk-cell">W3</td>
+        <td>Evaluating a Company's External Environment</td>
+        <td><span class="tag tpgs">Ch.3</span></td>
+        <td><span class="tag henry">Ch.3</span></td>
+        <td><span class="tag art">Art.3 Newman 2020</span> <span class="tag art">Art.4 Mason 2007</span></td>
+        <td><span class="tag indo">GoTo Gojek Tokopedia</span></td>
+      </tr>
+      <tr>
+        <td class="wk-cell">W4</td>
+        <td>Evaluating a Company's Resources &amp; Competitive Position</td>
+        <td><span class="tag tpgs">Ch.4</span></td>
+        <td><span class="tag henry">Ch.4</span></td>
+        <td><span class="tag art ph">Art.5 Barney 1991</span> <span class="tag art ph">Art.6 Hao Ma 2000</span></td>
+        <td><span class="tag indo">BCA (intangibles)</span></td>
+      </tr>
+      <tr>
+        <td class="wk-cell">W5</td>
+        <td>The Five Generic Competitive Strategies</td>
+        <td><span class="tag tpgs">Ch.5</span></td>
+        <td><span class="tag henry">Ch.5</span></td>
+        <td><span class="tag art ph">Art.7 Salavou 2015</span> <span class="tag art ph">Art.8 Adom 2016</span></td>
+        <td><span class="tag indo">Indofood (cost leader)</span></td>
+      </tr>
+      <tr>
+        <td class="wk-cell">W6</td>
+        <td>Supplementing the Chosen Competitive Strategy</td>
+        <td><span class="tag tpgs">Ch.6</span></td>
+        <td><span class="tag henry">Ch.5–6</span></td>
+        <td><span class="tag art ph">Art.9 Teeratansirikool 2013</span> <span class="tag art ph">Art.10 Onditi 2018</span></td>
+        <td><span class="tag indo">GoTo (blue ocean)</span></td>
+      </tr>
+      <tr>
+        <td class="wk-cell">W7</td>
+        <td>Tailoring Strategy to Fit Specific Industry &amp; Company Situations</td>
+        <td><span class="tag tpgs">Ch.6 (remapped)</span></td>
+        <td><span class="tag henry">Ch.6</span></td>
+        <td><span class="tag art ph">Art.11 Hsieh &amp; Chen 2011</span> <span class="tag art ph">Art.12 Moses 2018</span></td>
+        <td><span class="tag indo">Kalbe Farma</span></td>
+      </tr>
+      <tr style="background:#fef2f2">
+        <td class="wk-cell"><span class="tag exam">UTS</span></td>
+        <td colspan="5"><em>Ujian Tengah Semester · 120 min · 20% nilai akhir</em></td>
+      </tr>
+      <tr>
+        <td class="wk-cell">W8</td>
+        <td>Strategies for Competing in International Markets</td>
+        <td><span class="tag tpgs">Ch.7</span></td>
+        <td><span class="tag henry">Ch.8</span></td>
+        <td><span class="tag art ph">Art.15 Thomas 1999</span> <span class="tag art ph">Art.16 Grein</span> <span class="tag art ph">Art.17 Robles</span></td>
+        <td><span class="tag indo">Indofood (Indomie global)</span></td>
+      </tr>
+      <tr>
+        <td class="wk-cell">W9</td>
+        <td>Corporate Strategy: Diversification &amp; the Multibusiness Company</td>
+        <td><span class="tag tpgs">Ch.8</span></td>
+        <td><span class="tag henry">Ch.9</span></td>
+        <td><span class="tag art ph">Art.18 Kochhar</span> <span class="tag art ph">Art.19 Goold &amp; Luchs 1993</span></td>
+        <td><span class="tag indo">Astra International</span></td>
+      </tr>
+      <tr>
+        <td class="wk-cell">W10</td>
+        <td>Ethics, CSR, Environmental Sustainability, and Strategy</td>
+        <td><span class="tag tpgs">Ch.9</span></td>
+        <td><span class="tag henry">Ch.10</span></td>
+        <td><span class="tag art ph">Art.20 Triebswetter</span> <span class="tag art ph">Art.21 De Sousa 2010</span></td>
+        <td><span class="tag indo">Unilever Indonesia (USLP)</span></td>
+      </tr>
+      <tr>
+        <td class="wk-cell">W11</td>
+        <td>Superior Strategy Execution</td>
+        <td><span class="tag tpgs">Ch.10</span></td>
+        <td><span class="tag henry">Ch.11</span> <span class="tag">+ KK</span></td>
+        <td><span class="tag art ph">Art.22 Kaplan &amp; Norton 2006</span> <span class="tag art ph">Art.23 Richardson</span></td>
+        <td><span class="tag indo">Bank Mandiri (post-merger)</span></td>
+      </tr>
+      <tr>
+        <td class="wk-cell">W12</td>
+        <td>Business Model Innovation &amp; Barriers to Entry <em>(article-led)</em></td>
+        <td><span class="tag tpgs ph">N/A in 7e</span></td>
+        <td><span class="tag henry">Ch.7</span></td>
+        <td><span class="tag art ph">Art.24 Beckmann 2016</span> <span class="tag art ph">Art.25 Karakaya 2013</span></td>
+        <td><span class="tag indo">GoTo (super-app model)</span></td>
+      </tr>
+      <tr>
+        <td class="wk-cell">W13</td>
+        <td>Stakeholder Capability &amp; Engagement <em>(article-led)</em></td>
+        <td><span class="tag tpgs ph">N/A in 7e</span></td>
+        <td><span class="tag henry">Ch.2, Ch.10</span></td>
+        <td><span class="tag art ph">Art.26 Westermann 2016</span> <span class="tag art ph">Art.27 Kumar 2016</span></td>
+        <td><span class="tag indo">Gojek driver ecosystem</span></td>
+      </tr>
+      <tr>
+        <td class="wk-cell">W14</td>
+        <td>Hypercompetition &amp; Strategic Leadership <em>(article-led)</em></td>
+        <td><span class="tag tpgs ph">N/A</span></td>
+        <td><span class="tag henry">Ch.3, Ch.11</span></td>
+        <td><span class="tag art ph">Art.28 Chen 2010</span> <span class="tag art ph">Art.29 Jansen &amp; Vera 2009</span></td>
+        <td><span class="tag indo">GoTo-Grab-ShopeeFood</span></td>
+      </tr>
+      <tr style="background:#fef2f2">
+        <td class="wk-cell"><span class="tag exam">UAS</span></td>
+        <td colspan="5"><em>Ujian Akhir Semester · 120 min · 20% nilai akhir</em></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <p style="margin:0"><b>Legend:</b>
+      <span class="tag tpgs">TPGS chapter</span>
+      <span class="tag henry">Henry chapter</span>
+      <span class="tag art">Article (PDF provided · deep analysis)</span>
+      <span class="tag art ph">Article (PDF not provided · structured analysis from public abstract)</span>
+      <span class="tag indo">Indonesian flagship company</span>
+      <span class="tag exam">Exam week</span>
+    </p>
+  </div>
+</section>
+
+<!-- ================== INDONESIAN MAPPING ================== -->
+<section id="indo-map">
+  <div class="page-eyebrow">03b · Local-evidence layer</div>
+  <h2>Indonesian Company Mapping — Flagship + Sidebars</h2>
+  <p>Each week anchors a deep Indonesian case (flagship) to the chapter's central concept, plus 1–2 sidebar comparatives showing the same concept expressing differently across sectors. Every data point is anchored to a document type (AR / IDX / OJK / IR / sustainability report). No fabricated figures — descriptive language used where exact numbers aren't defensible.</p>
+
+  <table class="map-table">
+    <thead>
+      <tr>
+        <th style="width:52px">Week</th>
+        <th>Flagship · concept anchor</th>
+        <th>Sidebar 1</th>
+        <th>Sidebar 2</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="wk-cell">W1</td><td><b>Astra International</b> · diversified blue-chip / strategic coherence across 7 segments</td><td>Unilever Indonesia · focused differentiation</td><td>Indofood · integration across food value chain</td></tr>
+      <tr><td class="wk-cell">W2</td><td><b>BCA</b> · vision-mission discipline &amp; governance rigor</td><td>Pertamina · mission evolution post-Holding Migas transformation</td><td>—</td></tr>
+      <tr><td class="wk-cell">W3</td><td><b>GoTo Gojek Tokopedia</b> · macro &amp; technological environment shock</td><td>Adaro Energy · regulatory env (energy transition)</td><td>Telkom Indonesia · technological env (5G &amp; IndiHome)</td></tr>
+      <tr><td class="wk-cell">W4</td><td><b>BCA</b> · VRIN-aligned intangibles (network + brand + CASA franchise)</td><td>Telkomsel · spectrum &amp; infrastructure as rare resources</td><td>Gudang Garam · brand &amp; distribution as VRIN</td></tr>
+      <tr><td class="wk-cell">W5</td><td><b>Indofood</b> · cost leadership in CPG (scale + vertical integration)</td><td>Unilever Indonesia · broad differentiation</td><td>Sido Muncul · focused differentiation (jamu premium)</td></tr>
+      <tr><td class="wk-cell">W6</td><td><b>GoTo</b> · blue-ocean super-app (ride-hail + commerce + fintech)</td><td>Garuda Indonesia · defensive &amp; restructuring strategic moves</td><td>BRI · horizontal expansion via Holding UMi</td></tr>
+      <tr><td class="wk-cell">W7</td><td><b>Kalbe Farma</b> · tailoring to mature fragmented pharma industry</td><td>Indofood CBP · dominant-leader tailoring</td><td>Bukalapak · growing-industry pivot</td></tr>
+      <tr><td class="wk-cell">W8</td><td><b>Indofood</b> · global product strategy (Indomie in 90+ countries)</td><td>Astra Otoparts · export manufacturing</td><td>Kopi Kenangan · regional Southeast-Asia expansion</td></tr>
+      <tr><td class="wk-cell">W9</td><td><b>Astra International</b> · unrelated diversification (auto + financial + heavy eq + agri + infra + IT + property)</td><td>Salim / Indofood Group · related + unrelated</td><td>Djarum Group · tobacco + BCA + digital (GDP Venture)</td></tr>
+      <tr><td class="wk-cell">W10</td><td><b>Unilever Indonesia</b> · USLP localized / sustainable living plan</td><td>Indika Energy · coal-to-renewables transition</td><td>BRI · sustainable finance portfolio</td></tr>
+      <tr><td class="wk-cell">W11</td><td><b>Bank Mandiri</b> · post-merger integration execution (4-way legacy consolidation)</td><td>Pertamina · holding-subholding execution</td><td>BRI · BRILink &amp; BRImo execution layer</td></tr>
+      <tr><td class="wk-cell">W12</td><td><b>GoTo</b> · super-app business model architecture</td><td>Ruangguru · EdTech subscription model</td><td>Indomaret · density as barrier to entry</td></tr>
+      <tr><td class="wk-cell">W13</td><td><b>Gojek driver ecosystem</b> · stakeholder capability enhancement (landmark case)</td><td>Tokopedia seller engagement</td><td>BCA customer loyalty engagement</td></tr>
+      <tr><td class="wk-cell">W14</td><td><b>GoTo–Grab–ShopeeFood</b> · hypercompetitive food-delivery triopoly</td><td>Jahja Setiaatmadja (BCA) · long-tenure strategic leadership</td><td>Telkom TMT · ambidextrous leadership</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="section-sep">
+
+<!-- ================== DESIGN SYSTEM ================== -->
+<section id="typography">
+  <div class="page-eyebrow">04 · Design system</div>
+  <h2>Typography — Editorial Triad</h2>
+  <p>Three complementary families. <b>Fraunces</b> (variable serif) is the display voice — contemporary but confident, with soft curves that feel alive on H1 and pull-quotes. <b>Inter Tight</b> carries all UI, navigation, and section headings — clean modernist geometry that signals "editorial/tech press" rather than "corporate slide." <b>Source Serif 4</b> is the long-form body type — designed specifically for on-screen readability at 17px, with excellent rendering in both browser and PDF.</p>
+
+  <div class="type-sample">
+    <p class="display-1">Manajemen Strategik Kontemporer</p>
+    <p class="caption">Display H1 · Fraunces variable · weight 500 · SOFT 50 · opsz 144 · -0.028em tracking</p>
+
+    <p class="sans-2">Evaluating a Company's External Environment</p>
+    <p class="caption">Section H2 · Inter Tight · weight 700 · indigo-night #1a1f3a · underlined by gold rule</p>
+
+    <p class="serif-body" style="margin-top:1.5rem">
+      Strategi <b>korporat</b> <em>(corporate strategy)</em> mengatur arah pengembangan perusahaan multibisnis melalui tiga keputusan fundamental: <em>industry attractiveness test</em>, <em>cost-of-entry test</em>, dan <em>better-off test</em>. Di Indonesia, Astra International menjadi contoh klasik diversifikasi tak-terkait yang berhasil mempertahankan koherensi strategis melalui <em>management-by-values</em> (Catur Dharma) dan sistem pengukuran kinerja portofolio berbasis ROIC per segmen — sebuah pendekatan yang kontras dengan konglomerasi era 1990-an yang gagal karena <em>negative synergy</em>.
+    </p>
+    <p class="caption">Body paragraph · Source Serif 4 · 1.08rem · 1.72 line-height · 62ch max-width</p>
+  </div>
+</section>
+
+<section id="colors">
+  <h2>Color Palette — Editorial Scholar</h2>
+  <p>Warm paper base (not cold white) · deep indigo-ink as primary · refined scholarly gold as eye-catching accent · academic cyan as secondary callout. The gold accent adds distinctiveness without noise; the warm paper makes long-form reading feel like a physical book.</p>
+
+  <h3>Primary · Ink · Paper</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="sw-color" style="background:#1a1f3a"></div><div class="sw-meta"><div class="role">Indigo-Night — Primary</div><div class="hex">#1a1f3a · H1/H2, brand, active nav, data emphasis</div></div></div>
+    <div class="swatch"><div class="sw-color" style="background:#b08700"></div><div class="sw-meta"><div class="role">Gold — Eye-catching accent</div><div class="hex">#b08700 · eyebrows, stat rule, pull-quote, hover</div></div></div>
+    <div class="swatch"><div class="sw-color" style="background:#0e7490"></div><div class="sw-meta"><div class="role">Cyan — Secondary accent</div><div class="hex">#0e7490 · concept-check callouts, Henry chapter tag</div></div></div>
+  </div>
+
+  <h3>Neutrals</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="sw-color" style="background:#1a1a1a"></div><div class="sw-meta"><div class="role">Ink — Body text</div><div class="hex">#1a1a1a · warm black, body copy</div></div></div>
+    <div class="swatch"><div class="sw-color" style="background:#595959"></div><div class="sw-meta"><div class="role">Muted — Secondary text</div><div class="hex">#595959 · captions, eyebrows, dates</div></div></div>
+    <div class="swatch"><div class="sw-color" style="background:#fdfcfa; border:1px solid #e7e5e0"></div><div class="sw-meta"><div class="role">Paper — Main background</div><div class="hex">#fdfcfa · warm off-white, not cold #fff</div></div></div>
+  </div>
+
+  <h3>Panels &amp; Rules</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="sw-color" style="background:#faf8f4; border:1px solid #e7e5e0"></div><div class="sw-meta"><div class="role">Panel — Subtle warm bg</div><div class="hex">#faf8f4 · sidebar, callouts</div></div></div>
+    <div class="swatch"><div class="sw-color" style="background:#f3f1eb"></div><div class="sw-meta"><div class="role">Panel-2 — Deeper warm bg</div><div class="hex">#f3f1eb · code, table headers</div></div></div>
+    <div class="swatch"><div class="sw-color" style="background:#e7e5e0"></div><div class="sw-meta"><div class="role">Rule — Hairline borders</div><div class="hex">#e7e5e0 · warm dividers</div></div></div>
+  </div>
+
+  <h3>Semantic</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="sw-color" style="background:#b45309"></div><div class="sw-meta"><div class="role">Warn — Disclosure</div><div class="hex">#b45309 · article-not-provided banners</div></div></div>
+    <div class="swatch"><div class="sw-color" style="background:#166534"></div><div class="sw-meta"><div class="role">Ok — Completed phase</div><div class="hex">#166534 · phase-done badges</div></div></div>
+    <div class="swatch"><div class="sw-color" style="background:#7e22ce"></div><div class="sw-meta"><div class="role">Review — Revision flag</div><div class="hex">#7e22ce · items awaiting your call</div></div></div>
+  </div>
+</section>
+
+<section id="components">
+  <h2>Component Library</h2>
+  <p>Reusable blocks that appear throughout weekly outputs. All print-stable: blocks don't break across pages, and the visual treatment degrades gracefully to monochrome when printed.</p>
+
+  <h3>Concept Card</h3>
+  <div class="concept-card">
+    <h4>Five Forces Model (Porter, 1979)</h4>
+    <p>Kerangka yang menganalisis intensitas persaingan industri melalui lima kekuatan: rivalitas antar pesaing, ancaman pendatang baru, ancaman produk substitusi, daya tawar pemasok, dan daya tawar pembeli. Digunakan untuk menjawab pertanyaan mengapa beberapa industri secara struktural lebih menguntungkan dari yang lain.</p>
+  </div>
+
+  <h3>Pull Quote</h3>
+  <div class="pull-quote">
+    "Competitive strategy is about being different. It means deliberately choosing a different set of activities to deliver a unique mix of value."
+    <cite>Michael Porter · Harvard Business Review · 1996</cite>
+  </div>
+
+  <h3>Pemeriksa Konsep (Concept Check callout)</h3>
+  <div class="callout check">
+    <div class="tt">Pemeriksa Konsep</div>
+    Jelaskan perbedaan antara <em>stuck-in-the-middle</em> dalam kerangka generik Porter dan <em>hybrid strategy</em> modern (best-cost provider) dalam TPGS Ch.5. Berikan satu contoh perusahaan Indonesia yang secara eksplisit memosisikan diri sebagai <em>best-cost provider</em> dan jelaskan buktinya.
+  </div>
+
+  <h3>Disclosure Banner (articles without PDF)</h3>
+  <div class="callout disclosure">
+    <div class="tt">Catatan Sumber Primer</div>
+    PDF artikel tidak tersedia dalam paket materi. Analisis berikut disusun dari abstrak publik + literatur kanonik terkait (mis. Barney 1991, Kaplan &amp; Norton 1992, Porter 1985). Mahasiswa dianjurkan mencari PDF asli untuk pendalaman metodologis sebelum mengutip di tugas akhir.
+  </div>
+
+  <h3>Case Box (Indonesian flagship)</h3>
+  <div class="case-box">
+    <div class="case-head">
+      <h3>Astra International — Diversified Conglomerate</h3>
+      <span class="ticker">IDX: ASII · LQ45 · Kelompok Astra</span>
+    </div>
+    <p>Astra International menjalankan portofolio tujuh segmen bisnis (otomotif, jasa keuangan, alat berat &amp; pertambangan, agribisnis, infrastruktur &amp; logistik, teknologi informasi, dan properti). Koherensi strategis dipertahankan melalui <em>Catur Dharma</em>, sistem tata nilai yang dipakai sebagai instrumen integrasi soft-control di seluruh grup.</p>
+    <div class="data-row">
+      <div class="data-pt">
+        <span class="n">7</span>
+        <span class="l">Segmen Usaha</span>
+        <span class="src">Astra AR 2023, hlm. 42</span>
+      </div>
+      <div class="data-pt">
+        <span class="n">~Rp 316 T</span>
+        <span class="l">Pendapatan Konsolidasi 2023</span>
+        <span class="src">Astra AR 2023, Laporan Keuangan</span>
+      </div>
+      <div class="data-pt">
+        <span class="n">LQ45</span>
+        <span class="l">IDX Index Member</span>
+        <span class="src">IDX Fact Sheet 2024</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>Citation Block</h3>
+  <div class="citations">
+    <b>Referensi terpilih (bab ini):</b>
+    <ol>
+      <li>Gamble, Peteraf &amp; Thompson (2021). <em>Essentials of Strategic Management</em>, 7e, Ch.1.</li>
+      <li>Henry, A. (2021). <em>Understanding Strategic Management</em>, 4e, Ch.1.</li>
+      <li>Porter, M. E. (1996). What Is Strategy? <em>Harvard Business Review</em>, 74(6), 61–78.</li>
+      <li>Astra International Tbk. Laporan Tahunan 2023. IDX Disclosure Portal.</li>
+    </ol>
+  </div>
+
+  <h3>Sources Table (Indonesian evidence)</h3>
+  <table class="src-table">
+    <thead><tr><th>Dokumen</th><th>Tahun</th><th>Bagian / Halaman</th><th>Relevansi</th></tr></thead>
+    <tbody>
+      <tr><td>Annual Report</td><td>2023</td><td>Segment Reporting, hlm. 42–48</td><td>Struktur 7 segmen &amp; kontribusi pendapatan</td></tr>
+      <tr><td>IDX Disclosure</td><td>2024</td><td>LQ45 Member Fact Sheet</td><td>Status saham &amp; kapitalisasi</td></tr>
+      <tr><td>Sustainability Report</td><td>2023</td><td>Governance section</td><td>Catur Dharma &amp; ethics framework</td></tr>
+      <tr><td>Investor Relations</td><td>2024</td><td>Q1 Earnings Call Transcript</td><td>Segment outlook &amp; capital allocation</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="section-sep">
+
+<!-- ================== OUTPUT ANATOMY ================== -->
+<section id="anatomy">
+  <div class="page-eyebrow">05 · Output anatomy</div>
+  <h2>What Each Week Produces (4 HTML files)</h2>
+  <p>Every teaching week outputs four distinct HTML files, each with a specific pedagogical function. The weekly subfolder structure mirrors what you see in the sidebar's <em>Weekly Outputs</em> navigator.</p>
+
+  <div class="grid-2">
+    <div class="concept-card">
+      <h4>① Study Guide / Aid · <em>~5–8 print pages</em></h4>
+      <p><b>Tujuan:</b> learning scaffold — urutan membaca, peta konsep utama, koneksi antar-minggu, fokus diskusi &amp; potensi sudut UTS/UAS, pre-reading checklist + self-check questions. Membuat mahasiswa tahu <em>bagaimana</em> mendekati minggu tersebut sebelum membaca ringkasan.</p>
+    </div>
+    <div class="concept-card">
+      <h4>② Main Summary / Ebook · <em>~12–20 print pages</em></h4>
+      <p><b>Tujuan:</b> sintesis bab TPGS (+Henry untuk W12–14) — kerangka sebagai diagram SVG, istilah kunci bercetak tebal dengan bracket bahasa Inggris, Pemeriksa Konsep callouts, blok kutipan per bagian. Fungsi utama: pengganti textbook saat study session.</p>
+    </div>
+    <div class="concept-card">
+      <h4>③ Article Analysis · <em>~3–5 pages per artikel</em></h4>
+      <p><b>Tujuan:</b> analisis mendalam artikel mingguan — pertanyaan riset, metode, temuan, kontribusi teoretis, kritik, peran dalam minggu tersebut, jangkar ke bab TPGS. Pada minggu di mana PDF tidak tersedia, disclosure banner ditampilkan dan analisis dibangun dari abstrak publik + literatur kanonik.</p>
+    </div>
+    <div class="concept-card">
+      <h4>④ Indonesian Company Examples · <em>~3–4 pages</em></h4>
+      <p><b>Tujuan:</b> flagship (1–1.5 halaman) dengan 2–3 data keras bercitation + sidebar komparatif (1–2 paragraf). Semua data terjejaki ke dokumen (AR/IDX/OJK/IR). Sumber ditampilkan dalam tabel di akhir halaman + disclaimer verifikasi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================== SAMPLE MAIN SUMMARY ================== -->
+<section id="sample-summary">
+  <h2>Sample Preview — Main Summary · Week 3 (External Environment)</h2>
+  <p>This is what <code>course-materials/outputs/Main Summary - Ebook/Week 03/index.html</code> will look like (excerpt, ~20% of the final page). All inline styling is the actual production CSS — what you see here is how printed PDF will look.</p>
+
+  <div style="padding:2rem; border:1px solid var(--rule); border-radius:10px; background:var(--bg); margin:1.5rem 0;">
+    <div class="page-eyebrow">Minggu 3 · Evaluating a Company's External Environment</div>
+    <h2 style="margin-top:.5rem; color:var(--navy)">Lingkungan Eksternal: PESTEL, Lima Kekuatan Porter, dan Analisis Kelompok Strategis</h2>
+    <p><b>Referensi:</b> TPGS Ch.3 · Henry Ch.3 · Art.3 Newman (2020) · Art.4 Mason (2007)</p>
+
+    <h3>3.1 Tiga Lapis Lingkungan Eksternal</h3>
+    <p>Analisis lingkungan eksternal dalam kerangka TPGS dibagi tiga lapis: <b>makro-environment</b> <em>(macro-environment)</em> yang dipetakan melalui <b>PESTEL</b> <em>(political, economic, social, technological, environmental, legal)</em>; <b>industri</b> <em>(industry)</em> yang dianalisis melalui kerangka Lima Kekuatan Michael Porter; dan <b>kelompok strategis</b> <em>(strategic group)</em> yang mengidentifikasi sub-kluster perusahaan dengan posisi bersaing serupa di dalam industri.</p>
+
+    <div class="framework">
+      <div class="framework-title">Gambar 3.1 — Peta PESTEL</div>
+      <svg class="framework-svg" viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <style><![CDATA[
+            .pestel-box { fill: #f8fafc; stroke: #1e3a8a; stroke-width: 1.2; }
+            .pestel-t { font-family: Inter, sans-serif; font-size: 11px; font-weight: 700; fill: #1e3a8a; }
+            .pestel-s { font-family: Charter, serif; font-size: 9px; fill: #64748b; }
+            .pestel-c { fill: #0f766e; }
+            .pestel-ct { font-family: Inter, sans-serif; font-size: 12px; font-weight: 700; fill: #fff; }
+          ]]></style>
+        </defs>
+        <circle cx="300" cy="130" r="36" class="pestel-c"/>
+        <text x="300" y="128" text-anchor="middle" class="pestel-ct">MAKRO</text>
+        <text x="300" y="143" text-anchor="middle" class="pestel-ct">PESTEL</text>
+
+        <g transform="translate(20,20)">
+          <rect width="140" height="60" rx="5" class="pestel-box"/>
+          <text x="10" y="22" class="pestel-t">P · Political</text>
+          <text x="10" y="38" class="pestel-s">Stabilitas, regulasi, kebijakan</text>
+          <text x="10" y="52" class="pestel-s">pemerintah, geopolitik</text>
+        </g>
+        <g transform="translate(220,20)">
+          <rect width="140" height="60" rx="5" class="pestel-box"/>
+          <text x="10" y="22" class="pestel-t">E · Economic</text>
+          <text x="10" y="38" class="pestel-s">Pertumbuhan, inflasi, kurs,</text>
+          <text x="10" y="52" class="pestel-s">daya beli, siklus bisnis</text>
+        </g>
+        <g transform="translate(420,20)">
+          <rect width="160" height="60" rx="5" class="pestel-box"/>
+          <text x="10" y="22" class="pestel-t">S · Social</text>
+          <text x="10" y="38" class="pestel-s">Demografi, gaya hidup,</text>
+          <text x="10" y="52" class="pestel-s">preferensi konsumen, budaya</text>
+        </g>
+
+        <g transform="translate(20,180)">
+          <rect width="140" height="60" rx="5" class="pestel-box"/>
+          <text x="10" y="22" class="pestel-t">T · Technological</text>
+          <text x="10" y="38" class="pestel-s">Inovasi, disrupsi digital,</text>
+          <text x="10" y="52" class="pestel-s">kecepatan R&amp;D</text>
+        </g>
+        <g transform="translate(220,180)">
+          <rect width="140" height="60" rx="5" class="pestel-box"/>
+          <text x="10" y="22" class="pestel-t">E · Environmental</text>
+          <text x="10" y="38" class="pestel-s">Iklim, keberlanjutan,</text>
+          <text x="10" y="52" class="pestel-s">transisi energi</text>
+        </g>
+        <g transform="translate(420,180)">
+          <rect width="160" height="60" rx="5" class="pestel-box"/>
+          <text x="10" y="22" class="pestel-t">L · Legal</text>
+          <text x="10" y="38" class="pestel-s">UU, perizinan, sengketa,</text>
+          <text x="10" y="52" class="pestel-s">kepatuhan pelaporan</text>
+        </g>
+      </svg>
+    </div>
+
+    <p>PESTEL tidak bertujuan menghasilkan daftar variabel, melainkan mengidentifikasi <em>driving forces</em> — elemen lingkungan yang bergerak sangat cepat, memiliki dampak tinggi pada perusahaan, dan membentuk tren strategis jangka panjang. Pemetaan yang baik memisahkan sinyal dari derau.</p>
+
+    <h3>3.2 Lima Kekuatan Porter dalam Industri Ride-Hailing Indonesia</h3>
+    <div class="callout check">
+      <div class="tt">Anchor Indonesia · GoTo</div>
+      Rivalitas antar-pesaing di industri ride-hailing Indonesia berubah dari <em>duopoly</em> intensif (Gojek vs Grab, 2016–2021) menuju <em>triopoly</em> setelah ShopeeFood menyerang segmen food-delivery. Daya tawar pembeli tinggi (switching cost rendah karena multi-app behaviour). Ancaman substitusi dari logistik konvensional menurun. Bahasan detail di halaman <a href="#">Indonesian Company · Week 3</a>.
+    </div>
+
+    <p style="color:var(--muted); font-style:italic; font-size:.9rem">[…sisi halaman dilanjutkan: analisis Kelompok Strategis, konsep <em>driving forces</em>, PESTEL dinamis à la Mason 2007, implikasi untuk strategi, Pemeriksa Konsep, Referensi…]</p>
+  </div>
+</section>
+
+<!-- ================== SAMPLE INDO ================== -->
+<section id="sample-indo">
+  <h2>Sample Preview — Indonesian Company · Week 3 (GoTo)</h2>
+  <p>Excerpt from <code>course-materials/outputs/Indonesian Company Examples/Week 03/index.html</code>.</p>
+
+  <div style="padding:2rem; border:1px solid var(--rule); border-radius:10px; background:var(--bg); margin:1.5rem 0;">
+    <div class="page-eyebrow">Minggu 3 · Contoh Perusahaan Indonesia · Flagship</div>
+    <h2 style="margin-top:.5rem; color:var(--navy)">GoTo Gojek Tokopedia — Merespons Turbulensi Lingkungan Eksternal</h2>
+    <p><b>Konsep jangkar:</b> PESTEL · Five Forces · complexity theory (Mason 2007) · driving forces</p>
+
+    <h3>Konteks Strategis</h3>
+    <p>GoTo terbentuk dari merger dua perusahaan digital unicorn Indonesia (Gojek dan Tokopedia, Mei 2021) dan IPO di Bursa Efek Indonesia pada April 2022. Struktur grup menggabungkan tiga lini bisnis: <em>On-Demand Services</em> (ride-hailing, food delivery, logistik), <em>E-Commerce</em> (Tokopedia), dan <em>Financial Technology Services</em> (GoPay, GoTo Financial). Evolusi strategi GoTo memperlihatkan respons eksplisit terhadap turbulensi lingkungan eksternal yang dibahas Mason (2007): pergeseran dari <em>growth-at-all-cost</em> menuju <em>path-to-profitability</em> di bawah tekanan makro (kenaikan suku bunga global 2022–2023) dan lingkungan kompetitif (masuknya ShopeeFood).</p>
+
+    <div class="case-box">
+      <div class="case-head">
+        <h3>Data Kunci</h3>
+        <span class="ticker">IDX: GOTO</span>
+      </div>
+      <div class="data-row">
+        <div class="data-pt">
+          <span class="n">3 lini</span>
+          <span class="l">Segmen Bisnis</span>
+          <span class="src">GoTo AR 2023, Segment Reporting</span>
+        </div>
+        <div class="data-pt">
+          <span class="n">11 Apr 2022</span>
+          <span class="l">Tanggal IPO BEI</span>
+          <span class="src">IDX Disclosure · Prospektus GoTo</span>
+        </div>
+        <div class="data-pt">
+          <span class="n">Adj. EBITDA+</span>
+          <span class="l">Milestone 2024 Q1 (on-demand)</span>
+          <span class="src">GoTo Investor Update Q1 2024</span>
+        </div>
+      </div>
+    </div>
+
+    <h3>Interpretasi Strategis</h3>
+    <p>Tiga pergeseran PESTEL yang menekan model bisnis awal GoTo: (1) <b>Ekonomi</b> — pergeseran rezim suku bunga global membuat investor menuntut <em>positive unit economics</em>; (2) <b>Sosial &amp; Teknologi</b> — <em>multi-app behaviour</em> konsumen Indonesia mengikis switching cost dan memperkuat daya tawar pembeli dalam kerangka Porter; (3) <b>Regulatori</b> — peraturan Kemenkominfo/OJK soal <em>interoperability</em> pembayaran mengubah struktur persaingan fintech. Respons strategis: rasionalisasi biaya, fokus pada kota Tier-1 profit-dense, dan penekanan pada <em>financial services</em> sebagai lini margin tertinggi.</p>
+
+    <h3>Sumber</h3>
+    <table class="src-table">
+      <thead><tr><th>Dokumen</th><th>Tahun</th><th>Bagian</th><th>Relevansi</th></tr></thead>
+      <tbody>
+        <tr><td>Annual Report GoTo</td><td>2023</td><td>Segment Reporting + MD&amp;A</td><td>Struktur 3 lini &amp; posisi kompetitif</td></tr>
+        <tr><td>IDX Disclosure</td><td>2022</td><td>Prospektus IPO</td><td>Business model pre-IPO &amp; risk factors</td></tr>
+        <tr><td>Investor Update</td><td>Q1 2024</td><td>Earnings Call Deck</td><td>Path-to-profitability narrative</td></tr>
+        <tr><td>OJK Regulation</td><td>2023</td><td>POJK fintech pembayaran</td><td>Lingkungan regulatori fintech</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout disclosure">
+      <div class="tt">Catatan Verifikasi</div>
+      Data disarikan dari materi publik yang diungkapkan perusahaan Indonesia. Mahasiswa dianjurkan memverifikasi angka terkini dari pengajuan aktual di <a href="https://www.idx.co.id">idx.co.id</a> dan <a href="https://ir.gotocompany.com">ir.gotocompany.com</a>.
+    </div>
+  </div>
+</section>
+
+<!-- ================== SAMPLE ARTICLE ================== -->
+<section id="sample-article">
+  <h2>Sample Preview — Article Analysis · Week 3 (Mason 2007)</h2>
+  <p>Excerpt from <code>course-materials/outputs/Articles/Week 03/index.html</code>.</p>
+
+  <div style="padding:2rem; border:1px solid var(--rule); border-radius:10px; background:var(--bg); margin:1.5rem 0;">
+    <div class="page-eyebrow">Artikel 4 · Week 3</div>
+    <h2 style="margin-top:.5rem; color:var(--navy)">Mason (2007) — The External Environment's Effect on Management and Strategy: A Complexity Theory Approach</h2>
+    <p style="font-family:var(--sans); font-size:.85rem; color:var(--muted)">Roger B. Mason · <em>Management Decision</em>, Vol. 45 No. 1, 2007, pp. 10–28 · DOI 10.1108/00251740710718835</p>
+
+    <h3>Pertanyaan Riset</h3>
+    <p>Apakah perusahaan yang lebih sukses di lingkungan bisnis turbulen (kompleks &amp; chaotic) menggunakan praktik manajemen dan strategi yang berbeda dibandingkan perusahaan yang kurang sukses? Secara spesifik, Mason menguji apakah perusahaan sukses cenderung menerapkan <em>self-organising management</em> dan <em>emergent strategy making</em>.</p>
+
+    <h3>Kerangka Teoretis</h3>
+    <p>Mason menggunakan <b>complexity theory</b> <em>(teori kompleksitas)</em> untuk memposisikan lingkungan bisnis sebagai <em>Complex Adaptive System (CAS)</em> dengan empat karakteristik: <em>co-evolution</em>, <em>self-organisation &amp; emergence</em>, <em>non-linearity</em>, dan <em>sensitive dependence on initial conditions</em>. Implikasi strategisnya: di lingkungan turbulen, <em>planned strategy</em> tradisional menjadi tidak efektif; yang dibutuhkan adalah <em>emergent strategy</em> yang berkembang melalui iterasi, trial-and-error, dan pembelajaran cepat.</p>
+
+    <h3>Metode</h3>
+    <p>Studi kasus kualitatif eksploratif pada empat perusahaan Afrika Selatan: dua di industri IT (lingkungan kompleks/turbulen) dan dua di industri packaging (lingkungan relatif stabil). Di setiap industri, satu perusahaan "lebih sukses" dan satu "kurang sukses" dipilih melalui proses Delphi dengan panel ahli. Data dikumpulkan melalui wawancara mendalam + analisis dokumen (annual report, brosur, web pages, meeting minutes). Analisis menggunakan NVIVO untuk thematic coding.</p>
+
+    <h3>Temuan Utama</h3>
+    <ul>
+      <li><b>P1 didukung</b>: Perusahaan IT yang lebih sukses (ITA) menunjukkan praktik <em>self-organising management</em> (kontrol lokal, keputusan cepat, budaya eksperimen) dan <em>emergent strategy</em> (horizon perencanaan 3–6 bulan, strategi adaptif).</li>
+      <li><b>P2 didukung</b>: Perusahaan IT yang kurang sukses (ITB) menerapkan perencanaan jangka panjang tradisional (3 tahun) dan reaktif terhadap perubahan.</li>
+      <li><b>P3 tidak didukung sepenuhnya</b>: Perusahaan packaging sukses ternyata juga menggunakan unsur adaptif — Mason berargumen bahwa lingkungan yang benar-benar stabil tidak eksis lagi di Afrika Selatan.</li>
+    </ul>
+
+    <h3>Kontribusi &amp; Relevansi untuk Minggu 3</h3>
+    <p>Artikel ini memperluas pembahasan PESTEL dan Five Forces di TPGS Ch.3 dengan perspektif lingkungan bisnis sebagai <em>complex adaptive system</em>. Di mana TPGS Ch.3 berfokus pada <em>analytical snapshot</em> (foto struktur industri pada satu titik waktu), Mason menegaskan bahwa lingkungan bergerak terus dan saling membentuk dengan tindakan perusahaan. Ini relevan langsung dengan konsep <em>driving forces</em> TPGS dan membentuk jembatan ke diskusi strategi emergent vs. deliberate yang nanti muncul di TPGS Ch.2 (Mintzberg) dan Ch.10 (execution as learning).</p>
+
+    <h3>Kritik Metodologis</h3>
+    <p>Sampel kecil (empat perusahaan) membatasi generalisasi. Desain cross-sectional tidak membedakan kausalitas (apakah <em>emergent strategy</em> menyebabkan keberhasilan, atau sebaliknya). Konteks Afrika Selatan berbeda dengan Indonesia dalam hal intensitas turbulensi lingkungan politis.</p>
+
+    <h3>Diskusi Kelas (usulan)</h3>
+    <div class="callout check">
+      <div class="tt">Pertanyaan Diskusi</div>
+      Dalam kerangka Mason, GoTo dan Bukalapak sama-sama beroperasi di lingkungan teknologi yang turbulen. Mengapa yang satu bertahan dan yang lain terjerembab? Apakah perbedaannya terletak pada <em>self-organising management</em> atau pada faktor lain (modal, skala, kemampuan eksekusi)?
+    </div>
+  </div>
+</section>
+
+<!-- ================== PRINT PREVIEW ================== -->
+<section id="print-preview">
+  <div class="page-eyebrow">06 · Print fidelity</div>
+  <h2>Print-to-PDF Preview (A4 simulation)</h2>
+  <p>Simulasi halaman A4 yang dihasilkan oleh Chromium Print-to-PDF. Sidebar auto-hilang; main content jadi full-width; running header muncul di atas; nomor halaman di bawah kanan.</p>
+
+  <div class="print-preview">
+    <div class="print-page">
+      <div class="p-header">
+        <span>MST304 · Week 03 · Evaluating External Environment</span>
+        <span>Main Summary / Ebook</span>
+      </div>
+      <h2>3.2 Model Lima Kekuatan Porter</h2>
+      <p>Porter (1979) menawarkan kerangka sistematis untuk menganalisis intensitas persaingan industri. Lima kekuatan yang dimaksud adalah: (1) rivalitas antar-pesaing yang sudah ada, (2) ancaman pendatang baru, (3) ancaman produk atau jasa substitusi, (4) daya tawar pemasok, dan (5) daya tawar pembeli. Semakin tinggi kelima kekuatan ini secara agregat, semakin rendah profitabilitas struktural industri tersebut.</p>
+      <h3>Penerapan pada Industri Ride-Hailing Indonesia</h3>
+      <p>Industri ride-hailing Indonesia adalah laboratorium hidup untuk Porter. Rivalitas tinggi (Gojek–Grab–ShopeeFood), ancaman pendatang baru rendah (network effect + subsidi agresif), daya tawar pembeli tinggi (multi-app behaviour), daya tawar pemasok (mitra driver) meningkat seiring regulasi tarif minimum, dan substitusi moderat (transportasi publik MRT/KRL).</p>
+      <div class="p-box"><strong>Pemeriksa Konsep.</strong> Jelaskan mengapa industri ride-hailing Indonesia bisa tidak menguntungkan meskipun pasarnya tumbuh. Kaitkan dengan dua dari lima kekuatan Porter yang paling dominan.</div>
+      <p>Analisis Lima Kekuatan harus dibaca bersama dengan analisis <em>driving forces</em>: struktur industri bukanlah foto statis, melainkan lanskap yang bergerak karena teknologi, regulasi, dan perilaku konsumen.</p>
+      <div class="p-footer">
+        <span>Dzaki — Magister Akuntansi STIE YKPN · 2025/2026</span>
+        <span>Halaman 7 dari 19</span>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size:.9rem; color:var(--muted)">Fitur print aktual: <code>@page</code> dengan running header, <code>page-break-before: always</code> pada H2, <code>page-break-inside: avoid</code> pada tabel/framework/case-box, <code>orphans: 3; widows: 3</code>, SVG diagram <code>max-width:100%</code>. Diuji via Chromium headless pada fase QC.</p>
+</section>
+
+<hr class="section-sep">
+
+<!-- ================== PHASES ================== -->
+<section id="phases">
+  <div class="page-eyebrow">07 · Workflow</div>
+  <h2>Build Phases</h2>
+  <p>Full scope (~56 HTML files + Visual Companion + Master Bundle + Rust pipeline) is phased across sessions. Rust pipeline design guarantees subsequent phases are re-buildable end-to-end from Markdown fragments.</p>
+
+  <div class="phases">
+    <div class="phase done">
+      <div class="p-label">Phase 0</div>
+      <div class="p-body"><h4>Context review + Spec</h4><p>Syllabus parsed, TPGS 7e TOC confirmed, 4 article PDFs read, design decisions locked, spec written to <code>docs/superpowers/specs/2026-04-16-msk304-design.md</code>.</p></div>
+      <div class="p-status">Complete</div>
+    </div>
+    <div class="phase current">
+      <div class="p-label">Phase I</div>
+      <div class="p-body"><h4>Bootstrap — this session</h4><p>Dev Assistant scaffolding · Cargo.toml · Rust src skeleton · minijinja templates · print.css · Visual Companion v1 (this file) · Week 1 complete end-to-end.</p></div>
+      <div class="p-status">In Progress</div>
+    </div>
+    <div class="phase pending">
+      <div class="p-label">Phase II</div>
+      <div class="p-body"><h4>W2–W4 · Pre-UTS foundation</h4><p>Vision/mission craft-execute, external env, resources — deep article analysis for Art.1–4 (PDFs available). UTS-prep foundation.</p></div>
+      <div class="p-status">Pending</div>
+    </div>
+    <div class="phase pending">
+      <div class="p-label">Phase III</div>
+      <div class="p-body"><h4>W5–W7 · UTS-ready</h4><p>Generic strategies, supplementing, tailoring to industry. Articles 5–12 (structured analysis from abstracts). UTS presentation prep.</p></div>
+      <div class="p-status">Pending</div>
+    </div>
+    <div class="phase pending">
+      <div class="p-label">Phase IV</div>
+      <div class="p-body"><h4>W8–W11 · Post-UTS</h4><p>International, diversification, ethics/CSR, execution. Articles 15–23. Key strategic-mgt frameworks at scale.</p></div>
+      <div class="p-status">Pending</div>
+    </div>
+    <div class="phase pending">
+      <div class="p-label">Phase V</div>
+      <div class="p-body"><h4>W12–W14 · UAS prep</h4><p>Advanced/article-led weeks anchored in Henry 4e. Articles 24–29. Business model innovation, stakeholder theory, hypercompetition.</p></div>
+      <div class="p-status">Pending</div>
+    </div>
+    <div class="phase pending">
+      <div class="p-label">Phase VI</div>
+      <div class="p-body"><h4>QC + Master Print Bundle</h4><p>Assemble all-weeks course-companion.html, verify print-to-PDF fidelity, source-table audit, cross-reference validation.</p></div>
+      <div class="p-status">Pending</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== REVISION PANEL ================== -->
+<section id="revision">
+  <h2>Revision Panel — Sections You Can Redirect</h2>
+  <p>Flag before implementation proceeds. Each card describes a decision currently locked + an alternative you could request instead.</p>
+
+  <div class="revision">
+    <div class="r-head">R1 · Indonesian flagship substitutions</div>
+    <p>Current: Astra (W1, W9), BCA (W2, W4), GoTo (W3, W6, W12, W14), Indofood (W5, W8), etc. <b>Alternative:</b> swap any flagship for another allowlisted firm (e.g., W1 Astra → Telkom; W4 BCA → Mandiri). Sidebar companies are also swappable. <em>Tell me if any substitution is desired before Phase II.</em></p>
+  </div>
+
+  <div class="revision">
+    <div class="r-head">R2 · Article-not-provided strategy</div>
+    <p>Current: structured analysis from public abstract + canonical secondary sources, with visible disclosure banner. <b>Alternative:</b> skip deep analysis for these articles and produce only 1-paragraph citation summaries. <em>Default is deeper treatment — override if you prefer shorter.</em></p>
+  </div>
+
+  <div class="revision">
+    <div class="r-head">R3 · Language mix</div>
+    <p>Current: Bahasa Indonesia primary, English terms in italic brackets on first occurrence, citations in English. <b>Alternative:</b> full English, or English-primary with Indonesian gloss. <em>Current approach optimizes for graduate learning in your program's language.</em></p>
+  </div>
+
+  <div class="revision">
+    <div class="r-head">R4 · Inclusion of Kreitner &amp; Kinicki (KK) textbook</div>
+    <p>Current: KK used selectively in W11 (execution/culture/leadership) as supplementary. <b>Alternative:</b> expand KK coverage to W2 (vision/mission — behavioural), W10 (CSR — ethics behaviour), W14 (TMT integration — behavioural). <em>Tell me if you want broader KK integration.</em></p>
+  </div>
+
+  <div class="revision">
+    <div class="r-head">R5 · Master Print Bundle structure</div>
+    <p>Current: single <code>course-companion.html</code> at ~250+ pages with cover + TOC + 14 weeks + back-matter. <b>Alternative:</b> two bundles — "Pre-UTS Study Bundle" (W1–7) and "Post-UTS Study Bundle" (W8–14) — more portable per exam. <em>Default is one unified bundle.</em></p>
+  </div>
+
+  <div class="revision">
+    <div class="r-head">R6 · Visual Companion scope</div>
+    <p>Current: this single <code>index.html</code> that functions as master navigator + design showcase + sample previews + revision panel. <b>Alternative:</b> split into multiple companion pages (one for mapping, one for design system, one for samples). <em>Single-page keeps everything at-a-glance.</em></p>
+  </div>
+</section>
+
+<!-- ================== NEXT ================== -->
+<section id="next">
+  <h2>Next Actions</h2>
+  <p>Once you've reviewed this companion, your options are:</p>
+
+  <div class="grid-2">
+    <div class="concept-card">
+      <h4>Approve &amp; proceed to implementation plan</h4>
+      <p>Reply <b>"Approve"</b> or <b>"Proceed"</b>. I will invoke the writing-plans skill to produce a phased implementation plan for Phase I (Dev Assistant scaffolding + Week 1 complete build), then begin generating code &amp; content.</p>
+    </div>
+    <div class="concept-card">
+      <h4>Request revisions</h4>
+      <p>Flag the revision ID (R1–R6) with your change (e.g., <b>"R1: swap W4 BCA → Mandiri"</b>) and/or anything else you want re-thought. I'll adjust the spec + regenerate this companion, then re-present for approval.</p>
+    </div>
+  </div>
+
+  <p style="margin-top:2rem; font-size:.9rem; color:var(--muted); font-style:italic">
+    File location: <code>D:\DZAKI\S2\Sem. 1\Manajemen Strategik\course-materials\outputs\Visual Companion\index.html</code><br>
+    Open this file directly in your browser (Chrome/Edge/Firefox) to view the interactive layout. Use <kbd>Ctrl+P</kbd> to preview the print layout.
+  </p>
+</section>
+
+</main>
+</div>
+
+<script>
+  // Sidebar active-link highlighting on scroll
+  const links = document.querySelectorAll('aside.sidebar a[href^="#"]');
+  const sections = [...links].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const setActive = () => {
+    let active = sections[0];
+    const y = window.scrollY + 120;
+    for (const s of sections) { if (s.offsetTop <= y) active = s; }
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + active.id));
+  };
+  document.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+</script>
+</body>
+</html>
