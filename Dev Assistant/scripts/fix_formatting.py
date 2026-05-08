@@ -21,9 +21,9 @@ _CM = 914400 / 2.54
 
 A4_W   = int(21.0  * _CM)
 A4_H   = int(29.7  * _CM)
-M_TOP  = int(3.0   * _CM)
+M_TOP  = int(4.0   * _CM)
 M_BOT  = int(3.0   * _CM)
-M_LEFT = int(4.0   * _CM)
+M_LEFT = int(3.0   * _CM)
 M_RGT  = int(3.0   * _CM)
 
 # ── Style → alignment mapping ────────────────────────────────────────────────
