@@ -131,6 +131,11 @@ def extract_article12_figures(art12_path: Path, figures_dir: Path) -> dict:
         ("art12_table_3", "Table 3:", [13]),
         ("art12_table_4", "Table 4:", [15]),
     ]
+    ks_specs = [
+        ("art12_ks_h1", "One-Sample Kolmogorov-Smirnov Test", [12]),
+        ("art12_ks_h2", "One-Sample Kolmogorov-Smirnov Test", [14]),
+        ("art12_ks_h3", "One-Sample Kolmogorov-Smirnov Test", [16]),
+    ]
     with fitz.open(str(art12_path)) as doc:
         # Executive Fit Matrix on page index 5 — image-extraction first, clip fallback
         pg = doc[5]
@@ -188,6 +193,30 @@ def extract_article12_figures(art12_path: Path, figures_dir: Path) -> dict:
                 pix.save(str(out))
                 results[name] = out
                 print(f"  {name}: WARNING anchor not found, fallback full page index {pg_indices[0]}")
+
+        # KS one-sample test sub-tables (3 hypotheses)
+        for name, anchor, pg_indices in ks_specs:
+            clipped = False
+            for pg_idx in pg_indices:
+                pg = doc[pg_idx]
+                hits = pg.search_for(anchor)
+                if hits:
+                    r = hits[0]
+                    clip = fitz.Rect(30, r.y0 - 5, pg.rect.width - 30, pg.rect.height - 30)
+                    pix = pg.get_pixmap(matrix=mat, clip=clip)
+                    out = figures_dir / f"{name}.png"
+                    pix.save(str(out))
+                    results[name] = out
+                    clipped = True
+                    print(f"  {name}: anchor on page index {pg_idx}")
+                    break
+            if not clipped:
+                pg = doc[pg_indices[0]]
+                pix = pg.get_pixmap(matrix=mat)
+                out = figures_dir / f"{name}.png"
+                pix.save(str(out))
+                results[name] = out
+                print(f"  {name}: WARNING anchor not found, fallback full page index {pg_indices[0]}")
     return results
 
 
@@ -198,6 +227,7 @@ def validate_figures(results: dict) -> None:
         "cc_8_1_kraft_heinz", "table_8_1", "table_8_2",
         "art11_table_1",
         "art12_fig_matrix", "art12_table_1", "art12_table_2", "art12_table_3", "art12_table_4",
+        "art12_ks_h1", "art12_ks_h2", "art12_ks_h3",
     )
     for key in expected:
         path = results.get(key)
@@ -312,15 +342,15 @@ Akuisisi adalah pendekatan tercepat untuk memasuki industri baru. Perusahaan tar
 
 **Pilihan antara akuisisi, *internal development*, dan *joint venture* tidak dapat dilakukan dalam abstraksi — ia tergantung pada empat dimensi konkret yang harus dievaluasi secara bersama.** Pertama, urgensi waktu: bila *window of opportunity* sempit, akuisisi lebih masuk akal. Kedua, ketersediaan target akuisisi pada harga yang masuk akal: bila tidak ada target atau harga sudah *bid up* oleh pesaing, *internal development* atau *JV* menjadi alternatif. Ketiga, *gap* kapabilitas: bila perusahaan kekurangan kapabilitas kunci dan tidak ada cara cepat memperolehnya, *JV* dengan mitra yang memiliki kapabilitas tersebut sering optimal. Keempat, profil risiko: *internal development* menanggung risiko kegagalan teknologi dan pasar; akuisisi menanggung risiko integrasi dan premi yang dibayar; *JV* menanggung risiko *partner alignment*. GoTo (Gojek + Tokopedia 2021) adalah ilustrasi modern pendekatan *merger-of-equals* yang menggabungkan kapabilitas transport, *commerce*, dan *payment* dalam satu platform — bukan akuisisi murni dan bukan *JV* murni, melainkan konsolidasi setara yang mencerminkan urgensi konsolidasi platform-business model Indonesia.
 
+---
+
+## 5. Pilihan Jalur: Diversifikasi *Related* vs. *Unrelated*
+
 ![*Gambar 1. Strategic Themes of Multibusiness Corporation (Related vs Unrelated Diversification)*]({fig1})
 
 *Sumber: Gamble, Peteraf & Thompson (2021), Essentials of Strategic Management, Ch.8, hlm. 156*
 
-Gambar 1 menunjukkan dua tema strategis utama yang dapat dipilih oleh perusahaan terdiversifikasi. Pilihan ini menjadi kerangka untuk seluruh pembahasan diversifikasi berikutnya — apakah membangun portofolio bisnis yang saling berbagi nilai-rantai (*related*) atau portofolio bisnis yang independen secara operasional (*unrelated*).
-
----
-
-## 5. Pilihan Jalur: Diversifikasi *Related* vs. *Unrelated*
+Gambar 1 menunjukkan dua tema strategis utama yang dapat dipilih oleh perusahaan terdiversifikasi. Pilihan ini menjadi kerangka untuk seluruh pembahasan §5 — apakah membangun portofolio bisnis yang saling berbagi nilai-rantai (*related*) atau portofolio bisnis yang independen secara operasional (*unrelated*).
 
 ### *Related Diversification* — Logika *Cross-Business Strategic Fit*
 
@@ -350,6 +380,12 @@ Konteks Indonesia menyediakan ilustrasi kedua jalur. Astra International adalah 
 
 TPGS Ch.8 mengidentifikasi empat tipe *value-chain fit* yang menjadi sumber *economies of scope*. **Pertama, *supply chain fit*** — bisnis-bisnis berbagi pemasok yang sama, infrastruktur logistik yang sama, atau *input* yang sama sehingga dapat mengkonsolidasi pembelian dan menurunkan biaya per unit melalui skala pembelian agregat; Indofood mengintegrasikan Bogasari sebagai pemasok terigu *captive* untuk lini mie instan, kecap, dan makanan ringan sehingga seluruh portofolio mendapat *input* dengan harga internal yang stabil. **Kedua, *R&D dan teknologi fit*** — bisnis-bisnis berbagi platform teknologi inti sehingga investasi R&D dapat di-amortisasi pada beberapa lini produk dan inovasi pada satu bisnis dapat di-*spillover* ke bisnis lain; Honda mengaplikasikan kapabilitas *small-engine engineering* yang sama untuk mobil, sepeda motor, generator, dan mesin pertanian. **Ketiga, *manufacturing fit*** — bisnis-bisnis berbagi proses produksi, fasilitas, atau kapabilitas kualitas, sehingga *learning curve* dan *capacity utilization* dapat dimaksimalkan; Toyota Production System dan disiplin *lean manufacturing* yang dikembangkan untuk lini mobil ditransfer ke lini *forklift* Toyota Industries tanpa membangun kapabilitas baru dari nol. **Keempat, *sales/marketing/distribusi/brand fit*** — bisnis-bisnis berbagi saluran distribusi, *brand equity*, atau basis pelanggan sehingga biaya akuisisi pelanggan dan biaya pemasaran dapat di-*spread* lintas beberapa lini produk; Unilever Indonesia menggunakan jaringan distribusi tunggal yang menjangkau 800 ribu *outlet* untuk membawa produk personal care, *home care*, dan *food & beverage* secara bersama, sehingga biaya logistik per SKU lebih rendah daripada bila masing-masing kategori membangun jaringan terpisah.
 
+![*Boks Concepts & Connections 8.1. The Kraft-Heinz Merger: Pursuing the Benefits of Cross-Business Strategic Fit*]({cc81})
+
+*Sumber: Gamble, Peteraf & Thompson (2021), Essentials of Strategic Management, Ch.8 Concepts & Connections 8.1, hlm. 159*
+
+Boks Concepts & Connections 8.1 menyajikan ilustrasi konkret dari merger Kraft–Heinz tahun 2015 (USD 62,6 milyar) sebagai contoh penerapan keempat tipe *value-chain matchups* yang baru saja dibahas. Kasus ini memberi pembaca contoh empiris langsung — sebelum kerangka abstrak *economies of scope* diuraikan pada sub-bagian berikutnya — tentang bagaimana *supply chain fit* (pengadaan agregat), *manufacturing fit* (konsolidasi pabrik), serta *sales/marketing/brand fit* (rasionalisasi *brand portfolio*) dieksekusi secara bersamaan pada satu transaksi. Disiplin biaya 3G Capital pasca-merger menambah catatan penting: fit yang teoretis tidak otomatis menjadi sinergi nyata; ia memerlukan *operational discipline* yang konkret untuk diaktualisasi.
+
 ### *Economies of Scope* vs. *Economies of Scale*
 
 Perbedaan antara *economies of scope* dan *economies of scale* sering dicampur, padahal mekanismenya berbeda dan implikasi strategiknya berbeda pula. **Mekanisme *economies of scale*: biaya per unit menurun ketika volume satu lini produk meningkat** — biaya tetap (pabrik, lini produksi, R&D dasar) di-*spread* pada output yang lebih besar, *learning curve* mendorong efisiensi, dan kekuatan tawar terhadap pemasok meningkat dengan volume. Contoh konkret: pabrik semen Tonasa yang memproduksi 4 juta ton per tahun memiliki biaya tetap per ton substansial lebih rendah daripada pabrik yang memproduksi 1 juta ton — biaya kapital, biaya energi tetap, dan biaya overhead pabrik di-*amortise* pada volume yang lebih besar. **Mekanisme *economies of scope*: biaya per unit menurun ketika satu sumber daya digunakan bersama oleh beberapa lini produk yang berbeda.** Panzar & Willig (1981) dalam kerangka *production economics* memformalkan kondisi ini sebagai *subadditivity* dari fungsi biaya. Contoh konkret: jaringan distribusi Unilever yang awalnya dibangun untuk sabun digunakan bersama oleh sampo, pasta gigi, es krim, dan kecap — biaya distribusi per kategori jauh lebih rendah dibandingkan bila masing-masing membangun jaringan dari nol. Teece (1980) memperluas argumen ini dengan menunjukkan bahwa *intangible assets* — kapabilitas R&D, *brand*, *organizational know-how* — sering memiliki karakteristik *public goods* dalam batas perusahaan: penggunaannya untuk satu lini produk tidak mengurangi ketersediaannya untuk lini produk lain, sehingga sumber *economies of scope* yang paling sulit ditiru pesaing berasal justru dari aset tak berwujud, bukan dari fasilitas fisik bersama.
@@ -363,12 +399,6 @@ Perbedaan antara *economies of scope* dan *economies of scale* sering dicampur, 
 *Sumber: Gamble, Peteraf & Thompson (2021), Essentials of Strategic Management, Ch.8, hlm. 157*
 
 Gambar 2 adalah visualisasi paling penting dari konsep *strategic fit* di level korporat — peta yang menunjukkan di mana *value-chain matchups* antar-bisnis dapat menjadi sumber *economies of scope*. Inilah jembatan analitis yang akan dirujuk kembali pada §9 untuk menghubungkan Ch.8 dengan Artikel 11 (*internal fit*) dan Artikel 12 (*multi-element organizational fit*).
-
-![*Boks Concepts & Connections 8.1. The Kraft-Heinz Merger: Pursuing the Benefits of Cross-Business Strategic Fit*]({cc81})
-
-*Sumber: Gamble, Peteraf & Thompson (2021), Essentials of Strategic Management, Ch.8 Concepts & Connections 8.1, hlm. 159*
-
-Boks Concepts & Connections 8.1 menyajikan ilustrasi konkret dari merger Kraft–Heinz tahun 2015 (USD 62,6 milyar) sebagai contoh *strategic fit* yang dieksekusi pada keempat tipe *value-chain matchups* yang dibahas pada §6. Kasus ini menjadi rujukan empiris untuk argumen bahwa *related diversification* hanya menghasilkan keunggulan kompetitif jika manajemen secara aktif mengeksploitasi fit lintas-divisi melalui konsolidasi pengadaan, distribusi, dan *brand portfolio*. Disiplin biaya 3G Capital pasca-merger menjadi catatan tambahan: fit yang teoretis tidak otomatis menjadi sinergi nyata; ia memerlukan *operational discipline* yang konkret untuk diaktualisasi.
 
 ---
 
@@ -647,6 +677,9 @@ def build_cr12(figures: dict) -> str:
     tab2 = fp("art12_table_2")
     tab3 = fp("art12_table_3")
     tab4 = fp("art12_table_4")
+    ks_h1 = fp("art12_ks_h1")
+    ks_h2 = fp("art12_ks_h2")
+    ks_h3 = fp("art12_ks_h3")
     return f"""# CRITICAL REVIEW — ARTIKEL 12
 
 **Mata Kuliah:** MST304 — Manajemen Strategik Kontemporer
@@ -709,6 +742,38 @@ Temuan empiris dari survei pada 212 responden di tiga operator telekomunikasi Ni
 
 Tabel 1 adalah eksibit empiris terpenting artikel — operasionalisasi *4Cs* (*Capability*, *Compatibility*, *Commitment*, *Control*) terhadap tiga konstruk dependent (*Organization Design*, *Employee Relations*, *Information Exchange*) untuk N = 212 responden. Pola frekuensi dan persentase yang dilaporkan menjadi dasar bagi ketiga uji hipotesis berikutnya, dan akan menjadi sasaran kritik metodologis pada §6 — terutama soal validitas konstruk dan penyusunan rangsangan *Likert* yang tidak didukung *factor analysis*.
 
+Penyajian temuan empiris artikel berlanjut dengan tiga tabel distribusi frekuensi (satu untuk masing-masing hipotesis) yang dipasangkan dengan output uji *One-Sample Kolmogorov-Smirnov* sebagai dasar keputusan tolak/terima H₀.
+
+![*Tabel 2. To Ascertain if Strategic Organization Design Can Enhance Organizational Effectiveness (H1 — Frequency Distribution)*]({tab2})
+
+*Sumber: Okebaram & Onuoha (2018), hlm. 201*
+
+![*Tabel KS — Output Uji One-Sample Kolmogorov-Smirnov untuk H1*]({ks_h1})
+
+*Sumber: Okebaram & Onuoha (2018), hlm. 202*
+
+Tabel 2 menyajikan distribusi Likert untuk H1 (Mean = 3,78; SD = 1,16) dan tabel KS yang menyertainya melaporkan Z = 5,342 dengan p = 0,000. Penulis menyimpulkan H₀1 ditolak — strategic organization design berkontribusi pada organizational effectiveness. **Catatan kritis yang akan diperdalam pada §6:** prosedur uji yang dipakai sebenarnya menguji normalitas distribusi, bukan hipotesis tentang mean.
+
+![*Tabel 3. To Determine the Extent Strategic Fit Can Sustain Employee Relations to Boost Organizational Effectiveness (H2 — Frequency Distribution)*]({tab3})
+
+*Sumber: Okebaram & Onuoha (2018), hlm. 203*
+
+![*Tabel KS — Output Uji One-Sample Kolmogorov-Smirnov untuk H2*]({ks_h2})
+
+*Sumber: Okebaram & Onuoha (2018), hlm. 204*
+
+Tabel 3 melaporkan distribusi Likert untuk H2 (Mean = 3,88; SD = 0,97); tabel KS-nya menunjukkan Z = 5,677 dengan p = 0,000. Penulis menolak H₀2 dengan kesimpulan strategic fit mempertahankan employee relations dan pada gilirannya meningkatkan effectiveness.
+
+![*Tabel 4. To Establish the Extent Strategic Fit Can Boost Effective Information Exchange to Improve Organizational Effectiveness (H3 — Frequency Distribution)*]({tab4})
+
+*Sumber: Okebaram & Onuoha (2018), hlm. 205*
+
+![*Tabel KS — Output Uji One-Sample Kolmogorov-Smirnov untuk H3*]({ks_h3})
+
+*Sumber: Okebaram & Onuoha (2018), hlm. 206*
+
+Tabel 4 menyajikan distribusi Likert untuk H3 (Mean = 4,07; SD = 0,64 — distribusi tersempit dari ketiga hipotesis); KS Z = 5,745 dengan p = 0,000. Penulis menolak H₀3 — strategic fit meningkatkan information exchange dan effectiveness.
+
 ## §4 Koneksi ke Topik Silabus (Pertemuan 7)
 
 ### 4Cs sebagai Operasionalisasi Strategic Fit di Level Multibusiness/Alliance
@@ -747,23 +812,7 @@ Limitasi kedua adalah *empirical lag* — jeda temporal antara pengumpulan data 
 
 Limitasi ketiga adalah pilihan metodologi statistik yang dapat dipertanyakan. Penulis menggunakan Z-test pada *mean* skor Likert lima poin untuk menguji ketiga hipotesis null. Pertama, *mean* Likert pada skala lima poin secara teknis adalah *ordinal data* — bukan *interval data* — sehingga penggunaan *mean* sebagai *sufficient statistic* membutuhkan asumsi yang sering tidak terverifikasi. Kedua, Z-test mengasumsikan distribusi normal yang diketahui parameternya, padahal *sampling distribution* dari *mean* Likert pada n = 212 belum tentu normal tanpa pengujian eksplisit. Ketiga — dan ini paling fundamental — penulis melaporkan menggunakan *Kolmogorov-Smirnov test* sebagai bagian dari analisis. **K-S test sebenarnya menguji *kesesuaian distribusi* (apakah sampel berasal dari distribusi yang dispesifikasi), *bukan* hipotesis tentang *means*.** Penggunaan K-S sebagai pengganti uji *means* mencerminkan kebingungan metodologis. Hasil Z = 5,342–5,745 dengan p < 0,001 yang dilaporkan menjadi sulit diinterpretasi karena kerangka statistik yang digunakan tidak konsisten dengan klaim yang dibuat. Pilihan yang lebih tepat adalah *t-test* satu sampel atau *non-parametric Wilcoxon signed-rank test* — keduanya tidak digunakan.
 
-![*Tabel 2. Frequency Distribution untuk H1 — Strategic Organization Design → Organizational Effectiveness*]({tab2})
-
-*Sumber: Okebaram & Onuoha (2018), hlm. 201*
-
-Tabel 2 melaporkan distribusi frekuensi jawaban Likert lima titik untuk pertanyaan H1; *Mean* = 3,78; *SD* = 1,16. Kekuatan kritik metodologis terlihat jelas di sini — penulis menggunakan Z-test (*One-Sample Kolmogorov-Smirnov*, Z = 5,342, *p* < 0,001) pada data Likert, padahal K-S adalah uji normalitas distribusi, bukan uji hipotesis tentang *means*. Hasil "tolak H₀" yang dilaporkan secara metodologis tidak sah dari prosedur yang dijalankan.
-
-![*Tabel 3. Frequency Distribution untuk H2 — Strategic Fit → Employee Relations → Effectiveness*]({tab3})
-
-*Sumber: Okebaram & Onuoha (2018), hlm. 202*
-
-Tabel 3 memuat data untuk H2; *Mean* = 3,88; *SD* = 0,97. Pola metodologis yang sama berulang — Z-test K-S (Z = 5,677) digunakan tanpa justifikasi mengapa uji normalitas dipakai sebagai uji hipotesis *means*. Bila penulis bermaksud menguji apakah skor rata-rata berbeda dari titik tengah skala (3,0), prosedur yang dirujuk seharusnya *one-sample t-test* dengan asumsi yang dapat divalidasi.
-
-![*Tabel 4. Frequency Distribution untuk H3 — Strategic Fit → Information Exchange → Effectiveness*]({tab4})
-
-*Sumber: Okebaram & Onuoha (2018), hlm. 203*
-
-Tabel 4 melaporkan H3; *Mean* = 4,07; *SD* = 0,64. Hasil terkuat dalam tiga hipotesis ini paradoksal: dengan *SD* yang sangat rendah (0,64), distribusinya sangat sempit dan dekat normal — mengindikasikan responden mungkin merespons secara homogen karena konstruk yang diukur ambigu, bukan karena *strategic fit* benar-benar mendorong pertukaran informasi yang efektif. Ketiga tabel bersama-sama menjadi dasar empiris untuk klaim mediasi yang dibuat artikel, namun ketiganya berbagi kelemahan metodologis yang sama dan tidak dilengkapi indikator validitas konstruk seperti *Cronbach's alpha* atau *AVE*.
+Bukti masalah ini terlihat langsung pada **Tabel 2, Tabel 3, dan Tabel 4 yang telah disajikan di §3** beserta output KS-test berpasangannya. Ketiga tabel tersebut menggunakan prosedur *One-Sample Kolmogorov-Smirnov* (Z = 5,342; 5,677; 5,745) — padahal K-S adalah uji *normalitas distribusi*, bukan uji hipotesis tentang *mean*. Penolakan H₀ yang dilaporkan secara metodologis tidak sah dari prosedur yang dijalankan; output K-S menunjukkan distribusi Likert tidak normal (yang memang sudah diharapkan untuk data ordinal lima-titik), bukan bahwa strategic fit *menyebabkan* organizational effectiveness.
 
 ### Tidak Ada Validitas/Reliabilitas Konstruk
 
