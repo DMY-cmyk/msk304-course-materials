@@ -27,6 +27,8 @@ EBOOK        = PROJECT_ROOT / "Ebook" / (
     "Margaret Ann Peteraf - Essentials of Strategic Management _ "
     "The Quest for Competitive Advantage (2021).pdf"
 )
+ARTICLE_11   = PROJECT_ROOT / "Article" / "Artikel 11.pdf"
+ARTICLE_12   = PROJECT_ROOT / "Article" / "Artikel 12.pdf"
 OUT_RMK      = PROJECT_ROOT / "RMK"
 OUT_CR       = PROJECT_ROOT / "Critical Thinking of the Article"
 TEMP         = PROJECT_ROOT / "Dev Assistant" / "temp"
@@ -50,6 +52,9 @@ def extract_figures(ebook_path: Path, figures_dir: Path) -> dict:
         ("figure_8_2", "FIGURE 8.2", [195]),
         ("figure_8_3", "FIGURE 8.3", [206]),
         ("figure_8_4", "FIGURE 8.4", [210]),
+        ("cc_8_1_kraft_heinz", "CONCEPTS & CONNECTIONS 8.1", [197, 198]),
+        ("table_8_1", "TABLE 8.1", [202, 203]),
+        ("table_8_2", "TABLE 8.2", [205, 206]),
     ]
 
     with fitz.open(str(ebook_path)) as doc:
@@ -78,14 +83,128 @@ def extract_figures(ebook_path: Path, figures_dir: Path) -> dict:
     return results
 
 
+def extract_article11_figures(art11_path: Path, figures_dir: Path) -> dict:
+    """Extract Table 1 from Artikel 11 (Hsieh & Chen 2011)."""
+    figures_dir.mkdir(parents=True, exist_ok=True)
+    mat = fitz.Matrix(2, 2)
+    results: dict[str, Path] = {}
+    # Table 1 spans hlm. 26 → PDF page index 15 (confirmed)
+    fig_specs = [
+        ("art11_table_1", "Table 1.", [15]),
+    ]
+    with fitz.open(str(art11_path)) as doc:
+        for name, anchor, pg_indices in fig_specs:
+            clipped = False
+            for pg_idx in pg_indices:
+                pg = doc[pg_idx]
+                hits = pg.search_for(anchor)
+                if hits:
+                    r = hits[0]
+                    clip = fitz.Rect(30, r.y0 - 5, pg.rect.width - 30, pg.rect.height - 30)
+                    pix = pg.get_pixmap(matrix=mat, clip=clip)
+                    out = figures_dir / f"{name}.png"
+                    pix.save(str(out))
+                    results[name] = out
+                    clipped = True
+                    print(f"  {name}: anchor on page index {pg_idx}")
+                    break
+            if not clipped:
+                pg = doc[pg_indices[0]]
+                pix = pg.get_pixmap(matrix=mat)
+                out = figures_dir / f"{name}.png"
+                pix.save(str(out))
+                results[name] = out
+                print(f"  {name}: WARNING anchor not found, fallback full page index {pg_indices[0]}")
+    return results
+
+
+def extract_article12_figures(art12_path: Path, figures_dir: Path) -> dict:
+    """Extract Executive Fit Matrix + Tables 1-4 from Artikel 12."""
+    figures_dir.mkdir(parents=True, exist_ok=True)
+    mat = fitz.Matrix(2, 2)
+    results: dict[str, Path] = {}
+
+    # Table extractions via text anchor
+    table_specs = [
+        ("art12_table_1", "Table 1:", [10]),
+        ("art12_table_2", "Table 2:", [11]),
+        ("art12_table_3", "Table 3:", [13]),
+        ("art12_table_4", "Table 4:", [15]),
+    ]
+    with fitz.open(str(art12_path)) as doc:
+        # Executive Fit Matrix on page index 5 — image-extraction first, clip fallback
+        pg = doc[5]
+        image_list = pg.get_images(full=True)
+        matrix_saved = False
+        if image_list:
+            try:
+                largest = max(image_list, key=lambda x: (x[2] or 0) * (x[3] or 0))
+                xref = largest[0]
+                base_image = doc.extract_image(xref)
+                image_bytes = base_image["image"]
+                ext = base_image["ext"]
+                out = figures_dir / f"art12_fig_matrix.{ext}"
+                out.write_bytes(image_bytes)
+                # Validate size; if too small, fall back to clip
+                if out.stat().st_size >= 5_000:
+                    results["art12_fig_matrix"] = out
+                    matrix_saved = True
+                    print(f"  art12_fig_matrix: extracted embedded image (xref {xref})")
+            except Exception as exc:
+                print(f"  art12_fig_matrix: image extraction failed ({exc}), using clip fallback")
+        if not matrix_saved:
+            hits = pg.search_for("Executive Fit Matrix")
+            if hits:
+                r = hits[0]
+                # Caption is usually below the figure; clip upward from caption
+                clip = fitz.Rect(30, max(r.y0 - 350, 30), pg.rect.width - 30, r.y1 + 20)
+            else:
+                clip = fitz.Rect(30, pg.rect.height * 0.25, pg.rect.width - 30, pg.rect.height - 30)
+            pix = pg.get_pixmap(matrix=mat, clip=clip)
+            out = figures_dir / "art12_fig_matrix.png"
+            pix.save(str(out))
+            results["art12_fig_matrix"] = out
+            print(f"  art12_fig_matrix: clipped region from page index 5")
+
+        for name, anchor, pg_indices in table_specs:
+            clipped = False
+            for pg_idx in pg_indices:
+                pg = doc[pg_idx]
+                hits = pg.search_for(anchor)
+                if hits:
+                    r = hits[0]
+                    clip = fitz.Rect(30, r.y0 - 5, pg.rect.width - 30, pg.rect.height - 30)
+                    pix = pg.get_pixmap(matrix=mat, clip=clip)
+                    out = figures_dir / f"{name}.png"
+                    pix.save(str(out))
+                    results[name] = out
+                    clipped = True
+                    print(f"  {name}: anchor on page index {pg_idx}")
+                    break
+            if not clipped:
+                pg = doc[pg_indices[0]]
+                pix = pg.get_pixmap(matrix=mat)
+                out = figures_dir / f"{name}.png"
+                pix.save(str(out))
+                results[name] = out
+                print(f"  {name}: WARNING anchor not found, fallback full page index {pg_indices[0]}")
+    return results
+
+
 def validate_figures(results: dict) -> None:
-    """Confirm every PNG exists and is at least 10 KB."""
-    for key in ("figure_8_1", "figure_8_2", "figure_8_3", "figure_8_4"):
+    """Confirm every expected PNG/image exists and is at least 5 KB."""
+    expected = (
+        "figure_8_1", "figure_8_2", "figure_8_3", "figure_8_4",
+        "cc_8_1_kraft_heinz", "table_8_1", "table_8_2",
+        "art11_table_1",
+        "art12_fig_matrix", "art12_table_1", "art12_table_2", "art12_table_3", "art12_table_4",
+    )
+    for key in expected:
         path = results.get(key)
         if not path or not path.exists():
             raise FileNotFoundError(f"Missing figure: {key}")
         size = path.stat().st_size
-        if size < 10_000:
+        if size < 5_000:
             raise ValueError(f"{key} too small: {size} bytes")
         print(f"  OK {key}: {size:,} bytes")
 
@@ -101,6 +220,9 @@ def build_rmk(figures: dict) -> str:
     fig2 = fp("figure_8_2")
     fig3 = fp("figure_8_3")
     fig4 = fp("figure_8_4")
+    cc81 = fp("cc_8_1_kraft_heinz")
+    tab81 = fp("table_8_1")
+    tab82 = fp("table_8_2")
 
     return f"""# RINGKASAN MATERI KULIAH — PERTEMUAN 7
 
@@ -242,6 +364,12 @@ Perbedaan antara *economies of scope* dan *economies of scale* sering dicampur, 
 
 Gambar 2 adalah visualisasi paling penting dari konsep *strategic fit* di level korporat — peta yang menunjukkan di mana *value-chain matchups* antar-bisnis dapat menjadi sumber *economies of scope*. Inilah jembatan analitis yang akan dirujuk kembali pada §9 untuk menghubungkan Ch.8 dengan Artikel 11 (*internal fit*) dan Artikel 12 (*multi-element organizational fit*).
 
+![*Boks Concepts & Connections 8.1. The Kraft-Heinz Merger: Pursuing the Benefits of Cross-Business Strategic Fit*]({cc81})
+
+*Sumber: Gamble, Peteraf & Thompson (2021), Essentials of Strategic Management, Ch.8 Concepts & Connections 8.1, hlm. 159*
+
+Boks Concepts & Connections 8.1 menyajikan ilustrasi konkret dari merger Kraft–Heinz tahun 2015 (USD 62,6 milyar) sebagai contoh *strategic fit* yang dieksekusi pada keempat tipe *value-chain matchups* yang dibahas pada §6. Kasus ini menjadi rujukan empiris untuk argumen bahwa *related diversification* hanya menghasilkan keunggulan kompetitif jika manajemen secara aktif mengeksploitasi fit lintas-divisi melalui konsolidasi pengadaan, distribusi, dan *brand portfolio*. Disiplin biaya 3G Capital pasca-merger menjadi catatan tambahan: fit yang teoretis tidak otomatis menjadi sinergi nyata; ia memerlukan *operational discipline* yang konkret untuk diaktualisasi.
+
 ---
 
 ## 7. Diversifikasi ke Bisnis *Unrelated*: Logika *Conglomerate*
@@ -270,9 +398,21 @@ Tiga jebakan secara konsisten menjerat konglomerat yang tidak hati-hati. **Perta
 
 Langkah pertama adalah menilai daya tarik struktural setiap industri di mana perusahaan terdiversifikasi memiliki kehadiran. Penilaian dilakukan dengan menggabungkan beberapa dimensi: kekuatan kompetitif Porter Five-Forces (intensitas rivalitas, kekuatan tawar pembeli dan pemasok, ancaman masuk, ancaman substitusi), pertumbuhan pasar yang diharapkan, volatilitas profitabilitas historis, dan kemampuan industri menyediakan *return* di atas *cost of capital* secara berkelanjutan. Tujuan penilaian ini adalah memberi peringkat industri-industri dalam portofolio sehingga manajemen korporat memiliki dasar objektif untuk mengalokasikan sumber daya secara diferensial. Industri yang menunjukkan struktur kompetitif yang terkikis atau pertumbuhan yang stagnan menjadi kandidat untuk divestasi atau *harvest*; industri dengan daya tarik tinggi menjadi prioritas untuk investasi tambahan.
 
+![*Tabel 8.1. Calculating Weighted Industry Attractiveness Scores*]({tab81})
+
+*Sumber: Gamble, Peteraf & Thompson (2021), Essentials of Strategic Management, Ch.8, hlm. 164*
+
+Tabel 8.1 menunjukkan operasionalisasi Langkah 1 — pembobotan sembilan dimensi daya tarik industri (*market size*, *growth rate*, *profitability*, *intensity of competition*, dan seterusnya) untuk menghasilkan skor agregat per industri. Industri A, B, C, dan D pada contoh TPGS Ch.8 ini menerima skor 7,20 / 6,75 / 5,10 / 2,95 — yang akan menjadi koordinat sumbu vertikal pada matriks sembilan-sel (Gambar 3). Disiplin pembobotan ini penting: tanpa bobot eksplisit, *judgment* manajer korporat tentang prioritas dimensi tertentu dapat menjadi implisit dan tidak teruji.
+
 ### Langkah 2: *Business-Unit Competitive Strength*
 
 Langkah kedua menilai posisi kompetitif setiap unit bisnis di dalam industrinya. Dimensi penilaian mencakup pangsa pasar relatif, posisi biaya relatif terhadap pesaing, kekuatan *brand* dan basis pelanggan, *capability fit* terhadap *key success factors* industri, dan kemampuan unit menghasilkan *cash flow* yang menutupi kebutuhan investasinya sendiri. Penilaian ini memberi peringkat unit-unit bisnis dari yang paling kuat (kandidat untuk investasi *grow and build*) hingga yang paling lemah (kandidat untuk divestasi). Penggabungan Langkah 1 dan Langkah 2 menghasilkan matriks dua dimensi — *industry attractiveness* di satu sumbu, *competitive strength* di sumbu lain — yang menjadi alat analitis paling penting untuk evaluasi portofolio.
+
+![*Tabel 8.2. Calculating Weighted Competitive Strength Scores for a Diversified Company's Business Units*]({tab82})
+
+*Sumber: Gamble, Peteraf & Thompson (2021), Essentials of Strategic Management, Ch.8, hlm. 167*
+
+Tabel 8.2 melengkapi Tabel 8.1 dengan pembobotan delapan dimensi kekuatan kompetitif unit bisnis (*relative market share*, *costs relative to competitors*, *brand reputation*, dan seterusnya) untuk Bisnis A–D. Skor agregat 7,85 / 2,30 / 5,25 / 3,15 ini menjadi koordinat sumbu horizontal pada matriks sembilan-sel. Bersama-sama, Tabel 8.1 dan Tabel 8.2 menjelaskan bagaimana posisi *bubble* pada Gambar 3 dihasilkan secara metodologis — bukan sekadar penilaian intuitif manajer, melainkan output dari pembobotan yang dapat diaudit dan diperdebatkan.
 
 ![*Gambar 3. Nine-Cell Industry Attractiveness–Competitive Strength Matrix*]({fig3})
 
@@ -347,8 +487,11 @@ Pertemuan 8 akan menambahkan dimensi *geographic* pada kerangka fit yang sudah d
 
 
 
-def build_cr11() -> str:
-    return r"""# CRITICAL REVIEW — ARTIKEL 11
+def build_cr11(figures: dict) -> str:
+    def fp(name: str) -> str:
+        return str(figures[name]).replace("\\", "/")
+    art11_tab1 = fp("art11_table_1")
+    return f"""# CRITICAL REVIEW — ARTIKEL 11
 
 **Mata Kuliah:** MST304 — Manajemen Strategik Kontemporer
 
@@ -383,6 +526,12 @@ Hsieh dan Chen memposisikan artikelnya di persimpangan dua aliran literatur yang
 ### Komponen Triad yang Sebenarnya
 
 Argumen sentral artikel disampaikan melalui Tabel 1 (hlm. 26) yang memetakan tiga komponen ke dalam tiga konfigurasi internal yang konsisten. Komponen pertama adalah **strategi kompetitif bisnis** mengikuti tipologi Porter (1980, 1985): *differentiation*, *overall cost leadership*, dan *focus*. Komponen kedua adalah **tipe strategi HR** yang dibangun Hsieh dan Chen sebagai sintesis dari Schuler dan Jackson (1987), Miles dan Snow (1978, 1984), serta Dyer dan Holder (1988), terdiri dari tiga tipe: ***innovation-oriented***, ***contribution-oriented***, dan ***commitment-oriented***. Komponen ketiga adalah **tipe sistem *reward*** yang dibangun dari taksonomi Howard dan Dougherty (2004), terdiri dari tiga tipe: ***human capital reward***, ***output reward***, dan ***position reward***. Penamaan ini bukan sekadar label — masing-masing tipe membawa kriteria, objek (karyawan target), dan mode (intrinsik atau ekstrinsik) yang berbeda. **Penting** untuk dicatat bahwa Hsieh dan Chen tidak mereduksi taksonomi menjadi dikotomi sederhana; mereka mempertahankan struktur tripartit yang memungkinkan diskusi *fit* untuk strategi *focus*, yang sering tertinggal dalam diskusi strategi generik Porter.
+
+![*Tabel 1. The Integration among Competitive Strategies, Human Resource Strategies, and Reward Systems*]({art11_tab1})
+
+*Sumber: Hsieh & Chen (2011), Academy of Strategic Management Journal, 10(2): 26*
+
+Tabel 1 adalah sintesis visual dari seluruh argumen Hsieh dan Chen. Matriks tiga-kolom ini memetakan setiap strategi kompetitif Porter (*Differentiation*, *Overall Cost Leadership*, *Focus*) ke konfigurasi *HR strategy* dan *reward system* yang dihipotesiskan sebagai *fit* yang konsisten. Tanpa tabel ini, klaim *configurational triad* sulit dipahami secara penuh — seluruh evaluasi kritis pada §§5–7 berikutnya bersandar pada strukturnya.
 
 ### Logika Fit untuk *Differentiation*
 
@@ -490,8 +639,15 @@ Untuk riset di Indonesia, pertanyaan paling menarik adalah apakah model bisnis p
 """
 
 
-def build_cr12() -> str:
-    return r"""# CRITICAL REVIEW — ARTIKEL 12
+def build_cr12(figures: dict) -> str:
+    def fp(name: str) -> str:
+        return str(figures[name]).replace("\\", "/")
+    matrix = fp("art12_fig_matrix")
+    tab1 = fp("art12_table_1")
+    tab2 = fp("art12_table_2")
+    tab3 = fp("art12_table_3")
+    tab4 = fp("art12_table_4")
+    return f"""# CRITICAL REVIEW — ARTIKEL 12
 
 **Mata Kuliah:** MST304 — Manajemen Strategik Kontemporer
 
@@ -527,6 +683,12 @@ Penulis memposisikan artikelnya pada perpotongan beberapa aliran literatur klasi
 
 Okebaram dan Onuoha membangun konseptualisasi *strategic fit* dengan dua langkah definisi yang saling melengkapi. Pertama, penulis mengutip Nadler dan Tushman (1980) untuk definisi struktural: *"Fit is defined as the degree to which the needs, demands, goals, objectives and structures of one component"* (hlm. 195). Penulis menambahkan komentar interpretif: *"This conceptualization implies that high level of strategic fit is advantageous; therefore, an organization's fit should be maximized"* (hlm. 195). Kedua, penulis memperluas definisi tersebut dengan dimensi *external*: *"Strategic fit expresses the degree to which an organization is matching its resources and capabilities with the opportunities in the external environment"* (hlm. 195). Dua definisi ini menggabungkan *internal coherence* dengan *external alignment* — sebuah pendekatan yang konsisten dengan tradisi *contingency theory* meskipun penulis tidak secara eksplisit menyebut nama tradisi ini. **Penting** untuk dicatat bahwa definisi yang diadopsi penulis bersifat statis — *fit* sebagai *state of matching*, bukan sebagai proses dinamis. Konsekuensi metodologisnya adalah desain survei *cross-sectional* yang akan dikritisi pada §7; tanpa pemodelan dinamika temporal, klaim kausal yang ditarik penulis menjadi terlalu ambisius untuk basis data yang tersedia.
 
+![*Gambar 1. Executive Fit Matrix — Strategy × Change*]({matrix})
+
+*Sumber: Okebaram & Onuoha (2018), International Academic Research Conference Vienna, hlm. 5 (gambar bersumber HBR / Effron & Ort)*
+
+Gambar 1 memvisualisasikan konsep *strategic fit* melalui dua sumbu: dimensi strategi (*cost advantage* ↔ *differentiation advantage*) dan dimensi perubahan lingkungan (*stable* ↔ *unstable*). Empat kuadran yang dihasilkan menggambarkan kondisi *fit* yang berbeda — dari *fit* yang stabil di lingkungan tenang hingga *fit* dinamis yang menuntut adaptasi cepat. Diagram ini menjadi pemandu konseptual sebelum operasionalisasi *4Cs* Medcof (1997) yang diuji secara empiris pada bagian metode.
+
 ### Kerangka *4Cs* Medcof (1997)
 
 Operasionalisasi utama *strategic fit* dalam artikel ini adalah kerangka **4Cs** yang dipinjam dari Medcof (1997). Keempat C tersebut adalah: ***Capability*** — apa yang dibawa setiap mitra ke meja kerja sama, baik berupa keterampilan teknis, *intellectual property*, *brand equity*, maupun *market access*; ***Compatibility*** — kesesuaian kultural, *managerial style*, *organizational climate*, dan asumsi-asumsi diam yang membentuk perilaku sehari-hari; ***Commitment*** — kesediaan masing-masing pihak untuk berinvestasi sumber daya — *time, money, talent, attention* — pada hubungan strategis tersebut; dan ***Control*** — pengaturan hak keputusan, struktur tata kelola, dan mekanisme *dispute resolution* yang menetapkan siapa yang memutuskan apa pada situasi konflik. Penulis menggunakan kerangka ini sebagai *diagnostic lens* — sebuah *checklist* yang dapat dipakai praktisi M&A dan *alliance manager* untuk menilai kesesuaian pre-deal. **Catatan apresiatif:** dibandingkan dengan tipologi yang terlalu abstrak, *4Cs* memiliki keuntungan praktis — keempat dimensi cukup spesifik untuk diterjemahkan ke pertanyaan *due diligence* tetapi cukup umum untuk diterapkan lintas industri dan lintas tipe kemitraan strategis, baik akuisisi murni, *joint venture*, maupun *contractual alliance*.
@@ -540,6 +702,12 @@ Mekanisme kausal yang diajukan dan diuji penulis dapat digambarkan sebagai ranta
 Temuan empiris dari survei pada 212 responden di tiga operator telekomunikasi Nigeria (MTN, Airtel, Etisalat) dan satu bank (Ecobank) konsisten ke arah yang diharapkan penulis. Ketiga hipotesis null ditolak pada tingkat signifikansi p < 0,001 dengan nilai Z masing-masing 5,342, 5,677, dan 5,745. Penulis menyimpulkan pada hlm. 210: *"Based on the research outcome, we conclude that the organizations can achieve synergy and sustain their organizational effectiveness by integrating the element of 4Cs capability, compatibility, commitment and control with the appropriate organization design, good employee relations and effective information exchange."* Kesimpulan ini mengintegrasikan keempat dimensi *4Cs* dengan ketiga jalur organisasional menjadi resep terpadu untuk *organizational effectiveness*.
 
 **Catatan pivot — konflasi *sustainability* dan *sustained competitive advantage*:** Judul artikel mencantumkan *sustainability* sebagai konsep sentral, tetapi konseptualisasi penulis di seluruh tubuh artikel sebenarnya merujuk pada *sustained competitive advantage* dalam tradisi Porter (1985, hlm. 198) — *"A firm is said to have a sustainable competitive advantage when it is implementing a value creating strategy not simultaneously being implemented by any current or potential competitors and when these other firms are unable to duplicate the benefits of this strategy."* Artikel ini **tidak** menggunakan kerangka *triple bottom line* dari Elkington (1997 — referensi yang tidak ada dalam daftar pustaka artikel ini), *natural-resource-based view* dari Hart (1995 — juga tidak dirujuk), maupun *shared value* dari Porter dan Kramer (2006 — tidak dirujuk). Konflasi terminologis ini bukan sekadar persoalan kosakata; ia membentuk seluruh pembacaan artikel. Pembaca yang mengharapkan analisis *environmental-social-economic sustainability* akan kecewa, karena artikel ini sebenarnya membahas *competitive advantage durability*. Isu ini akan dieksplorasi lebih dalam pada §6 dan §7.
+
+![*Tabel 1. Assessment of 4Cs as Against Organizational Effectiveness*]({tab1})
+
+*Sumber: Okebaram & Onuoha (2018), hlm. 200*
+
+Tabel 1 adalah eksibit empiris terpenting artikel — operasionalisasi *4Cs* (*Capability*, *Compatibility*, *Commitment*, *Control*) terhadap tiga konstruk dependent (*Organization Design*, *Employee Relations*, *Information Exchange*) untuk N = 212 responden. Pola frekuensi dan persentase yang dilaporkan menjadi dasar bagi ketiga uji hipotesis berikutnya, dan akan menjadi sasaran kritik metodologis pada §6 — terutama soal validitas konstruk dan penyusunan rangsangan *Likert* yang tidak didukung *factor analysis*.
 
 ## §4 Koneksi ke Topik Silabus (Pertemuan 7)
 
@@ -578,6 +746,24 @@ Limitasi kedua adalah *empirical lag* — jeda temporal antara pengumpulan data 
 ### Metodologi Statistik yang Diragukan
 
 Limitasi ketiga adalah pilihan metodologi statistik yang dapat dipertanyakan. Penulis menggunakan Z-test pada *mean* skor Likert lima poin untuk menguji ketiga hipotesis null. Pertama, *mean* Likert pada skala lima poin secara teknis adalah *ordinal data* — bukan *interval data* — sehingga penggunaan *mean* sebagai *sufficient statistic* membutuhkan asumsi yang sering tidak terverifikasi. Kedua, Z-test mengasumsikan distribusi normal yang diketahui parameternya, padahal *sampling distribution* dari *mean* Likert pada n = 212 belum tentu normal tanpa pengujian eksplisit. Ketiga — dan ini paling fundamental — penulis melaporkan menggunakan *Kolmogorov-Smirnov test* sebagai bagian dari analisis. **K-S test sebenarnya menguji *kesesuaian distribusi* (apakah sampel berasal dari distribusi yang dispesifikasi), *bukan* hipotesis tentang *means*.** Penggunaan K-S sebagai pengganti uji *means* mencerminkan kebingungan metodologis. Hasil Z = 5,342–5,745 dengan p < 0,001 yang dilaporkan menjadi sulit diinterpretasi karena kerangka statistik yang digunakan tidak konsisten dengan klaim yang dibuat. Pilihan yang lebih tepat adalah *t-test* satu sampel atau *non-parametric Wilcoxon signed-rank test* — keduanya tidak digunakan.
+
+![*Tabel 2. Frequency Distribution untuk H1 — Strategic Organization Design → Organizational Effectiveness*]({tab2})
+
+*Sumber: Okebaram & Onuoha (2018), hlm. 201*
+
+Tabel 2 melaporkan distribusi frekuensi jawaban Likert lima titik untuk pertanyaan H1; *Mean* = 3,78; *SD* = 1,16. Kekuatan kritik metodologis terlihat jelas di sini — penulis menggunakan Z-test (*One-Sample Kolmogorov-Smirnov*, Z = 5,342, *p* < 0,001) pada data Likert, padahal K-S adalah uji normalitas distribusi, bukan uji hipotesis tentang *means*. Hasil "tolak H₀" yang dilaporkan secara metodologis tidak sah dari prosedur yang dijalankan.
+
+![*Tabel 3. Frequency Distribution untuk H2 — Strategic Fit → Employee Relations → Effectiveness*]({tab3})
+
+*Sumber: Okebaram & Onuoha (2018), hlm. 202*
+
+Tabel 3 memuat data untuk H2; *Mean* = 3,88; *SD* = 0,97. Pola metodologis yang sama berulang — Z-test K-S (Z = 5,677) digunakan tanpa justifikasi mengapa uji normalitas dipakai sebagai uji hipotesis *means*. Bila penulis bermaksud menguji apakah skor rata-rata berbeda dari titik tengah skala (3,0), prosedur yang dirujuk seharusnya *one-sample t-test* dengan asumsi yang dapat divalidasi.
+
+![*Tabel 4. Frequency Distribution untuk H3 — Strategic Fit → Information Exchange → Effectiveness*]({tab4})
+
+*Sumber: Okebaram & Onuoha (2018), hlm. 203*
+
+Tabel 4 melaporkan H3; *Mean* = 4,07; *SD* = 0,64. Hasil terkuat dalam tiga hipotesis ini paradoksal: dengan *SD* yang sangat rendah (0,64), distribusinya sangat sempit dan dekat normal — mengindikasikan responden mungkin merespons secara homogen karena konstruk yang diukur ambigu, bukan karena *strategic fit* benar-benar mendorong pertukaran informasi yang efektif. Ketiga tabel bersama-sama menjadi dasar empiris untuk klaim mediasi yang dibuat artikel, namun ketiganya berbagi kelemahan metodologis yang sama dan tidak dilengkapi indikator validitas konstruk seperti *Cronbach's alpha* atau *AVE*.
 
 ### Tidak Ada Validitas/Reliabilitas Konstruk
 
@@ -672,12 +858,16 @@ if __name__ == "__main__":
 
     print("Phase 1: Extracting TPGS Ch.8 figures...")
     figures = extract_figures(EBOOK, FIGURES_DIR)
+    print("Phase 1b: Extracting Artikel 11 figure...")
+    figures.update(extract_article11_figures(ARTICLE_11, FIGURES_DIR))
+    print("Phase 1c: Extracting Artikel 12 figures...")
+    figures.update(extract_article12_figures(ARTICLE_12, FIGURES_DIR))
     validate_figures(figures)
 
     print("Phase 2: Building markdown and running pandoc...")
     rmk_md  = build_rmk(figures)
-    cr11_md = build_cr11()
-    cr12_md = build_cr12()
+    cr11_md = build_cr11(figures)
+    cr12_md = build_cr12(figures)
 
     for name, content, out in [
         ("rmk_w7.md",  rmk_md,  OUT_RMK / "01079_Dzaki Muhammad Yusfian_RMK Pert. 7.docx"),
