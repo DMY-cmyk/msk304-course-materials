@@ -81,6 +81,8 @@ Pembeli terkadang kesulitan menilai nilai suatu produk secara objektif sebelum p
 
 Risiko dan jebakan utama strategi diferensiasi: (1) **atribut diferensiasi mudah dan cepat ditiru** pesaing, mengikis nilai *premium*; (2) **pembeli melihat sedikit nilai** pada atribut unik yang ditawarkan ("*so what?*" response) karena perusahaan mengembangkan fitur yang tidak benar-benar dihargai pelanggan; (3) **pengeluaran berlebihan** untuk upaya diferensiasi sehingga profitabilitas tergerus; (4) **diferensiasi berlebihan** (*over-differentiating*) sehingga produk melebihi kebutuhan pembeli; (5) **harga *premium* terlalu tinggi** sehingga tidak sebanding dengan nilai tambah yang dipersepsikan; dan (6) **perusahaan berbiaya rendah** dapat mengalahkan diferensiasi jika pembeli puas dengan produk dasar.
 
+Kondisi di mana strategi *broad differentiation* paling efektif adalah ketika kebutuhan dan penggunaan produk oleh pembeli beragam, ada banyak cara untuk membedakan produk atau layanan, hanya sedikit pesaing yang mengikuti pendekatan diferensiasi serupa, dan perubahan teknologi cepat serta kompetisi berpusat pada fitur produk yang berkembang pesat. Di pasar Indonesia, industri perbankan digital dan *e-commerce* memperlihatkan kondisi ini secara nyata: diferensiasi yang berhasil hari ini — fitur *live commerce*, layanan *same-day delivery*, atau integrasi dompet digital — cepat diimitasi pesaing, sehingga perusahaan harus terus-menerus memperbarui sumber diferensiasinya untuk mempertahankan nilai *premium* di mata pelanggan.
+
 ---
 
 ## §5.4 Strategi 3 — Focused Low-Cost & Focused Differentiation
