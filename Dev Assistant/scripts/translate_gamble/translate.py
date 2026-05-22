@@ -98,9 +98,16 @@ def translate_block(
     offset = 0
     for chunk in chunk_text(text):
         masked, mapping = mask(chunk)
-        translated = translator.translate(masked)
+        try:
+            translated = translator.translate(masked)
+        except Exception:
+            translated = None
         if sleep_seconds:
             time.sleep(sleep_seconds)
+        # deep-translator returns None for empty / un-translatable input;
+        # fall back to the masked source so the page still renders.
+        if not translated:
+            translated = masked
         restored, spans = unmask(translated, mapping)
         for s, e in spans:
             span_accum.append((s + offset, e + offset))
@@ -143,7 +150,7 @@ def translate_pages(extracted_dir: Path, out_dir: Path, cache_dir: Path) -> None
             json.dumps(payload, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
-        print(f"[{idx}/{total}] {src.name}")
+        print(f"[{idx}/{total}] {src.name}", flush=True)
 
 
 if __name__ == "__main__":
