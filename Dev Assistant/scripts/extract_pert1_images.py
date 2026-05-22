@@ -22,11 +22,18 @@ ZOOM = DPI / 72
 MATRIX = fitz.Matrix(ZOOM, ZOOM)
 PAD = 12  # PDF points of padding around the discovered bounding box
 
-# (pdf_page_index_0based, text_marker_prefix, output_filename)
+# (pdf_page_index_0based, text_marker_prefix, output_filename, explicit_crop)
+# explicit_crop = (x0, y0, x1, y1) in PDF points; None falls back to heuristic.
+# Crops were measured directly from each page's text/image block bboxes after
+# the heuristic mis-clipped narrow-seed cases (FIGURE 1.1) and 3-column
+# layouts (CONCEPTS & CONNECTIONS 1.1).
 TARGETS = [
-    (44, "CONCEPTS & CONNECTIONS 1.1", "cc_1_1.png"),
-    (46, "CONCEPTS & CONNECTIONS 1.2", "cc_1_2.png"),
-    (47, "FIGURE 1.1",                  "fig_1_1.png"),
+    (44, "CONCEPTS & CONNECTIONS 1.1", "cc_1_1.png",
+     (45.0, 58.0, 530.0, 626.0)),
+    (46, "CONCEPTS & CONNECTIONS 1.2", "cc_1_2.png",
+     (45.0, 58.0, 502.0, 462.0)),
+    (47, "FIGURE 1.1",                 "fig_1_1.png",
+     (60.0, 440.0, 535.0, 672.0)),
 ]
 
 
@@ -90,13 +97,17 @@ def main() -> int:
         print(f"PDF not found: {PDF_PATH}", file=sys.stderr)
         return 1
     doc = fitz.open(PDF_PATH)
-    for pno, marker, fname in TARGETS:
+    for pno, marker, fname, explicit_crop in TARGETS:
         page = doc[pno]
-        seed = find_marker_block(page, marker)
-        if seed is None:
-            print(f"marker not found on page {pno+1}: {marker}", file=sys.stderr)
-            return 2
-        rect = union_nearby_blocks(page, seed)
+        if explicit_crop is not None:
+            rect = fitz.Rect(*explicit_crop) & page.rect
+        else:
+            seed = find_marker_block(page, marker)
+            if seed is None:
+                print(f"marker not found on page {pno+1}: {marker}",
+                      file=sys.stderr)
+                return 2
+            rect = union_nearby_blocks(page, seed)
         render(page, rect, OUT_DIR / fname)
     return 0
 
