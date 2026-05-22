@@ -1,0 +1,65 @@
+# BAGIAN III — CRITICAL REVIEW ARTIKEL 7
+
+## Helen Salavou (2015) — *Competitive Strategies and Their Shift to the Future*
+
+**Sitasi lengkap:** Salavou, H. E. (2015). Competitive Strategies and Their Shift to the Future. *European Business Review*, 27(1), 80–99.
+
+---
+
+### Ringkasan Inti
+
+Helen E. Salavou (2015) menyajikan sebuah tinjauan literatur konseptual (*conceptual literature review*) yang mendokumentasikan pergeseran besar dalam tradisi penelitian strategi kompetitif selama empat dekade terakhir — yakni perpindahan dari dogma **kemurnian strategis** (*strategic purity*) Porter (1980) menuju penerimaan luas atas **strategi hibrida** (*hybrid strategies*). Artikel ini tidak memproduksi data empiris baru, melainkan merangkum dan memetakan ulang perdebatan yang telah berlangsung sejak dekade 1980-an, dengan argumen sentral bahwa era di mana strategi hibrida disamakan dengan posisi *stuck-in-the-middle* yang gagal sudah berakhir.
+
+Porter (1980, 1985) menetapkan tiga pilihan strategi generik — *kepemimpinan biaya rendah*, *diferensiasi*, dan *fokus* — sebagai pilihan yang saling eksklusif. Perusahaan yang tidak mengambil posisi yang tegas di antara ketiganya diprediksi akan terjebak di tengah (*stuck in the middle*) dan menghasilkan kinerja inferior. Argumen ini mendominasi literatur strategi selama hampir dua dekade dan didukung oleh sejumlah studi empiris awal, terutama dari konteks Portugal, Korea, dan Amerika Serikat.
+
+Pergeseran konseptual dimulai dengan kritik Hill (1988) yang mempertanyakan dikotomi biaya rendah versus diferensiasi sebagai dua kutub yang saling berlawanan secara absolut. Meta-analisis **Campbell-Hunt (2000)** menjadi titik balik (*turning point*) yang paling berpengaruh: studi lintas negara tersebut memperlihatkan bahwa dalam praktiknya, variasi strategi kompetitif yang diadopsi perusahaan jauh lebih luas daripada tiga sel model Porter, dan bahwa strategi yang menggabungkan lebih dari satu dimensi generik sering kali menghasilkan kinerja yang setara atau lebih unggul.
+
+Salavou kemudian merangkum **15 studi empiris pasca-2000** yang ia temukan melalui pencarian *database* Scopus dan pemeriksaan referensi manual. Studi-studi ini mencakup konteks dari empat benua — Afrika (Ghana), Amerika (AS, Meksiko, Kanada), Asia (Cina, Korea, India, Turki), dan Eropa (Austria, Spanyol, Yunani, Inggris, Portugal, Belanda, Jerman). Meskipun demikian, hampir separuh dari studi tersebut dilakukan di negara-negara Eropa, yang mencerminkan bias geografis yang perlu dicermati dalam interpretasi generalisasinya.
+
+---
+
+### Temuan Utama
+
+Salavou (2015) membangun argumennya di atas beberapa klaim substantif yang saling terkait. Pertama, ia mengidentifikasi **tiga kelemahan struktural strategi murni** yang mendorong pergeseran menuju hibridisasi. (1) *Kurang responsif terhadap perubahan pasar* — perusahaan yang berkonsentrasi pada satu dimensi generik cenderung kurang fleksibel dalam menawarkan produk yang secara simultan memperhatikan biaya dan atribut diferensiasi. (2) *Spesialisasi yang berbahaya* — konsentrasi strategis yang terlalu sempit meninggalkan celah dalam penawaran produk yang mengabaikan kebutuhan pelanggan penting. (3) *Mudah ditiru* — strategi murni lebih transparan dan lebih mudah direplikasi pesaing dibandingkan konfigurasi hibrida yang lebih kompleks.
+
+Kedua, Salavou mempertegas **perbedaan konseptual antara strategi hibrida dan** ***stuck-in-the-middle***. Kebingungan antara kedua konsep ini selama satu dekade lebih menjadi salah satu hambatan terbesar dalam penerimaan strategi hibrida di literatur. Salavou (2015, hlm. 85) menegaskan bahwa posisi *stuck-in-the-middle* mencerminkan ketidakmampuan membuat pilihan — yaitu tidak ada penekanan yang berbeda pada dimensi strategi apa pun (rata-rata pada semua dimensi), atau justru memiliki biaya tinggi dan diferensiasi rendah secara bersamaan. Sebaliknya, **strategi hibrida** berarti penekanan yang *tinggi* secara simultan pada dua atau lebih dimensi generik. Strategi hibrida adalah pilihan aktif dan disengaja, bukan ketidakmampuan membuat pilihan.
+
+Ketiga, Salavou mengusulkan **pendekatan dimensional** (*dimensional approach*) sebagai alternatif superior terhadap pendekatan taksonomik (*taxonomic approach*) Porter. Pendekatan taksonomik memandang strategi sebagai kategori diskret yang terpisah; pendekatan dimensional memperlakukan setiap dimensi generik (biaya rendah, diferensiasi, fokus) sebagai kontinum dengan tiga tingkat penekanan — *tinggi*, *sedang*, dan *rendah*. Kombinasi tiga dimensi dengan tiga tingkat penekanan menghasilkan **16 tipe strategi hibrida** yang dirangkum dalam Tabel IV artikel. Tipologi ini mencakup *single-emphasis* (satu dimensi tinggi, dua lainnya rendah), *mixed-emphasis/hybrid* (dua atau tiga dimensi dengan penekanan tinggi), *stuck-in-the-middle* (semua dimensi rata-rata), dan *no-distinctive-emphasis* (semua dimensi rendah). Kerangka ini secara dramatis memperluas ruang strategis yang dapat didiagnosis oleh peneliti maupun praktisi.
+
+Keempat, **bukti empiris pasca-2000** yang dirangkum Salavou dalam Tabel V menunjukkan pola konsisten: strategi hibrida secara dominan menghasilkan kinerja lebih tinggi dibandingkan strategi murni di berbagai konteks industri dan geografis. Penelitian Acquaah & Yasai-Ardekani (2008) di Ghana, Leitner & Guldenberg (2010) di Austria, Pertusa-Ortega et al. (2009) di Spanyol, dan beberapa studi oleh Salavou sendiri di Yunani semuanya mendukung kesimpulan ini, meskipun dengan metodologi yang beragam — dari *regression analysis* dan *cluster analysis* hingga *meta-analysis* dan *ANOVA*, serta ukuran kinerja yang berbeda-beda (*ROA*, *ROE*, *profit margin*, dan ukuran persepsi manajerial).
+
+Kelima, artikel ini menegaskan **pergeseran pertanyaan penelitian** dari "strategi murni mana yang paling efektif?" menjadi "apakah strategi murni atau strategi hibrida (dengan struktur seperti apa) yang menghasilkan kinerja unggul?" Sejalan dengan itu, Salavou merumuskan **tiga agenda teoretis** untuk penelitian ke depan: (1) pengembangan skema deskriptif konseptual yang lebih komprehensif untuk variasi strategi hibrida; (2) pembangunan spektrum teoretis penuh yang menempatkan semua jenis strategi dalam satu kerangka koheren; dan (3) pengembangan tipologi dengan mempertimbangkan *joint effects* dari moderator dan mediator, khususnya kapabilitas perusahaan dan faktor kontekstual seperti sektor industri dan dinamika teknologi.
+
+---
+
+### Kelebihan
+
+**Pertama, klarifikasi konseptual yang tegas antara hibrida dan** ***stuck-in-the-middle*****.** Salavou berhasil menyelesaikan kebingungan istilah yang sudah berlangsung hampir satu dekade sejak Porter (1985). Dengan mendefinisikan *stuck-in-the-middle* sebagai absennya pilihan strategis (bukan campurannya) dan strategi hibrida sebagai penekanan tinggi yang simultan pada lebih dari satu dimensi, Salavou memberi presisi konseptual yang sangat dibutuhkan literatur. Pembedaan ini memiliki implikasi praktis langsung: manajer tidak perlu takut dituduh "tidak konsisten" ketika mengombinasikan efisiensi biaya dan diferensiasi, selama kombinasi itu dieksekusi dengan intensitas yang tinggi dan konsisten.
+
+**Kedua, sintesis bukti empiris lintas konteks geografis yang sistematis.** Tabel V dengan 15 studi pasca-2000 memberi gambaran yang cukup komprehensif atas keadaan bukti empiris, termasuk keberagaman metodologi dan konteks. Upaya ini melampaui sekadar tinjauan naratif dan menawarkan basis perbandingan yang lebih terstruktur.
+
+**Ketiga, agenda penelitian yang konkret dan dapat ditindaklanjuti.** Berbeda dari banyak artikel konseptual yang menutup dengan pernyataan umum tentang "perlunya penelitian lebih lanjut", Salavou merumuskan tiga arah penelitian yang spesifik dan operasional, sehingga artikel ini menjadi titik referensi yang produktif bagi peneliti berikutnya.
+
+---
+
+### Kekurangan
+
+**Pertama, bersifat deskriptif dan tidak konstruktif.** Salavou (2015) dengan cermat mengidentifikasi kebutuhan akan kerangka teoretis yang lebih baik untuk strategi hibrida, tetapi artikel ini sendiri tidak menyediakannya. Tipologi 16 tipe hybrid dalam Tabel IV bersifat deskriptif-kombinatorik, bukan teoritis-eksplanatif: ia menunjukkan *berapa banyak* kombinasi yang mungkin, tetapi tidak menjelaskan *mengapa* kombinasi tertentu unggul atas yang lain dalam kondisi spesifik.
+
+**Kedua, generalisasi yang terlalu luas dari basis bukti yang Eurosentris.** Hampir separuh dari 15 studi berasal dari konteks Eropa, dan mayoritas argumen Salavou dibangun di atas pola yang dominan di pasar-pasar Eropa yang relatif matang. Dinamika *winner-take-all* di pasar teknologi Amerika Utara, atau struktur pasar yang masih dipengaruhi proteksi regulatif di banyak negara berkembang, bisa menghasilkan pola yang berbeda secara sistematis. Klaim bahwa "strategi hibrida menjadi pilihan paling menarik" membutuhkan kualifikasi kontekstual yang lebih ketat.
+
+**Ketiga, risiko strategi hibrida kurang dibahas.** Argumen bahwa hibridisasi lebih unggul dari kemurnian disampaikan dengan nuansa advokasi yang cukup kuat. Salavou tidak membahas secara memadai kondisi di mana strategi murni tetap lebih unggul — misalnya pada pasar komoditas dengan sensitivitas harga sangat tinggi, atau segmen yang sangat spesifik di mana *focus strategy* murni menghasilkan keunggulan yang tidak dapat ditiru oleh pesaing hibrida.
+
+**Keempat, dimensi Porter tidak dipertanyakan.** Salavou menerima tiga dimensi generik Porter (biaya rendah, diferensiasi, fokus) sebagai kerangka dasar tanpa mempertanyakan apakah dimensi-dimensi tersebut masih memadai untuk menangkap konfigurasi strategis kontemporer. Inovasi, kecepatan, kualitas layanan, dan ekosistem digital adalah dimensi yang semakin krusial dalam kompetisi modern, dan Tabel II artikel sebenarnya mengakui perluasan ini secara implisit — tetapi tipologi 16 hybrid tetap dibangun hanya di atas tiga dimensi Porter.
+
+**Kelima, kecenderungan advokasi pro-hibrida yang mengurangi keseimbangan evaluatif.** Artikel ini, meskipun diklaim sebagai tinjauan literatur, memiliki nada yang cukup jelas berpihak pada hibridisasi. Studi-studi yang mendukung kemurnian strategis dirangkum secara lebih singkat dan kurang dianalisis dibandingkan studi-studi yang mendukung hibridisasi, sehingga keseimbangan evaluatif keseluruhan menjadi timpang.
+
+---
+
+### Posisi dalam Kerangka Mata Kuliah
+
+Artikel Salavou (2015) memiliki resonansi langsung dengan **Pertemuan 5 (TPGS Bab 5)** tentang strategi kompetitif generik. Pada pertemuan tersebut, mahasiswa berhadapan dengan peringatan *stuck-in-the-middle* sebagai salah satu pilar argumen Porter — bahwa perusahaan yang tidak mengambil posisi strategis yang tegas akan menghasilkan kinerja inferior. Salavou secara langsung menantang peringatan ini dengan memperlihatkan bahwa ada perbedaan konseptual yang fundamental antara *stuck-in-the-middle* (absennya pilihan) dan strategi hibrida (pilihan aktif untuk menggabungkan dimensi dengan intensitas tinggi). Implikasinya bagi mahasiswa sangat konkret: posisi *best-cost provider* yang sudah diperkenalkan TPGS sebagai kelima strategi generik bukan anomali atau kompromi, melainkan instansiasi dari logika hibridisasi yang kini memiliki dukungan empiris yang kuat.
+
+Pada **Pertemuan 7**, Artikel 11 (Hsieh & Chen 2011) dan Artikel 12 (Okebaram & Onuoha 2018) sama-sama menekankan pentingnya konfigurasi multi-elemen — *strategic fit* antara beberapa dimensi strategi secara simultan. Kerangka Salavou memberikan fondasi konseptual untuk memahami mengapa konfigurasi multi-elemen itu penting: ia bukan kompromi antara dua strategi yang saling melemahkan, melainkan sumber keunggulan kompetitif yang lebih sulit ditiru karena kompleksitasnya.
+
+Dalam **konteks Indonesia**, logika hibridisasi adalah realitas yang mudah diverifikasi secara empiris. Indomaret dan Alfamart membangun posisi kompetitif mereka di atas kombinasi efisiensi distribusi (*cost leadership*) dan kenyamanan lokasi beserta keseragaman pengalaman berbelanja (*differentiation*) — bukan murni salah satunya. Ini bukan *stuck in the middle*; ini adalah konfigurasi hibrida yang dieksekusi dengan konsistensi tinggi. **GoTo (Gojek-Tokopedia)** pasca-merger 2021 memperlihatkan dimensi yang lebih kompleks: kombinasi *platform economics*, efisiensi pembayaran digital, dan diferensiasi layanan *super-app* yang menggabungkan tiga atau lebih dimensi kompetitif secara simultan. Kerangka Salavou membantu mendiagnosis bahwa ini adalah strategi hibrida dengan intensitas tinggi pada beberapa dimensi — bukan ketidakkonsistenan strategis. Di sisi lain, kasus platform e-commerce seperti Tokopedia, Shopee, dan Lazada juga mengingatkan bahwa keunggulan hibrid bersifat dinamis: kombinasi yang optimal hari ini bisa perlu direkonfigurasi dalam dua atau tiga tahun ke depan seiring pergeseran preferensi konsumen dan teknologi — sebuah dimensi yang Salavou hanya sentuh secara implisit dan yang membutuhkan integrasi dengan literatur *dynamic capabilities* untuk dianalisis secara penuh.
