@@ -31,13 +31,16 @@ def find_insertion_point(doc, anchor_prefix: str):
 
     If no terminator heading found, returns the last paragraph in the doc.
     """
-    anchor = find_anchor_paragraph(doc, anchor_prefix)
-    if anchor is None:
-        return None
     paras = doc.paragraphs
-    idx = paras.index(anchor)
-    last_in_section = anchor
-    for p in paras[idx + 1:]:
+    anchor_idx = None
+    for i, p in enumerate(paras):
+        if p.text.strip().startswith(anchor_prefix):
+            anchor_idx = i
+            break
+    if anchor_idx is None:
+        return None
+    last_in_section = paras[anchor_idx]
+    for p in paras[anchor_idx + 1:]:
         if p.style.name in ("Heading 1", "Heading 2", "Heading 3"):
             return last_in_section
         last_in_section = p
