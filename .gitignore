@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Translate-gamble pipeline build artifacts
+Dev Assistant/scripts/translate_gamble/build/
+
+# Word lock files
+~$*.docx
+~$*.doc
+
+# OS
+Thumbs.db
+.DS_Store
