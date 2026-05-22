@@ -53,6 +53,65 @@ def detect_chapter_start(first_line: str) -> int | None:
     return None
 
 
+def detect_chapter_from_blocks(raw_blocks: list[dict]) -> int | None:
+    """Scan all blocks on a page for the giant-digit + all-caps-title pair.
+
+    A chapter-start page contains BOTH:
+    1. A span with font size >= 30pt whose stripped text is exactly one or two
+       digits (the giant chapter number).
+    2. A span with font size >= 14pt whose stripped text is uppercase
+       letters/punctuation with length >= 15 (the chapter title banner).
+       OR a block whose aggregated text (via _block_text_and_style) satisfies
+       the same criterion.
+
+    Detection operates at the *span* level so it handles the common layout
+    where the title and chapter digit share the same block (merged by MuPDF).
+
+    Returns the chapter number (int) if both signals are found, else None.
+    """
+    giant_digit: int | None = None
+    has_uppercase_title = False
+
+    for blk in raw_blocks:
+        if blk.get("type", 0) != 0:
+            continue
+        for line in blk.get("lines", []):
+            for span in line.get("spans", []):
+                txt = span.get("text", "").strip()
+                size = float(span.get("size", 0.0))
+                if not txt:
+                    continue
+
+                # Signal 1: giant digit span (1–2 digits, font >= 30pt)
+                if size >= 30.0 and re.fullmatch(r"\d{1,2}", txt):
+                    giant_digit = int(txt)
+
+                # Signal 2: all-caps title span (font >= 14pt, len >= 15,
+                # only uppercase letters + common punctuation)
+                if (
+                    size >= 14.0
+                    and len(txt) >= 15
+                    and re.fullmatch(r"[A-Z0-9\s,\.\-\'\"&/’‘]+", txt)
+                ):
+                    has_uppercase_title = True
+
+        # Also check the aggregated block text for Signal 2 (covers multi-line
+        # uppercase titles that individually may be short per span)
+        if not has_uppercase_title:
+            block_text, block_size, _ = _block_text_and_style(blk)
+            stripped = block_text.strip()
+            if (
+                block_size >= 14.0
+                and len(stripped) >= 15
+                and re.fullmatch(r"[A-Z0-9\s,\.\-\'\"&/’‘â]+", stripped)
+            ):
+                has_uppercase_title = True
+
+    if giant_digit is not None and has_uppercase_title:
+        return giant_digit
+    return None
+
+
 def _block_text_and_style(block: dict[str, Any]) -> tuple[str, float, bool]:
     """Flatten a PyMuPDF block dict into (text, dominant_font_size, any_bold)."""
     if block.get("type", 0) != 0:  # not a text block
@@ -129,14 +188,8 @@ def extract_pdf(pdf_path: Path, out_dir: Path) -> None:
             raw = page.get_text("dict")
             blocks_out: list[dict[str, Any]] = []
 
-            # Chapter detection: look at first non-empty text block
-            first_text = ""
-            for blk in raw.get("blocks", []):
-                t, _, _ = _block_text_and_style(blk)
-                if t:
-                    first_text = t.splitlines()[0] if "\n" in t else t
-                    break
-            ch = detect_chapter_start(first_text)
+            # Chapter detection: scan all blocks for giant-digit + all-caps-title pair
+            ch = detect_chapter_from_blocks(raw.get("blocks", []))
             if ch is not None:
                 current_chapter = ch
 

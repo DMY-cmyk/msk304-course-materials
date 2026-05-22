@@ -29,3 +29,37 @@ def test_detect_chapter_start_matches_chapter_header():
     assert detect_chapter_start("CHAPTER 1") == 1
     assert detect_chapter_start("3 EVALUATING A COMPANY'S EXTERNAL ENVIRONMENT") == 3
     assert detect_chapter_start("A company's strategy is its game plan.") is None
+
+
+def test_detect_chapter_from_blocks_finds_giant_digit_and_uppercase_title():
+    from translate_gamble.extract import detect_chapter_from_blocks
+    # Minimal fake PyMuPDF blocks (lines->spans->text/size/flags=0)
+    def block(text, size):
+        return {"type": 0, "lines": [{"spans": [{"text": text, "size": size, "flags": 0}]}]}
+    blocks = [
+        block("14", 9.0),                                             # page num — ignored
+        block("STRATEGY FORMULATION, EXECUTION, AND GOVERNANCE", 18.0),  # uppercase title
+        block("2", 72.0),                                             # giant chapter digit
+        block("Crafting and executing strategy ...", 11.0),
+    ]
+    assert detect_chapter_from_blocks(blocks) == 2
+
+
+def test_detect_chapter_from_blocks_returns_none_for_body_page():
+    from translate_gamble.extract import detect_chapter_from_blocks
+    def block(text, size):
+        return {"type": 0, "lines": [{"spans": [{"text": text, "size": size, "flags": 0}]}]}
+    blocks = [
+        block("A company's strategy is its game plan.", 11.0),
+        block("Some more body text on a regular page.", 11.0),
+    ]
+    assert detect_chapter_from_blocks(blocks) is None
+
+
+def test_detect_chapter_from_blocks_requires_both_signals():
+    from translate_gamble.extract import detect_chapter_from_blocks
+    def block(text, size):
+        return {"type": 0, "lines": [{"spans": [{"text": text, "size": size, "flags": 0}]}]}
+    # Only the giant digit, no uppercase title
+    blocks = [block("5", 60.0), block("regular body", 11.0)]
+    assert detect_chapter_from_blocks(blocks) is None
