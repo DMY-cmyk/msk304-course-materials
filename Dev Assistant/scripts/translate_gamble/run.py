@@ -1,11 +1,18 @@
 """End-to-end orchestrator. Runs extract -> translate -> render with optional stage skipping."""
 from __future__ import annotations
 import argparse
+import sys
 from pathlib import Path
 
-from translate_gamble.extract import extract_pdf
-from translate_gamble.render import render_to_docx
-from translate_gamble.translate import translate_pages
+# When invoked as a script (python run.py), put the parent dir on sys.path
+# so `from translate_gamble...` works.
+_PKG_PARENT = Path(__file__).resolve().parent.parent
+if str(_PKG_PARENT) not in sys.path:
+    sys.path.insert(0, str(_PKG_PARENT))
+
+from translate_gamble.extract import extract_pdf  # noqa: E402
+from translate_gamble.render import render_to_docx  # noqa: E402
+from translate_gamble.translate import translate_pages  # noqa: E402
 
 
 def main() -> None:
