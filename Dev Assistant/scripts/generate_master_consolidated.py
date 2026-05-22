@@ -73,71 +73,85 @@ def _set_run_color_red(run) -> None:
 def apply_red_pertanyaan(docx_path: Path) -> None:
     """
     Post-processing pass: find every paragraph containing a Pertanyaan phrase,
-    reconstruct its runs so that the exact phrase is colored red and bold.
-    All other text in those paragraphs is left as-is.
+    SURGICALLY split the matching run so the exact phrase becomes red+bold while
+    all other text and formatting in the paragraph is preserved unchanged.
+
+    Algorithm: for each run that contains a match, split it into three runs
+    (before / match / after) by manipulating XML in-place. The before and after
+    runs inherit the original run's full rPr (bold, italic, font, etc.); the
+    middle run inherits rPr + overrides color=EE0000 and ensures bold.
     """
+    from copy import deepcopy
+
     doc = Document(str(docx_path))
     modified = 0
 
     for para in doc.paragraphs:
-        full_text = para.text
-        if not _PERTANYAAN_PATTERN.search(full_text):
+        if not _PERTANYAAN_PATTERN.search(para.text):
             continue
 
-        # Preserve existing run properties where possible
-        # Strategy: collect all run text, find matches, rebuild
-        # First, gather full text broken at run boundaries with their properties
-        existing_runs = []
-        for run in para.runs:
-            existing_runs.append({
-                "text": run.text,
-                "bold": run.bold,
-                "italic": run.italic,
-                "underline": run.underline,
-                "font_name": run.font.name,
-                "font_size": run.font.size,
-                "style": run.style,
-            })
+        # Snapshot the run list because we will mutate the XML by inserting siblings
+        runs_snapshot = list(para.runs)
+        for run in runs_snapshot:
+            text = run.text
+            if not text:
+                continue
+            m = _PERTANYAAN_PATTERN.search(text)
+            if not m:
+                continue
 
-        # Clear all existing runs
-        for run in para.runs:
-            run.text = ""
+            before_text = text[:m.start()]
+            match_text = text[m.start():m.end()]
+            after_text = text[m.end():]
 
-        # Rebuild runs with colored Pertanyaan phrases
-        last_end = 0
-        for m in _PERTANYAAN_PATTERN.finditer(full_text):
-            # Text before match - add as normal run
-            before = full_text[last_end:m.start()]
-            if before:
-                r = para.add_run(before)
-                # Try to inherit properties from first original run
-                if existing_runs:
-                    src = existing_runs[0]
-                    if src["bold"] is not None:
-                        r.bold = src["bold"]
-                    if src["italic"]:
-                        r.italic = src["italic"]
+            # Original rPr (formatting properties of this run)
+            original_rpr = run._element.find(qn('w:rPr'))
 
-            # The match itself - add as RED BOLD run
-            colored = para.add_run(full_text[m.start():m.end()])
-            _set_run_color_red(colored)
-            last_end = m.end()
+            # Modify original run -> "before" portion (preserves original formatting)
+            run.text = before_text
 
-        # Remainder after last match
-        remainder = full_text[last_end:]
-        if remainder:
-            r = para.add_run(remainder)
-            if existing_runs:
-                src = existing_runs[0]
-                if src["bold"] is not None:
-                    r.bold = src["bold"]
-                if src["italic"]:
-                    r.italic = src["italic"]
+            # Build middle run (red + bold), inheriting original rPr then overriding
+            mid_run = OxmlElement('w:r')
+            if original_rpr is not None:
+                mid_rpr = deepcopy(original_rpr)
+            else:
+                mid_rpr = OxmlElement('w:rPr')
+            # Strip any existing color
+            for ex_color in mid_rpr.findall(qn('w:color')):
+                mid_rpr.remove(ex_color)
+            color_elem = OxmlElement('w:color')
+            color_elem.set(qn('w:val'), 'EE0000')
+            mid_rpr.append(color_elem)
+            # Ensure bold is present (don't double-add)
+            if mid_rpr.find(qn('w:b')) is None:
+                mid_rpr.append(OxmlElement('w:b'))
+            mid_run.append(mid_rpr)
 
-        modified += 1
+            mid_t = OxmlElement('w:t')
+            mid_t.set(qn('xml:space'), 'preserve')
+            mid_t.text = match_text
+            mid_run.append(mid_t)
+
+            # Insert middle run immediately after the original run
+            run._element.addnext(mid_run)
+
+            # Build after run if there's trailing text, preserving original rPr
+            if after_text:
+                after_run = OxmlElement('w:r')
+                if original_rpr is not None:
+                    after_rpr = deepcopy(original_rpr)
+                    after_run.append(after_rpr)
+                after_t = OxmlElement('w:t')
+                after_t.set(qn('xml:space'), 'preserve')
+                after_t.text = after_text
+                after_run.append(after_t)
+                mid_run.addnext(after_run)
+
+            modified += 1
+            # In practice each paragraph has only one Pertanyaan phrase; stop after first match per run
 
     doc.save(str(docx_path))
-    print(f"  apply_red_pertanyaan: {modified} paragraph(s) colored red.")
+    print(f"  apply_red_pertanyaan: {modified} phrase(s) colored red bold.")
 
 
 def main() -> None:
